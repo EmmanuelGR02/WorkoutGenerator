@@ -1,4 +1,4 @@
-package com.example.workoutgenerator.ui.theme
+package com.example.workoutgenerator
 
 // This class will contain the background code for the login screen
 class LoginActivity {

@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</LinearLayout>
+    <!-- Title of the login page -->
+    <TextView
+        android:id="@+id/pageTitle_login"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="190dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="LOG IN"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="238dp"
+        tools:layout_editor_absoluteY="129dp" />
+
+    <!-- Log in Button -->
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+</RelativeLayout>
+
