@@ -9,22 +9,34 @@
     <!-- Title of the login page -->
     <TextView
         android:id="@+id/pageTitle_login"
-        android:layout_width="150dp"
+        android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginStart="190dp"
+        android:layout_marginStart="70dp"
         android:layout_marginTop="15dp"
         android:gravity="center"
-        android:text="LOG IN"
+        android:text="WORKOUT GENERATOR"
         android:textStyle="bold"
-        android:textSize="30sp"
+        android:textSize="20sp"
+        android:textColor="@color/dark_blue"
         tools:layout_editor_absoluteX="238dp"
         tools:layout_editor_absoluteY="129dp" />
+
+    <EditText
+        android:id="@+id/username_login"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="85dp"
+        android:layout_marginTop="200dp"
+        >
+    </EditText>
 
     <!-- Log in Button -->
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="170dp"
+        android:layout_marginTop="300dp"
         android:text="Button" />
 </RelativeLayout>
 
