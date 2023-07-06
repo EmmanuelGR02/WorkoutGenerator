@@ -15,6 +15,6 @@ import com.example.workoutgenerator.ui.theme.WorkoutGeneratorTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_layout)
+        setContentView(R.layout.login_layout)
     }
 }
