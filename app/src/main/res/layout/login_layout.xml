@@ -4,39 +4,85 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background">
 
-    <!-- Title of the login page -->
+
+
+    <!-- Title -->
     <TextView
-        android:id="@+id/pageTitle_login"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="15dp"
-        android:gravity="center"
-        android:text="WORKOUT GENERATOR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Workout Generator"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
+        android:textSize="40sp"
         android:textStyle="bold"
-        android:textSize="20sp"
-        android:textColor="@color/dark_blue"
-        tools:layout_editor_absoluteX="238dp"
-        tools:layout_editor_absoluteY="129dp" />
+        android:textColor="@color/loginBG_darkerBlue"></TextView>
 
-    <EditText
-        android:id="@+id/username_login"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="85dp"
-        android:layout_marginTop="200dp"
-        >
-    </EditText>
 
-    <!-- Log in Button -->
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="170dp"
-        android:layout_marginTop="300dp"
-        android:text="Button" />
+        android:orientation="vertical"
+        android:layout_centerVertical="true">
+
+        <!-- logo -->
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/main_logo"
+            android:layout_gravity="center_horizontal"
+            ></ImageView>
+
+        <!-- Login edit text input -->
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/login_icon"
+            android:hint="Username"
+            android:drawablePadding="10dp"
+            android:background="@drawable/logininput_background"
+            android:padding="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"></EditText>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/password_icon"
+            android:hint="Passsword"
+            android:drawablePadding="1dp"
+            android:background="@drawable/logininput_background"
+            android:padding="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"></EditText>
+
+        <!-- Forgot Password Edit -->
+        <TextView
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Forgot Password?"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:layout_gravity="end"></TextView>
+
+        <!-- Login button -->
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/loginbtn_background"
+            android:text="Sign In"
+            android:textAllCaps="false"
+            android:textSize="21sp"></Button>
+
+    </LinearLayout>
+
 </RelativeLayout>
 
