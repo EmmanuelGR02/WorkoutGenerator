@@ -39,15 +39,29 @@
             android:text="Please enter your information below"
             android:gravity="center_horizontal"
             android:padding="10dp"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/white"></TextView>
+
+        <!-- Error Message -->
+        <TextView
+            android:id="@+id/signUp_errMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="fdf"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/red"></TextView>
 
     <!--   Sign up Inputs   -->
 
         <!-- Name Input -->
         <EditText
             android:id="@+id/signUp_name"
+            android:maxLength="10"
+            android:maxLines="1"
             android:layout_gravity="center_horizontal"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
@@ -63,6 +77,8 @@
         <!-- Lasr Name Input -->
         <EditText
             android:id="@+id/signUp_lastName"
+            android:maxLength="10"
+            android:maxLines="1"
             android:layout_gravity="center_horizontal"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
@@ -78,6 +94,8 @@
         <!-- Username Input -->
         <EditText
             android:id="@+id/signUp_username"
+            android:maxLength="15"
+            android:maxLines="1"
             android:layout_gravity="center_horizontal"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
@@ -92,7 +110,10 @@
 
         <!-- Password Input -->
         <EditText
+            android:maxLength="15"
+            android:maxLines="1"
             android:id="@+id/signUp_password"
+            android:password="true"
             android:layout_gravity="center_horizontal"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
@@ -119,6 +140,9 @@
         <!-- Password 2nd Input -->
         <EditText
             android:id="@+id/signUp_reEnteredPassword"
+            android:maxLength="15"
+            android:maxLines="1"
+            android:password="true"
             android:layout_gravity="center_horizontal"
             android:layout_width="300dp"
             android:layout_height="wrap_content"

@@ -9,7 +9,7 @@ class LoginActivity {
     fun LoginActivit() {}
 
     // get name
-    fun getName(): String { return name }
+   // fun getName(): String { return name }
 
     // Get name from the EditView and assign it to the "name" variable
     fun setName() {
