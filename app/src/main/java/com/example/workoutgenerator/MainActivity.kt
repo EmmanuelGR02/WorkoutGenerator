@@ -38,7 +38,6 @@ class MainActivity : ComponentActivity() {
 
     // store all the data given in the database
     private fun signUp() {
-        var num: Int = 0
         val signUpButton = findViewById<Button>(R.id.signUp_button)
 
         signUpButton?.setOnClickListener {
@@ -53,21 +52,18 @@ class MainActivity : ComponentActivity() {
 
             // check for bad inputs
             if (signUp.isValidInputs() == 1) {
-                signUpErrMessage.text = "**Inputs cannot be left blank**"
+                signUpErrMessage.text = signUp.getIds()[0]
             } else if (signUp.isValidInputs() == 2) {
                 signUpErrMessage.text = "**Username already exists**"
             } else if(signUp.isValidInputs() == 3) {
                 signUpErrMessage.text = "**username and password must contain at least 1 number**"
-            }
-            else if (signUp.isValidInputs() == 4) {
+            } else if (signUp.isValidInputs() == 4) {
                 if (reEnteredPswd != password) {
                     signUpErrMessage.text = "**Passwords do not match**"
                 }
             }
 
-            if (signUp.isValidInputs() != 1 && signUp.isValidInputs() != 2 && signUp.isValidInputs() != 3 && signUp.isValidInputs() != 4)
             database.child(username).setValue(signUp)
-
 
         }
     }
