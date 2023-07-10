@@ -52,7 +52,7 @@ class MainActivity : ComponentActivity() {
 
             // check for bad inputs
             if (signUp.isValidInputs() == 1) {
-                signUpErrMessage.text = signUp.getIds()[0]
+                signUpErrMessage.text = "**Inputs cannot be left blank**"
             } else if (signUp.isValidInputs() == 2) {
                 signUpErrMessage.text = "**Username already exists**"
             } else if(signUp.isValidInputs() == 3) {
