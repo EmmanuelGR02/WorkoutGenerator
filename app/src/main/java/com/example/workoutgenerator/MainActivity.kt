@@ -4,11 +4,12 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.annotation.ContentView
 import com.google.firebase.database.FirebaseDatabase
 
-public val database = FirebaseDatabase.getInstance().reference
+val database = FirebaseDatabase.getInstance().reference
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,19 +45,35 @@ class MainActivity : ComponentActivity() {
             val lastName = findViewById<EditText>(R.id.signUp_lastName).text.toString()
             val username = findViewById<EditText>(R.id.signUp_username).text.toString()
             val password = findViewById<EditText>(R.id.signUp_password).text.toString()
+            val reEnteredPswd = findViewById<EditText>(R.id.signUp_reEnteredPassword).text.toString()
+            val signUpErrMessage = findViewById<TextView>(R.id.signUp_errMessage)
 
             val signUp = SignUpActivity(name, lastName, username, password)
 
-            database.child(username).setValue(signUp)
+            // check for bad inputs
+            if (signUp.isValidInputs() == 1) {
+                signUpErrMessage.text = "**Inputs cannot be left blank**"
+            } else if (signUp.isValidInputs() == 2) {
+                signUpErrMessage.text = "**Username already exists**"
+            } else if(signUp.isValidInputs() == 3) {
+                signUpErrMessage.text = "**username and password must contain at least 1 number**"
+            }
+            else if (signUp.isValidInputs() == 4) {
+                if (reEnteredPswd != password) {
+                    signUpErrMessage.text = "**Passwords do not match**"
+                }
+            }  else {
+                database.child(username).setValue(signUp)
+                signUp()
+            }
+
         }
     }
 
     // Back to Log In Page
     private fun goBack(button: Button) {
-        button?.setOnClickListener {
-           logIn()
+        button.setOnClickListener {
+            logIn()
         }
     }
-
-
 }

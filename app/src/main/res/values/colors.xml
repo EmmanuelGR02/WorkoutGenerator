@@ -15,4 +15,5 @@
     <color name="loginBG_darkGray">#545454</color>
     <color name="loginBG_lightGray">#ADADAD</color>
     <color name="loginBG_darkerBlue">#16192A</color>
+    <color name="red">#880808</color>
 </resources>
