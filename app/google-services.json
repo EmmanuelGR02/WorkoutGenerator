@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1084166010560",
+    "firebase_url": "https://workout-generator-b32f9-default-rtdb.firebaseio.com",
+    "project_id": "workout-generator-b32f9",
+    "storage_bucket": "workout-generator-b32f9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1084166010560:android:a1cb99526994cad7031f25",
+        "android_client_info": {
+          "package_name": "com.example.workoutgenerator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1084166010560-lhlaekbe86gr1hdh53tg30b0ugf7q55l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDoqO26tV7CLifYMeMHU4_JCmZQXDGxb4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1084166010560-lhlaekbe86gr1hdh53tg30b0ugf7q55l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

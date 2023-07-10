@@ -1,7 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background">
 
-</LinearLayout>
+    <!-- Title -->
+    <TextView
+        android:id="@+id/login_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Workout Generator"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:textColor="@color/loginBG_darkerBlue"></TextView>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerVertical="true">
+
+        <!-- logo -->
+        <ImageView
+            android:id="@+id/login_logo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/main_logo"
+            android:layout_gravity="center_horizontal"
+            ></ImageView>
+
+        <!-- Login edit text inputs -->
+        <EditText
+            android:id="@+id/logIn_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/login_icon"
+            android:hint="Username"
+            android:drawablePadding="10dp"
+            android:background="@drawable/logininput_background"
+            android:padding="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"></EditText>
+
+        <EditText
+            android:id="@+id/logIn_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/password_icon"
+            android:hint="Passsword"
+            android:drawablePadding="1dp"
+            android:background="@drawable/logininput_background"
+            android:padding="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"></EditText>
+
+        <!-- Forgot Password Edit -->
+        <TextView
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Forgot Password?"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:layout_gravity="end"></TextView>
+
+        <!-- Login button -->
+        <Button
+            android:id="@+id/signIn_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/loginbtn_background"
+            android:text="Sign In"
+            android:textAllCaps="false"
+            android:textSize="21sp"></Button>
+
+        <!-- Sing up Button -->
+        <Button
+            android:id="@+id/logIn_signUpBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/signupbtn_background"
+            android:text="Sign Up"
+            android:textAllCaps="false"
+            android:layout_marginTop="15dp"
+            android:textSize="21sp"></Button>
+
+    </LinearLayout>
+
+</RelativeLayout>
+
