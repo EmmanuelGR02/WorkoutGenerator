@@ -38,6 +38,7 @@ class MainActivity : ComponentActivity() {
 
     // store all the data given in the database
     private fun signUp() {
+        var num: Int = 0
         val signUpButton = findViewById<Button>(R.id.signUp_button)
 
         signUpButton?.setOnClickListener {
@@ -62,10 +63,11 @@ class MainActivity : ComponentActivity() {
                 if (reEnteredPswd != password) {
                     signUpErrMessage.text = "**Passwords do not match**"
                 }
-            }  else {
-                database.child(username).setValue(signUp)
-                signUp()
             }
+
+            if (signUp.isValidInputs() != 1 && signUp.isValidInputs() != 2 && signUp.isValidInputs() != 3 && signUp.isValidInputs() != 4)
+            database.child(username).setValue(signUp)
+
 
         }
     }
