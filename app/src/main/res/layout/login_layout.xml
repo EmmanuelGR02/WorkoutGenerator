@@ -38,6 +38,7 @@
 
         <!-- Login edit text inputs -->
         <EditText
+            android:id="@+id/logIn_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/login_icon"
@@ -50,6 +51,7 @@
             android:layout_marginTop="20dp"></EditText>
 
         <EditText
+            android:id="@+id/logIn_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/password_icon"
@@ -75,11 +77,23 @@
 
         <!-- Login button -->
         <Button
+            android:id="@+id/signIn_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/loginbtn_background"
             android:text="Sign In"
             android:textAllCaps="false"
+            android:textSize="21sp"></Button>
+
+        <!-- Sing up Button -->
+        <Button
+            android:id="@+id/logIn_signUpBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/signupbtn_background"
+            android:text="Sign Up"
+            android:textAllCaps="false"
+            android:layout_marginTop="15dp"
             android:textSize="21sp"></Button>
 
     </LinearLayout>

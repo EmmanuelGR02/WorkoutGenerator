@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background">
+
+    <Button
+        android:id="@+id/signUp_backButton"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/back_icon"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="5dp"
+        ></Button>
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/login_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SIGN UP!"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:textColor="@color/loginBG_darkerBlue"></TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerVertical="true">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Please enter your information below"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"></TextView>
+
+    <!--   Sign up Inputs   -->
+
+        <!-- Name Input -->
+        <EditText
+            android:id="@+id/signUp_name"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/name_icon"
+            android:hint="Name"
+            android:drawablePadding="10dp"
+            android:background="@drawable/logininput_background"
+            android:padding="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"></EditText>
+
+        <!-- Lasr Name Input -->
+        <EditText
+            android:id="@+id/signUp_lastName"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/name_icon"
+            android:hint="Last Name"
+            android:drawablePadding="10dp"
+            android:background="@drawable/logininput_background"
+            android:padding="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"></EditText>
+
+        <!-- Username Input -->
+        <EditText
+            android:id="@+id/signUp_username"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/login_icon"
+            android:hint="Username"
+            android:drawablePadding="10dp"
+            android:background="@drawable/signupbtn_background"
+            android:padding="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"></EditText>
+
+        <!-- Password Input -->
+        <EditText
+            android:id="@+id/signUp_password"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/password_icon"
+            android:hint="Password"
+            android:drawablePadding="10dp"
+            android:background="@drawable/signupbtn_background"
+            android:padding="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"></EditText>
+
+        <TextView
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Re-enter Password"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:layout_gravity="start"></TextView>
+
+        <!-- Password 2nd Input -->
+        <EditText
+            android:id="@+id/signUp_reEnteredPassword"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/password_icon"
+            android:hint="Password"
+            android:drawablePadding="10dp"
+            android:background="@drawable/signupbtn_background"
+            android:padding="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="0dp"></EditText>
+
+        <!-- Sing up Button -->
+        <Button
+            android:id="@+id/signUp_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/loginbtn_background"
+            android:text="Sign Up"
+            android:textAllCaps="false"
+            android:layout_marginTop="25dp"
+            android:textSize="21sp"></Button>
+
+        </LinearLayout>
+
+</RelativeLayout>
