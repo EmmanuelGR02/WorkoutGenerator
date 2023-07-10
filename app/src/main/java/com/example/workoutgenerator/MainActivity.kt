@@ -53,39 +53,14 @@ class MainActivity : ComponentActivity() {
             val signUpErrMessage = findViewById<TextView>(R.id.signUp_errMessage)
 
 
-            var getData = object : ValueEventListener {
-                override fun onCancelled(p0: DatabaseError) {
-                }
-
-                override fun onDataChange(p0: DataSnapshot) {
-                    var sb = StringBuilder()
-                    for (i in p0.children) {
-                        var name = i.child("name").value
-                        var username = i.child("username").value.toString()
-                        sb.append("${i.key}$username $name")
-                    }
-                    signUpErrMessage.text = sb.toString()
-                }
-            }
-            database.addValueEventListener(getData)
-            database.addListenerForSingleValueEvent(getData)
 
             val signUp = SignUpActivity(name, lastName, username, password)
 
-            // check for bad inputs
-            if (signUp.isValidInputs() == 1) {
-                signUpErrMessage.text = "**Inputs cannot be left blank**"
-            } else if (signUp.isValidInputs() == 2) {
-                signUpErrMessage.text = "**Username already exists**"
-            } else if(signUp.isValidInputs() == 3) {
-                signUpErrMessage.text = "**username and password must contain at least 1 number**"
-            } else if (signUp.isValidInputs() == 4) {
-                if (reEnteredPswd != password) {
-                    signUpErrMessage.text = "**Passwords do not match**"
-                }
+            if (signUp.isValidInputs(signUpErrMessage, reEnteredPswd)) {
+                database.child(username).setValue(signUp)
+            } else {
+                signUpErrMessage.text = "Something went wrong, data was not saved"
             }
-
-            database.child(username).setValue(signUp)
 
         }
     }
