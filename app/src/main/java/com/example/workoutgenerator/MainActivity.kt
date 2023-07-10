@@ -55,13 +55,8 @@ class MainActivity : ComponentActivity() {
 
 
             val signUp = SignUpActivity(name, lastName, username, password)
-
-            if (signUp.isValidInputs(signUpErrMessage, reEnteredPswd)) {
-                database.child(username).setValue(signUp)
-            } else {
-                signUpErrMessage.text = "Something went wrong, data was not saved"
-            }
-
+            signUpErrMessage.text = signUp.getIds().toString()
+            signUp.isValidInputs(signUpErrMessage, reEnteredPswd)
         }
     }
 
