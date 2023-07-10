@@ -85,7 +85,7 @@
             android:textAllCaps="false"
             android:textSize="21sp"></Button>
 
-        <!-- Sing up Button -->
+        <!-- Sign up Button -->
         <Button
             android:id="@+id/logIn_signUpBtn"
             android:layout_width="match_parent"
