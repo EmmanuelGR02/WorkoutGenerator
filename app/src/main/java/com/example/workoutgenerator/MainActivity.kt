@@ -37,6 +37,7 @@ class MainActivity : ComponentActivity() {
     }
 
     // store all the data given in the database
+    @SuppressLint("SetTextI18n")
     private fun signUp() {
         var num: Int = 0
         val signUpButton = findViewById<Button>(R.id.signUp_button)
@@ -46,7 +47,8 @@ class MainActivity : ComponentActivity() {
             val lastName = findViewById<EditText>(R.id.signUp_lastName).text.toString()
             val username = findViewById<EditText>(R.id.signUp_username).text.toString()
             val password = findViewById<EditText>(R.id.signUp_password).text.toString()
-            val reEnteredPswd = findViewById<EditText>(R.id.signUp_reEnteredPassword).text.toString()
+            val reEnteredPswd =
+                findViewById<EditText>(R.id.signUp_reEnteredPassword).text.toString()
             val signUpErrMessage = findViewById<TextView>(R.id.signUp_errMessage)
 
             val signUp = SignUpActivity(name, lastName, username, password)
@@ -56,19 +58,19 @@ class MainActivity : ComponentActivity() {
                 signUpErrMessage.text = "**Inputs cannot be left blank**"
             } else if (signUp.isValidInputs() == 2) {
                 signUpErrMessage.text = "**Username already exists**"
-            } else if(signUp.isValidInputs() == 3) {
+            } else if (signUp.isValidInputs() == 3) {
                 signUpErrMessage.text = "**username and password must contain at least 1 number**"
-            }
-            else if (signUp.isValidInputs() == 4) {
+            } else if (signUp.isValidInputs() == 4) {
                 if (reEnteredPswd != password) {
                     signUpErrMessage.text = "**Passwords do not match**"
                 }
             }
 
-            if (signUp.isValidInputs() != 1 && signUp.isValidInputs() != 2 && signUp.isValidInputs() != 3 && signUp.isValidInputs() != 4)
-            database.child(username).setValue(signUp)
+            if (signUp.isValidInputs() != 1 && signUp.isValidInputs() != 2 && signUp.isValidInputs() != 3 && signUp.isValidInputs() != 4) {
+                database.child(username).setValue(signUp)
 
 
+            }
         }
     }
 
