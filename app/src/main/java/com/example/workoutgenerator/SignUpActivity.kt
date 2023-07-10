@@ -3,6 +3,7 @@ package com.example.workoutgenerator
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import java.lang.StringBuilder
 
 
 // This class will get the username and password from the edit texts and
@@ -31,17 +32,8 @@ class SignUpActivity {
 
         var num: Int = 0
 
-        database.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onCancelled(error: DatabaseError) {
-                println(error.message)
-            }
 
-            override fun onDataChange(snapshot: DataSnapshot) {
-                for (childSnapshot in snapshot.children) {
-                    ids.add(childSnapshot.value.toString())
-                }
-            }
-        })
+
 
 
 

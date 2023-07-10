@@ -7,7 +7,11 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.annotation.ContentView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import java.lang.StringBuilder
 
 val database = FirebaseDatabase.getInstance().reference
 
@@ -47,6 +51,24 @@ class MainActivity : ComponentActivity() {
             val password = findViewById<EditText>(R.id.signUp_password).text.toString()
             val reEnteredPswd = findViewById<EditText>(R.id.signUp_reEnteredPassword).text.toString()
             val signUpErrMessage = findViewById<TextView>(R.id.signUp_errMessage)
+
+
+            var getData = object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {
+                }
+
+                override fun onDataChange(p0: DataSnapshot) {
+                    var sb = StringBuilder()
+                    for (i in p0.children) {
+                        var name = i.child("name").value
+                        var username = i.child("username").value.toString()
+                        sb.append("${i.key}$username $name")
+                    }
+                    signUpErrMessage.text = sb.toString()
+                }
+            }
+            database.addValueEventListener(getData)
+            database.addListenerForSingleValueEvent(getData)
 
             val signUp = SignUpActivity(name, lastName, username, password)
 
