@@ -3,7 +3,6 @@ package com.example.workoutgenerator
 import android.widget.TextView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import java.lang.StringBuilder
 
@@ -26,27 +25,25 @@ class SignUpActivity {
         this.password = password
     }
 
-    fun userInfo(name: String, lastName: String) {
-        this.name = name
-        this.lastName = lastName
-    }
-
     fun getIds(): ArrayList<String> {
         return ids
     }
 
-    fun isValidInputs(msg: TextView, reEnteredPswd: String) {
-        val signUp = SignUpActivity(name, lastName,username, password)
-        database.child("Login Info")
+    fun isValidInputs(msg: TextView, reEnteredPswd: String): Boolean {
 
         // Check if username already exists in the database
         var getData = object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }
+
             override fun onDataChange(p0: DataSnapshot) {
+                var sb = StringBuilder()
                 for (i in p0.children) {
-                   ids.add(i.key.toString())
+                    var name = i.child("name").value
+                    var username = i.child("username").value.toString()
+                    sb.append("${i.key}")
                 }
+                ids.add(sb.toString())
             }
         }
         database.addValueEventListener(getData)
@@ -55,17 +52,19 @@ class SignUpActivity {
         // check for errors
         val regex: Regex = ("[1234567890]").toRegex()
 
-        if (ids.contains(password)) {
+        if (ids.contains(username)) {
             msg.text = "**Username already exists**"
+            return false
         }else if (name == "" || lastName == "" || username == "" || password == "") {
             msg.text = "**Inputs cannot be left blank**"
-        }else if (!password.contains(regex)) {
-            msg.text = "**password must contain at least 1 number**"
+            return false
+        }else if (!password.contains(regex) || (!username.contains(regex))) {
+            msg.text = "**username and password must contain at least 1 number**"
+            return false
         }else if (reEnteredPswd != password) {
             msg.text = "**Passwords do not match**"
-        } else {
-            database.child("Login Info").child(username).setValue(password)
-            database.child("User Info").child(username).setValue(name)
+            return false
         }
+        return true
     }
 }
