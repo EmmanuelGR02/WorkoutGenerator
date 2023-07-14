@@ -55,7 +55,7 @@ class MainActivity : ComponentActivity() {
 
 
             val signUp = SignUpActivity(name, lastName, username, password)
-            signUpErrMessage.text = signUp.getIds().toString()
+            signUp.getIds(signUpErrMessage)
             signUp.isValidInputs(signUpErrMessage, reEnteredPswd)
         }
     }
