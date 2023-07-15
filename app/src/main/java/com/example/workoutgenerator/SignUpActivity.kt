@@ -19,12 +19,12 @@ class SignUpActivity {
     private var password: String = ""
     private  val ids = ArrayList<String>()
 
-    constructor(name: String, lastName: String, username: String, password: String) {
+    constructor(username: String, password: String, name: String, lastName: String) {
         this.name = name
         this.lastName = lastName
-        this.username = username
-        this.password = password
     }
+
+
 
     fun userInfo(name: String, lastName: String) {
         this.name = name

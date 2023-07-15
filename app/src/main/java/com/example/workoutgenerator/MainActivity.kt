@@ -13,14 +13,11 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import java.lang.StringBuilder
 
-val database = FirebaseDatabase.getInstance().reference
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         logIn()
-
     }
 
     // Log in page functionality
