@@ -9,8 +9,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.annotation.ContentView
-import com.example.workoutgenerator.databinding.LoginLayoutBinding
-import com.example.workoutgenerator.databinding.SignupLayoutBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -18,7 +16,6 @@ import com.google.firebase.database.ValueEventListener
 import java.lang.StringBuilder
 val database = FirebaseDatabase.getInstance().reference
 class MainActivity : ComponentActivity() {
-    private lateinit var binding: SignupLayoutBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         logIn()
@@ -66,6 +63,7 @@ class MainActivity : ComponentActivity() {
                     findViewById<EditText>(R.id.signUp_username).text.clear()
                     findViewById<EditText>(R.id.signUp_password).text.clear()
                     findViewById<EditText>(R.id.signUp_reEnteredPassword).text.clear()
+                    signUpErrMessage.text = ""
 
                     // pops out a message that the data was saved
                     Toast.makeText(this, "Successfully Saved", Toast.LENGTH_SHORT).show()
