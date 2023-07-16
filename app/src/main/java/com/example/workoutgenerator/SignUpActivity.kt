@@ -1,73 +1,67 @@
+
 package com.example.workoutgenerator
 
 import android.widget.TextView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import java.lang.StringBuilder
 
 
-// This class will get the username and password from the edit texts and
-// Store the values in the database
+data class SignUpActivity(val name : String? = null, val lastName : String? = null, val username : String? = null, val password : String? = null)  {
 
-class SignUpActivity {
-
-    private var name: String = ""
-    private var lastName: String = ""
-    private var username: String = ""
-    private var password: String = ""
-    private  val ids = ArrayList<String>()
-
-    constructor(username: String, password: String, name: String, lastName: String) {
-        this.name = name
-        this.lastName = lastName
-    }
-
-
-
-    fun userInfo(name: String, lastName: String) {
-        this.name = name
-        this.lastName = lastName
-    }
-
-    fun getIds(view: TextView){
-        for (i in ids) {
-            view.text = i
-        }
-    }
-
-    fun isValidInputs(msg: TextView, reEnteredPswd: String) {
-        val signUp = SignUpActivity(name, lastName,username, password)
-        database.child("Login Info")
-
-        // Check if username already exists in the database
-        var getData = object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {
-            }
-            override fun onDataChange(p0: DataSnapshot) {
-                for (i in p0.children) {
-                   ids.add(i.child("Login Info").toString())
-                }
-            }
-        }
-        database.addValueEventListener(getData)
-        database.addListenerForSingleValueEvent(getData)
+    fun isValidInputs (msg: TextView, reEnteredPswd : String) : Boolean {
 
         // check for errors
         val regex: Regex = ("[1234567890]").toRegex()
 
-        if (ids.contains(password)) {
-            msg.text = "**Username already exists**"
-        }else if (name == "" || lastName == "" || username == "" || password == "") {
+        if (name.isNullOrBlank() || lastName.isNullOrBlank() || username.isNullOrBlank() || password.isNullOrBlank()) {
             msg.text = "**Inputs cannot be left blank**"
-        }else if (!password.contains(regex)) {
+            return false
+        }else if (!password?.contains(regex)!!) {
             msg.text = "**password must contain at least 1 number**"
+            return false
         }else if (reEnteredPswd != password) {
             msg.text = "**Passwords do not match**"
+            return false
+        } else if (password.length < 7) {
+            msg.text = "**Password must contain at least 8 characters**"
+            return false
+        } else if (username?.length?.let { it < 5 } == true) {
+            msg.text = "**username must contain at least 5 characters**"
+            return false
+        } else if (!isUsernameValid(username, msg)) {
+            msg.text = "**username already exists**"
+            return false
         } else {
-            database.child("Login Info").child(username).setValue(password)
-            database.child("User Info").child(username).setValue(name)
+            return true
         }
     }
+
+    private fun isUsernameValid(username : String, tv : TextView) : Boolean {
+        val userList: ArrayList<String> = ArrayList()
+        var bool = false
+
+        val valueEventListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (childSnapshot in dataSnapshot.children) {
+                    val childUsername = childSnapshot.key as String
+                    if (childUsername == username) {
+                        bool = true
+                        break
+                    }
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Handle the error if necessary
+            }
+        }
+        database.addValueEventListener(valueEventListener)
+        database.addListenerForSingleValueEvent(valueEventListener)
+
+        return bool
+    }
+
 }
+
