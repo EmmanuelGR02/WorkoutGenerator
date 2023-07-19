@@ -52,28 +52,27 @@ class MainActivity : ComponentActivity() {
 
             var userInfo = SignUpActivity(name, lastName, username, password)
 
+            userInfo.isValidInputs(signUpErrMessage, reEnteredPswd) { isValid ->
+                if (isValid) {
+                    database.child("user info").child(username).setValue(userInfo)
+                        .addOnSuccessListener {
+                            // clears the text from the input boxes
+                            findViewById<EditText>(R.id.signUp_name).text.clear()
+                            findViewById<EditText>(R.id.signUp_lastName).text.clear()
+                            findViewById<EditText>(R.id.signUp_username).text.clear()
+                            findViewById<EditText>(R.id.signUp_password).text.clear()
+                            findViewById<EditText>(R.id.signUp_reEnteredPassword).text.clear()
+                            signUpErrMessage.text = ""
 
-            var bool : Boolean = userInfo.isValidInputs(signUpErrMessage, reEnteredPswd)
-
-            if (bool){
-                database.child("users").child(username).setValue(userInfo).addOnSuccessListener {
-                    // clears the text from the input boxes
-                    findViewById<EditText>(R.id.signUp_name).text.clear()
-                    findViewById<EditText>(R.id.signUp_lastName).text.clear()
-                    findViewById<EditText>(R.id.signUp_username).text.clear()
-                    findViewById<EditText>(R.id.signUp_password).text.clear()
-                    findViewById<EditText>(R.id.signUp_reEnteredPassword).text.clear()
-                    signUpErrMessage.text = ""
-
-                    // pops out a message that the data was saved
-                    Toast.makeText(this, "Successfully Saved", Toast.LENGTH_SHORT).show()
-                }.addOnFailureListener {
-                    Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show()
+                            // pops out a message that the data was saved
+                            Toast.makeText(this, "Successfully Saved", Toast.LENGTH_SHORT).show()
+                        }.addOnFailureListener {
+                        Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(this, "Retry Sign Up", Toast.LENGTH_SHORT).show()
                 }
-            } else {
-                Toast.makeText(this, "Retry Sign Up", Toast.LENGTH_SHORT).show()
             }
-
         }
     }
 
