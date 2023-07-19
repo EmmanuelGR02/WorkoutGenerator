@@ -36,6 +36,18 @@
             android:layout_gravity="center_horizontal"
             ></ImageView>
 
+        <!-- Error Message -->
+        <TextView
+            android:id="@+id/signIn_errMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/red"></TextView>
+
         <!-- Login edit text inputs -->
         <EditText
             android:id="@+id/logIn_username"

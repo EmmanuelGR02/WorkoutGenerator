@@ -27,15 +27,22 @@ class MainActivity : ComponentActivity() {
 
         // Buttons
         val signUpButton = findViewById<Button>(R.id.logIn_signUpBtn)
+        val signInButton = findViewById<Button>(R.id.signIn_btn)
 
+        // Sign up logic
         signUpButton.setOnClickListener {
             setContentView(R.layout.signup_layout)
-            // Sing up logic
             signUp()
             // Takes you back to log in page
             val backButton = findViewById<Button>(R.id.signUp_backButton)
             goBack(backButton)
         }
+
+        // Sign in logic
+        signInButton.setOnClickListener {
+            signIn()
+        }
+
     }
 
     // store all the data given in the database
@@ -69,12 +76,33 @@ class MainActivity : ComponentActivity() {
                         }.addOnFailureListener {
                         Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show()
                     }
+                    setContentView(R.layout.login_layout)
                 } else {
                     Toast.makeText(this, "Retry Sign Up", Toast.LENGTH_SHORT).show()
                 }
             }
         }
     }
+
+    // Sign in
+    private fun signIn() {
+        var username = findViewById<EditText>(R.id.logIn_username).text.toString()
+        var password = findViewById<EditText>(R.id.logIn_password).text.toString()
+        var errMessage = findViewById<TextView>(R.id.signIn_errMessage)
+
+        var si = LoginActivity(username, password)
+
+        si.isLoginValid(errMessage) { isValid ->
+            if(isValid) {
+                setContentView(R.layout.main_layout)
+                Toast.makeText(this, "Successfully Logged In", Toast.LENGTH_SHORT).show()
+            }else {
+                Toast.makeText(this, "Retry Sign Up", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+    }
+
 
     // Back to Log In Page
     private fun goBack(button: Button) {
