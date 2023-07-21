@@ -14,16 +14,24 @@ class LoginActivity(val username : String? = null, val password : String? = null
     fun isLoginValid(msg : TextView, callback: (Boolean) -> Unit) {
         isUsernameValid(username.toString()) { isValid ->
             if (isValid) {
-
+                isPasswordValid(password.toString()) { isPswdValid ->
+                    if(isPswdValid) {
+                        callback(true)
+                    } else {
+                        msg.text = "Invalid password"
+                        callback(false)
+                    }
+                }
             } else {
                 msg.text = "Invalid username"
+                callback(false)
             }
         }
     }
 
 
     private fun isUsernameValid(username: String, callback: (Boolean) -> Unit) {
-        database.child("user info").addListenerForSingleValueEvent(object : ValueEventListener {
+        database.child("users").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
                 val arr = ArrayList<String>()
                 for (i in p0.children) {
@@ -41,14 +49,12 @@ class LoginActivity(val username : String? = null, val password : String? = null
     }
 
     private fun isPasswordValid(password : String, callback : (Boolean) -> Unit) {
-        database.child("user info").child(username.toString()).addListenerForSingleValueEvent(object : ValueEventListener {
+        database.child("users").child(username.toString()).child("user info").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val arr = ArrayList<String>()
+                val pswd = snapshot.child("password").value.toString()
+                    arr.add(pswd)
 
-                for (i in snapshot.children) {
-                    val pswd = i.child("password").value
-                    arr.add(pswd.toString())
-                }
                 val isPasswordValid = arr.contains(password)
                 callback(isPasswordValid)
             }

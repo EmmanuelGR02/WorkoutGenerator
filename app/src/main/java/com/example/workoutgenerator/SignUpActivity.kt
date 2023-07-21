@@ -14,6 +14,7 @@ import java.lang.StringBuilder
 
 data class SignUpActivity(val name : String? = null, val lastName : String? = null, val username : String? = null, val password : String? = null)  {
 
+
     fun isValidInputs(msg: TextView, reEnteredPswd: String, callback: (Boolean) -> Unit) : Boolean {
         // check for errors
         val regex: Regex = ("[1234567890]").toRegex()
@@ -50,7 +51,7 @@ data class SignUpActivity(val name : String? = null, val lastName : String? = nu
     }
 
     private fun isUsernameValid(username: String, callback: (Boolean) -> Unit) {
-        database.child("user info").addListenerForSingleValueEvent(object : ValueEventListener {
+        database.child("users").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
                 val arr = ArrayList<String>()
                 for (i in p0.children) {

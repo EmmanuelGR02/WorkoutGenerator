@@ -61,7 +61,7 @@ class MainActivity : ComponentActivity() {
 
             userInfo.isValidInputs(signUpErrMessage, reEnteredPswd) { isValid ->
                 if (isValid) {
-                    database.child("user info").child(username).setValue(userInfo)
+                    database.child("users").child(username).child("user info").setValue(userInfo)
                         .addOnSuccessListener {
                             // clears the text from the input boxes
                             findViewById<EditText>(R.id.signUp_name).text.clear()
@@ -95,12 +95,11 @@ class MainActivity : ComponentActivity() {
         si.isLoginValid(errMessage) { isValid ->
             if(isValid) {
                 setContentView(R.layout.main_layout)
-                Toast.makeText(this, "Successfully Logged In", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Welcome", Toast.LENGTH_SHORT).show()
             }else {
                 Toast.makeText(this, "Retry Sign Up", Toast.LENGTH_SHORT).show()
             }
         }
-
     }
 
 
