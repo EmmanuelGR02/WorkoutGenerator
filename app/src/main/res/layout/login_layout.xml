@@ -58,6 +58,7 @@
             android:drawablePadding="10dp"
             android:background="@drawable/logininput_background"
             android:padding="10dp"
+
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="20dp"></EditText>
@@ -71,6 +72,7 @@
             android:drawablePadding="1dp"
             android:background="@drawable/logininput_background"
             android:padding="10dp"
+            android:password="true"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="10dp"></EditText>

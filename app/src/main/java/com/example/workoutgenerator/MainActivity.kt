@@ -95,9 +95,9 @@ class MainActivity : ComponentActivity() {
         si.isLoginValid(errMessage) { isValid ->
             if(isValid) {
                 setContentView(R.layout.main_layout)
-                Toast.makeText(this, "Welcome", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Welcome", Toast.LENGTH_LONG).show()
             }else {
-                Toast.makeText(this, "Retry Sign Up", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_LONG).show()
             }
         }
     }

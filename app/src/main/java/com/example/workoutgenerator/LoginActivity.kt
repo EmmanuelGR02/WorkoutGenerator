@@ -31,7 +31,7 @@ class LoginActivity(val username : String? = null, val password : String? = null
 
 
     private fun isUsernameValid(username: String, callback: (Boolean) -> Unit) {
-        database.child("users").addListenerForSingleValueEvent(object : ValueEventListener {
+        database.child("users").child(username).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
                 val arr = ArrayList<String>()
                 for (i in p0.children) {
@@ -53,7 +53,7 @@ class LoginActivity(val username : String? = null, val password : String? = null
             override fun onDataChange(snapshot: DataSnapshot) {
                 val arr = ArrayList<String>()
                 val pswd = snapshot.child("password").value.toString()
-                    arr.add(pswd)
+                arr.add(pswd)
 
                 val isPasswordValid = arr.contains(password)
                 callback(isPasswordValid)
@@ -65,5 +65,4 @@ class LoginActivity(val username : String? = null, val password : String? = null
 
         })
     }
-
 }
