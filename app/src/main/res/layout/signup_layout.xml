@@ -4,40 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/signup_background">
+    android:background="@drawable/login_background">
+
 
     <Button
         android:id="@+id/signUp_backButton"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:background="@drawable/back_icon"
-        android:layout_marginTop="5dp"
+        android:layout_width="80dp"
+        android:layout_height="35dp"
         android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:shadowColor="@color/dark_gray"
+        android:shadowRadius="@integer/material_motion_duration_long_1"
+        android:text="BACK"
+        android:textStyle="bold"
+        android:background="@color/dark_blue"
+        android:drawableStart="@drawable/back_icon"
         ></Button>
 
-    <!-- Title -->
-    <TextView
-        android:id="@+id/login_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:padding="10dp"
-        android:text="SIGN UP"
-        android:textColor="@color/loginBG_darkerBlue"
-        android:textSize="40sp"
-        android:layout_marginTop="35dp"
-        android:textStyle="bold"></TextView>
-
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="60dp"
         android:background="@drawable/signup_linearlayout_border"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        >
+        android:layout_marginEnd="10dp">
 
+        <!-- Title -->
+        <TextView
+            android:id="@+id/login_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="SIGN UP"
+            android:textColor="@color/navy"
+            android:textSize="40sp"
+            android:textStyle="bold"></TextView>
 
         <!-- Error Message -->
         <TextView
@@ -54,8 +59,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            >
+            android:gravity="center_horizontal">
 
             <!-- Name Input -->
             <EditText
@@ -74,7 +78,7 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginTop="10dp"></EditText>
 
-            <!-- Lasr Name Input -->
+             <!--Last Name Input-->
             <EditText
 
                 android:id="@+id/signUp_lastName"
@@ -92,58 +96,62 @@
 
         </LinearLayout>
 
+         <!--Username Input-->
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Hello"
-            android:textColor="@color/white">
-        </TextView>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Invalid username"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="0dp"
+            android:textStyle="bold"
+            android:textColor="@color/red"></TextView>
 
-        <!-- Username Input -->
         <EditText
             android:id="@+id/signUp_username"
-            android:maxLength="15"
-            android:maxLines="1"
-            android:layout_gravity="center_horizontal"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/signup_username_input"
             android:drawableStart="@drawable/login_icon"
-            android:hint="Username"
             android:drawablePadding="10dp"
-            android:background="@drawable/signupbtn_background"
-            android:padding="10dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="40dp"></EditText>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Hello"
-            android:textColor="@color/white">
-        </TextView>
-        <!-- Password Input -->
-        <EditText
+            android:hint="Username"
             android:maxLength="15"
             android:maxLines="1"
+            android:padding="10dp"></EditText>
+
+         <!--Password Input-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="invalid password"
+            android:textColor="@color/red"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"></TextView>
+
+        <EditText
             android:id="@+id/signUp_password"
-            android:inputType="textPassword"
+            android:layout_width="292dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/password_icon"
-            android:hint="Password"
-            android:drawablePadding="10dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
             android:background="@drawable/signupbtn_background"
-            android:padding="10dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="20dp"></EditText>
+            android:drawableStart="@drawable/password_icon"
+            android:drawablePadding="10dp"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:maxLength="15"
+            android:maxLines="1"
+            android:padding="10dp"></EditText>
 
+         <!--Password 2nd Input-->
 
-        <!-- Password 2nd Input -->
-
-        <!-- Sing up Button -->
+         <!--Sing up Button-->
         <EditText
             android:id="@+id/signUp_reEnteredPassword"
             android:layout_width="300dp"
@@ -171,9 +179,10 @@
             android:background="@drawable/loginbtn_background"
             android:text="Sign Up"
             android:textAllCaps="false"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="70dp"
             android:layout_marginBottom="10dp"
-            android:textSize="21sp"></Button>
+            android:textSize="21sp"
+            ></Button>
 
         </LinearLayout>
 

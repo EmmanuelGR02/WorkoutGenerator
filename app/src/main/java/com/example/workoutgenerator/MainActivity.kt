@@ -3,25 +3,24 @@ package com.example.workoutgenerator
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.ComponentActivity
-import androidx.annotation.ContentView
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import java.lang.StringBuilder
 val database = FirebaseDatabase.getInstance().reference
 class MainActivity : ComponentActivity() {
+
+    private lateinit var countDownTimer: CountDownTimer
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         logIn()
     }
 
     // Log in page functionality
+    @SuppressLint("MissingInflatedId")
     private fun logIn() {
         setContentView(R.layout.login_layout)
 
@@ -42,7 +41,6 @@ class MainActivity : ComponentActivity() {
         signInButton.setOnClickListener {
             signIn()
         }
-
     }
 
     // store all the data given in the database
@@ -57,7 +55,7 @@ class MainActivity : ComponentActivity() {
             val reEnteredPswd = findViewById<EditText>(R.id.signUp_reEnteredPassword).text.toString()
             val signUpErrMessage = findViewById<TextView>(R.id.signUp_errMessage)
 
-            var userInfo = SignUpActivity(name, lastName, username, password)
+            val userInfo = SignUpActivity(name, lastName, username, password)
 
             userInfo.isValidInputs(signUpErrMessage, reEnteredPswd) { isValid ->
                 if (isValid) {
@@ -86,16 +84,24 @@ class MainActivity : ComponentActivity() {
 
     // Sign in
     private fun signIn() {
-        var username = findViewById<EditText>(R.id.logIn_username).text.toString()
-        var password = findViewById<EditText>(R.id.logIn_password).text.toString()
-        var errMessage = findViewById<TextView>(R.id.signIn_errMessage)
+        val username = findViewById<EditText>(R.id.logIn_username).text.toString()
+        val password = findViewById<EditText>(R.id.logIn_password).text.toString()
+        val errMessage = findViewById<TextView>(R.id.signIn_errMessage)
 
-        var si = LoginActivity(username, password)
+        val si = LoginActivity(username, password)
 
         si.isLoginValid(errMessage) { isValid ->
             if(isValid) {
-                setContentView(R.layout.main_layout)
-                Toast.makeText(this, "Welcome", Toast.LENGTH_LONG).show()
+                si.getName { name ->
+                    if (name != null) {
+                        setContentView(R.layout.welcome_layout)
+                        val welcome = findViewById<TextView>(R.id.welcome_message)
+                        welcome.text = "Welcome $name"
+                        startTimer()
+                    } else {
+                        Toast.makeText(this, "Name retrieval failed", Toast.LENGTH_LONG).show()
+                    }
+                }
             }else {
                 Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_LONG).show()
             }
@@ -108,5 +114,23 @@ class MainActivity : ComponentActivity() {
         button.setOnClickListener {
             logIn()
         }
+    }
+
+    private fun startTimer() {
+        countDownTimer = object : CountDownTimer(3000, 1000) {
+
+            override fun onTick(millisUntilFinished: Long) {
+                val secondsRemaining = millisUntilFinished / 1000
+            }
+            override fun onFinish() {
+                setContentView(R.layout.main_layout)
+            }
+        }.start()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // Cancel the timer if the activity is destroyed to avoid memory leaks
+        countDownTimer.cancel()
     }
 }

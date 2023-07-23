@@ -7,13 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="dark_blue">#00008B</color>
-    <color name="loginBG_darkBlue">#1A425B</color>
-    <color name="loginBG_lightOrange">#C14326</color>
-    <color name="loginBG_darkOrange">#A93923</color>
-    <color name="loginBG_lightBlue">#17739B</color>
-    <color name="loginBG_darkGray">#545454</color>
-    <color name="loginBG_lightGray">#ADADAD</color>
-    <color name="loginBG_darkerBlue">#16192A</color>
+    <color name="blue">#00008B</color>
+    <color name="dark_blue">#1A425B</color>
+    <color name="light_orange">#C14326</color>
+    <color name="dark_orange">#A93923</color>
+    <color name="light_blue">#17739B</color>
+    <color name="dark_gray">#545454</color>
+    <color name="light_gray">#ADADAD</color>
+    <color name="navy">#16192A</color>
     <color name="red">#880808</color>
 </resources>

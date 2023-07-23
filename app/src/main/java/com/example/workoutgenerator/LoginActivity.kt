@@ -8,6 +8,18 @@ import com.google.firebase.database.ValueEventListener
 // This class will contain the background code for the login screen
 class LoginActivity(val username : String? = null, val password : String? = null) {
 
+    fun getName(callback: (name: String?) -> Unit) {
+        database.child("users").child(username.toString()).child("user info").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val name = snapshot.child("name").value.toString()
+                callback(name)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                callback(null)
+            }
+        })
+    }
 
     // Checks if the given username and password are in the database
     // returns true if yes, false otherwise

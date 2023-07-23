@@ -14,7 +14,6 @@ import java.lang.StringBuilder
 
 data class SignUpActivity(val name : String? = null, val lastName : String? = null, val username : String? = null, val password : String? = null)  {
 
-
     fun isValidInputs(msg: TextView, reEnteredPswd: String, callback: (Boolean) -> Unit) : Boolean {
         // check for errors
         val regex: Regex = ("[1234567890]").toRegex()

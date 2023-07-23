@@ -3,6 +3,7 @@
     android:shape="rectangle">
 
     <solid
-        android:color="@color/loginBG_darkBlue"></solid>
+        android:color="@color/dark_blue"></solid>
+
 
 </shape>
