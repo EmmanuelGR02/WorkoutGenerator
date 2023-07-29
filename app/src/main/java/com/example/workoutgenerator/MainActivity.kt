@@ -2,18 +2,25 @@
 package com.example.workoutgenerator
 
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.DatePicker
 import android.widget.EditText
+import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import com.google.firebase.database.FirebaseDatabase
+import java.util.Calendar
+
 val database = FirebaseDatabase.getInstance().reference
 class MainActivity : ComponentActivity() {
-
+    private lateinit var genderSpinner: Spinner
     private lateinit var countDownTimer: CountDownTimer
+    private lateinit var birthdateTextView: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         logIn()
@@ -46,6 +53,16 @@ class MainActivity : ComponentActivity() {
     // store all the data given in the database
     private fun signUp() {
         val signUpButton = findViewById<Button>(R.id.signUp_button)
+        birthdateTextView = findViewById(R.id.birthdateTextView)
+
+
+        // Initialize the Spinner
+        genderSpinner = findViewById(R.id.gender)
+
+        // Gender pick
+        val genderOptions = arrayOf("gender", "MALE", "FEMALE")
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, genderOptions)
+        genderSpinner.adapter = adapter
 
         signUpButton.setOnClickListener {
             val name = findViewById<EditText>(R.id.signUp_name).text.toString()
@@ -106,6 +123,29 @@ class MainActivity : ComponentActivity() {
                 Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    fun showDatePickerDialog(view: android.view.View) {
+        val calendar = Calendar.getInstance()
+        val currentYear = calendar.get(Calendar.YEAR)
+        val currentMonth = calendar.get(Calendar.MONTH)
+        val currentDay = calendar.get(Calendar.DAY_OF_MONTH)
+
+        // Create a DatePickerDialog
+        val datePickerDialog = DatePickerDialog(
+            this,
+            DatePickerDialog.OnDateSetListener { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
+                // Update the TextView with the selected birthdate
+                val selectedBirthdate = "$year-${month + 1}-$dayOfMonth"
+                birthdateTextView.text = "Selected Birthdate: $selectedBirthdate"
+            },
+            currentYear,
+            currentMonth,
+            currentDay
+        )
+
+        // Show the DatePickerDialog
+        datePickerDialog.show()
     }
 
 

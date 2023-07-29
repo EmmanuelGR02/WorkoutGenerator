@@ -14,7 +14,6 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:shadowColor="@color/dark_gray"
-        android:shadowRadius="@integer/material_motion_duration_long_1"
         android:text="BACK"
         android:textStyle="bold"
         android:background="@color/dark_blue"
@@ -93,6 +92,49 @@
                 android:padding="10dp"
                 android:layout_marginStart="20dp">
             </EditText>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Spinner
+                android:id="@+id/gender"
+                android:layout_weight="0"
+                android:layout_width="180dp"
+                android:layout_height="40dp"
+                tools:listitem="@layout/item_dropdown"
+            ></Spinner>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/birthdateLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Birthdate:"
+                />
+
+            <Button
+                android:id="@+id/selectBirthdateButton"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:text="Select"
+                android:onClick="showDatePickerDialog"
+                />
+
+            <!-- TextView to display selected birthdate -->
+            <TextView
+                android:id="@+id/birthdateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Selected Birthdate: N/A"
+                />
 
         </LinearLayout>
 
@@ -179,7 +221,7 @@
             android:background="@drawable/loginbtn_background"
             android:text="Sign Up"
             android:textAllCaps="false"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="30dp"
             android:layout_marginBottom="10dp"
             android:textSize="21sp"
             ></Button>

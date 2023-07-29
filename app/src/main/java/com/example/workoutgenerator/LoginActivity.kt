@@ -6,12 +6,12 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 
 // This class will contain the background code for the login screen
-class LoginActivity(val username : String? = null, val password : String? = null) {
+class LoginActivity(private val username : String? = null, private val password : String? = null) {
 
     fun getName(callback: (name: String?) -> Unit) {
         database.child("users").child(username.toString()).child("user info").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val name = snapshot.child("name").value.toString()
+                val name = snapshot.child("name").value?.toString() ?: "N/A"
                 callback(name)
             }
 
@@ -53,7 +53,6 @@ class LoginActivity(val username : String? = null, val password : String? = null
                 val isUsernameValid = arr.contains(username)
                 callback(isUsernameValid)
             }
-
             override fun onCancelled(p0: DatabaseError) {
                 callback(false)
             }
@@ -74,7 +73,6 @@ class LoginActivity(val username : String? = null, val password : String? = null
             override fun onCancelled(error: DatabaseError) {
                 callback(false)
             }
-
         })
     }
 }

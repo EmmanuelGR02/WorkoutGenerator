@@ -10,14 +10,13 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import java.lang.StringBuilder
+import java.util.Date
 
-
-data class SignUpActivity(val name : String? = null, val lastName : String? = null, val username : String? = null, val password : String? = null)  {
+data class SignUpActivity(val name : String? = null, val lastName : String? = null, val username : String? = null, val password : String? = null, val birthDate : Date? = null, val gender : String? = null)  {
 
     fun isValidInputs(msg: TextView, reEnteredPswd: String, callback: (Boolean) -> Unit) : Boolean {
         // check for errors
         val regex: Regex = ("[1234567890]").toRegex()
-
 
         if (name.isNullOrBlank() || lastName.isNullOrBlank() || username.isNullOrBlank() || password.isNullOrBlank()) {
             msg.text = "**Inputs cannot be left blank**"
@@ -60,11 +59,24 @@ data class SignUpActivity(val name : String? = null, val lastName : String? = nu
                 val isUsernameValid = arr.contains(username)
                 callback(isUsernameValid)
             }
-
             override fun onCancelled(p0: DatabaseError) {
                 callback(false)
             }
         })
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+        other as SignUpActivity
+        if (username != other.username) return false
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return username?.hashCode() ?: 0
+    }
+
+
 }
 
