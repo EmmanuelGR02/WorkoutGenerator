@@ -1,6 +1,7 @@
 package com.example.workoutgenerator
 
 import android.widget.TextView
+import androidx.annotation.ContentView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -20,6 +21,8 @@ data class LoginActivity(val username : String? = null, val password : String? =
             }
         }
     }
+
+
 
     // Checks if the given username and password are in the database
     // returns true if yes, false otherwise

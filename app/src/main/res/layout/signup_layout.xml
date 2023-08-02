@@ -21,13 +21,15 @@
         ></Button>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="60dp"
         android:background="@drawable/signup_linearlayout_border"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp">
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="10dp"
+        android:elevation="15dp"
+        android:padding="5dp">
 
         <!-- Title -->
         <TextView
@@ -35,12 +37,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="5dp"
             android:gravity="center_horizontal"
             android:padding="10dp"
             android:text="SIGN UP"
             android:textColor="@color/navy"
-            android:textSize="40sp"
+            android:textSize="25sp"
             android:textStyle="bold"></TextView>
 
         <!-- Error Message -->
@@ -50,7 +52,8 @@
             android:layout_height="wrap_content"
             android:text=""
             android:gravity="center_horizontal"
-            android:padding="10dp"
+            android:padding="5dp"
+            android:layout_marginBottom="7dp"
             android:textSize="12sp"
             android:textStyle="bold"
             android:textColor="@color/red"></TextView>
@@ -71,7 +74,7 @@
                 android:drawableStart="@drawable/name_icon"
                 android:hint="Name        "
                 android:drawablePadding="10dp"
-                android:background="@drawable/logininput_background"
+                android:background="@drawable/signup_name_input"
                 android:padding="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
@@ -88,7 +91,7 @@
                 android:drawableStart="@drawable/name_icon"
                 android:hint="Last Name   "
                 android:drawablePadding="10dp"
-                android:background="@drawable/logininput_background"
+                android:background="@drawable/signup_lastname_input"
                 android:padding="10dp"
                 android:layout_marginStart="20dp">
             </EditText>
@@ -102,7 +105,7 @@
             <Spinner
                 android:id="@+id/gender"
                 android:layout_weight="0"
-                android:layout_width="180dp"
+                android:layout_width="130dp"
                 android:layout_height="40dp"
                 tools:listitem="@layout/item_dropdown"
             ></Spinner>
@@ -113,18 +116,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/birthdateLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Select Birthdate:"
-                />
-
             <Button
                 android:id="@+id/selectBirthdateButton"
-                android:layout_width="50dp"
+                android:layout_width="160dp"
                 android:layout_height="40dp"
-                android:text="Select"
+                android:text="Select BirthDate"
+                android:textStyle="bold"
                 android:onClick="showDatePickerDialog"
                 />
 
@@ -133,13 +130,15 @@
                 android:id="@+id/birthdateTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Selected Birthdate: N/A"
+                android:text="Selected Birthdate: "
+                android:textStyle="bold"
                 />
 
         </LinearLayout>
 
          <!--Username Input-->
         <TextView
+            android:id="@+id/invalidUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Invalid username"
@@ -162,10 +161,11 @@
             android:hint="Username"
             android:maxLength="15"
             android:maxLines="1"
-            android:padding="10dp"></EditText>
+            android:padding="8dp"></EditText>
 
          <!--Password Input-->
         <TextView
+            android:id="@+id/invalidPassword"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="invalid password"
@@ -189,7 +189,7 @@
             android:inputType="textPassword"
             android:maxLength="15"
             android:maxLines="1"
-            android:padding="10dp"></EditText>
+            android:padding="5dp"></EditText>
 
          <!--Password 2nd Input-->
 
@@ -208,7 +208,7 @@
             android:hint="Confirm Password"
             android:maxLength="15"
             android:maxLines="1"
-            android:padding="10dp"
+            android:padding="5dp"
             android:inputType="textPassword"
             ></EditText>
 
