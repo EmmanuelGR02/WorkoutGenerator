@@ -1,3 +1,4 @@
+
 package com.example.workoutgenerator
 
 import com.google.firebase.database.DataSnapshot
@@ -6,32 +7,22 @@ import com.google.firebase.database.ValueEventListener
 import javax.security.auth.callback.Callback
 
 class Friend(private val username : String?) {
+    private val database : Database = Database.getInstance()
 
     // Get friend name method
     fun getName(callback: (name: String?) -> Unit) {
-        database.child("users").child(username.toString()).child("user info").addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val name = snapshot.child("name").value?.toString() ?: "N/A"
-                callback(name)
-            }
-
-            override fun onCancelled(error : DatabaseError) {
-                callback("N/A")
-            }
-        })
+        database.getUserInfo(username.toString()) { snapshot ->
+            val name = snapshot?.child("name")?.value?.toString() ?: "N/A"
+            callback(name)
+        }
     }
 
     // Gets PRs wanted from database
     private fun getPersonalRecords(key: String, callback: (record: String?) -> Unit) {
-        database.child("users").child(username.toString()).child("personal records").addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val record = snapshot.child(key).value?.toString() ?: "N/A"
-                callback(record)
-            }
-            override fun onCancelled(error: DatabaseError) {
-                callback("N/A")
-            }
-        })
+        database.getUserInfo(username.toString()) { snapshot ->
+            val record = snapshot?.child("personal records")?.child(key)?.value?.toString() ?: "N/A"
+            callback(record)
+        }
     }
     // Specifies the child path to get the wanted PR on "getPersonalRecords()"
     fun getBenchPR(callback: (benchPR: String?) -> Unit) {
@@ -45,13 +36,15 @@ class Friend(private val username : String?) {
     }
 
     // Get the last workout done by this friend
-    fun getLastWorkout(callback: (Boolean) -> Unit) : String {
-        return ""
+    fun getLastWorkout(callback: (lastWorkout: String?) -> Unit) {
+        database.getUserWorkout(username.toString()) { snapshot ->
+            val lastWorkout = snapshot?.child("workout")?.value?.toString() ?: "N/A"
+            callback(lastWorkout)
+        }
     }
 
     // Get a list of the friend's friends
     fun getFriends(callback: (Boolean) -> Unit) : ArrayList<String>? {
         return null
     }
-
 }

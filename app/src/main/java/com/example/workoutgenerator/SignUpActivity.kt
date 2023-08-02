@@ -35,7 +35,7 @@ data class SignUpActivity(val name : String? = null, val lastName : String? = nu
             return false
         } else {
             // If all checks pass, perform username validation
-            isUsernameValid(username) { isUsernameValid ->
+            Database.getInstance().isUsernameValid(username) { isUsernameValid ->
                 if (isUsernameValid) {
                     msg.text = "**username already exists**"
                 }
@@ -48,23 +48,6 @@ data class SignUpActivity(val name : String? = null, val lastName : String? = nu
         return true
     }
 
-    private fun isUsernameValid(username: String, callback: (Boolean) -> Unit) {
-        database.child("users").addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(p0: DataSnapshot) {
-                val arr = ArrayList<String>()
-                for (i in p0.children) {
-                    val user = i.child("username").value
-                    arr.add(user.toString())
-                }
-                val isUsernameValid = arr.contains(username)
-                callback(isUsernameValid)
-            }
-            override fun onCancelled(p0: DatabaseError) {
-                callback(false)
-            }
-        })
-    }
-
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -72,11 +55,8 @@ data class SignUpActivity(val name : String? = null, val lastName : String? = nu
         if (username != other.username) return false
         return true
     }
-
     override fun hashCode(): Int {
         return username?.hashCode() ?: 0
     }
-
-
 }
 

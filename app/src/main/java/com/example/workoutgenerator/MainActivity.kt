@@ -18,48 +18,39 @@ import java.util.Calendar
 
 val database = FirebaseDatabase.getInstance().reference
 class MainActivity : ComponentActivity() {
-    private lateinit var genderSpinner: Spinner
     private lateinit var countDownTimer: CountDownTimer
     private lateinit var birthdateTextView: TextView
+    private lateinit var database: Database
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        database = Database.getInstance()
         logIn()
     }
 
-    // Log in page functionality
-    @SuppressLint("MissingInflatedId")
     private fun logIn() {
         setContentView(R.layout.login_layout)
-
-        // Buttons
         val signUpButton = findViewById<Button>(R.id.logIn_signUpBtn)
         val signInButton = findViewById<Button>(R.id.signIn_btn)
 
-        // Sign up logic
         signUpButton.setOnClickListener {
             setContentView(R.layout.signup_layout)
             signUp()
-            // Takes you back to log in page
-            val backButton = findViewById<Button>(R.id.signUp_backButton)
-            goBack(backButton)
         }
 
-        // Sign in logic
         signInButton.setOnClickListener {
             signIn()
         }
     }
 
-    // store all the data given in the database
+    @SuppressLint("MissingInflatedId")
     private fun signUp() {
+        val backBtn = findViewById<Button>(R.id.signUp_backButton)
+        goBack(backBtn)
         val signUpButton = findViewById<Button>(R.id.signUp_button)
         birthdateTextView = findViewById(R.id.birthdateTextView)
+        val genderSpinner = findViewById<Spinner>(R.id.gender)
 
-
-        // Initialize the Spinner
-        genderSpinner = findViewById(R.id.gender)
-
-        // Gender pick
         val genderOptions = arrayOf("gender", "MALE", "FEMALE")
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, genderOptions)
         genderSpinner.adapter = adapter
@@ -76,9 +67,9 @@ class MainActivity : ComponentActivity() {
 
             userInfo.isValidInputs(signUpErrMessage, reEnteredPswd) { isValid ->
                 if (isValid) {
-                    database.child("users").child(username).child("user info").setValue(userInfo)
-                        .addOnSuccessListener {
-                            // clears the text from the input boxes
+                    database.saveUserInfo(username, userInfo,
+                        onSuccess = {
+                            // Clears the text from the input boxes
                             findViewById<EditText>(R.id.signUp_name).text.clear()
                             findViewById<EditText>(R.id.signUp_lastName).text.clear()
                             findViewById<EditText>(R.id.signUp_username).text.clear()
@@ -86,12 +77,15 @@ class MainActivity : ComponentActivity() {
                             findViewById<EditText>(R.id.signUp_reEnteredPassword).text.clear()
                             signUpErrMessage.text = ""
 
-                            // pops out a message that the data was saved
+                            // Shows a message that the data was saved
                             Toast.makeText(this, "Successfully Saved", Toast.LENGTH_SHORT).show()
-                        }.addOnFailureListener {
-                        Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show()
-                    }
-                    setContentView(R.layout.login_layout)
+                            setContentView(R.layout.login_layout)
+                            logIn()
+                        },
+                        onFailure = {
+                            Toast.makeText(this, "Username already taken", Toast.LENGTH_SHORT).show()
+                        }
+                    )
                 } else {
                     Toast.makeText(this, "Retry Sign Up", Toast.LENGTH_SHORT).show()
                 }
@@ -99,27 +93,24 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    // Sign in
     private fun signIn() {
         val username = findViewById<EditText>(R.id.logIn_username).text.toString()
         val password = findViewById<EditText>(R.id.logIn_password).text.toString()
         val errMessage = findViewById<TextView>(R.id.signIn_errMessage)
-
         val si = LoginActivity(username, password)
-
+        // Check login credentials directly using Database.getInstance()
         si.isLoginValid(errMessage) { isValid ->
-            if(isValid) {
-                si.getName { name ->
-                    if (name != null) {
-                        setContentView(R.layout.welcome_layout)
-                        val welcome = findViewById<TextView>(R.id.welcome_message)
-                        welcome.text = "Welcome $name"
-                        startTimer()
-                    } else {
-                        Toast.makeText(this, "Name retrieval failed", Toast.LENGTH_LONG).show()
-                    }
+            if (isValid) {
+                // Retrieve the user name using Database.getInstance()
+                Database.getInstance().getUserInfo(username) { snapshot ->
+                    val name = snapshot?.child("name")?.value?.toString() ?: "N/A"
+                    setContentView(R.layout.welcome_layout)
+                    val welcome = findViewById<TextView>(R.id.welcome_message)
+                    welcome.text = "Welcome $name"
+                    startTimer()
                 }
-            }else {
+            } else {
+                errMessage.text = "Invalid Credentials"
                 Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_LONG).show()
             }
         }
@@ -143,11 +134,9 @@ class MainActivity : ComponentActivity() {
             currentMonth,
             currentDay
         )
-
         // Show the DatePickerDialog
         datePickerDialog.show()
     }
-
 
     // Back to Log In Page
     private fun goBack(button: Button) {
@@ -158,7 +147,6 @@ class MainActivity : ComponentActivity() {
 
     private fun startTimer() {
         countDownTimer = object : CountDownTimer(3000, 1000) {
-
             override fun onTick(millisUntilFinished: Long) {
                 val secondsRemaining = millisUntilFinished / 1000
             }
