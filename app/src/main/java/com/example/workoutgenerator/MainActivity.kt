@@ -48,7 +48,6 @@ class MainActivity : ComponentActivity() {
         val backBtn = findViewById<Button>(R.id.signUp_backButton)
         goBack(backBtn)
         val signUpButton = findViewById<Button>(R.id.signUp_button)
-        birthdateTextView = findViewById(R.id.birthdateTextView)
         val genderSpinner = findViewById<Spinner>(R.id.gender)
 
         val genderOptions = arrayOf("gender", "MALE", "FEMALE")
@@ -128,7 +127,8 @@ class MainActivity : ComponentActivity() {
             DatePickerDialog.OnDateSetListener { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
                 // Update the TextView with the selected birthdate
                 val selectedBirthdate = "$year-${month + 1}-$dayOfMonth"
-                birthdateTextView.text = "Selected Birthdate: $selectedBirthdate"
+                val birthdateBtn = findViewById<Button>(R.id.selectBirthdateButton)
+                birthdateBtn.text = "$selectedBirthdate"
             },
             currentYear,
             currentMonth,

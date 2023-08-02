@@ -21,10 +21,12 @@
         ></Button>
 
     <LinearLayout
-        android:layout_width="350dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="80dp"
         android:background="@drawable/signup_linearlayout_border"
         android:layout_marginStart="35dp"
         android:layout_marginEnd="10dp"
@@ -110,28 +112,14 @@
                 tools:listitem="@layout/item_dropdown"
             ></Spinner>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
             <Button
                 android:id="@+id/selectBirthdateButton"
-                android:layout_width="160dp"
+                android:layout_width="100dp"
                 android:layout_height="40dp"
-                android:text="Select BirthDate"
+                android:layout_marginStart="20dp"
+                android:text="BirthDate"
                 android:textStyle="bold"
                 android:onClick="showDatePickerDialog"
-                />
-
-            <!-- TextView to display selected birthdate -->
-            <TextView
-                android:id="@+id/birthdateTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Selected Birthdate: "
-                android:textStyle="bold"
                 />
 
         </LinearLayout>
