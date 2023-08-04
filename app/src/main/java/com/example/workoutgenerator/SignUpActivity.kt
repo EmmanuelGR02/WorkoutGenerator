@@ -12,7 +12,7 @@ import com.google.firebase.database.ValueEventListener
 import java.lang.StringBuilder
 import java.util.Date
 
-data class SignUpActivity(val name : String? = null, val lastName : String? = null, val username : String? = null, val password : String? = null, val birthDate : Date? = null, val gender : String? = null)  {
+data class SignUpActivity(val name : String? = null, val lastName : String? = null, val username : String? = null, val password : String? = null, val year : Int? = null, var month : Int? = null, var day : Int? = null, val gender : String? = null)  {
 
     fun isValidInputs(msg: TextView, reEnteredPswd: String, callback: (Boolean) -> Unit) : Boolean {
         // check for errors

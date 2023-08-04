@@ -9,16 +9,33 @@
 
     <Button
         android:id="@+id/signUp_backButton"
-        android:layout_width="80dp"
-        android:layout_height="35dp"
+        android:layout_width="75dp"
+        android:layout_height="30dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:shadowColor="@color/dark_gray"
         android:text="BACK"
         android:textStyle="bold"
-        android:background="@color/dark_blue"
+        android:background="@drawable/signup_backbtn_background"
         android:drawableStart="@drawable/back_icon"
         ></Button>
+
+    <TextView
+        android:id="@+id/login_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center_horizontal"
+        android:padding="0dp"
+        android:text="SIGN UP"
+        android:textColor="@color/navy"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:shadowColor="@color/black"
+        android:shadowDx="4"
+        android:shadowDy="4"
+        android:shadowRadius="4"></TextView>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -34,18 +51,6 @@
         android:padding="5dp">
 
         <!-- Title -->
-        <TextView
-            android:id="@+id/login_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:layout_marginBottom="5dp"
-            android:gravity="center_horizontal"
-            android:padding="10dp"
-            android:text="SIGN UP"
-            android:textColor="@color/navy"
-            android:textSize="25sp"
-            android:textStyle="bold"></TextView>
 
         <!-- Error Message -->
         <TextView
@@ -70,6 +75,7 @@
                 android:id="@+id/signUp_name"
                 android:maxLength="12"
                 android:maxLines="1"
+                android:elevation="20dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -77,14 +83,13 @@
                 android:hint="Name        "
                 android:drawablePadding="10dp"
                 android:background="@drawable/signup_name_input"
-                android:padding="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+                android:padding="8dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginTop="10dp"></EditText>
 
              <!--Last Name Input-->
             <EditText
-
                 android:id="@+id/signUp_lastName"
                 android:maxLength="12"
                 android:maxLines="1"
@@ -94,8 +99,8 @@
                 android:hint="Last Name   "
                 android:drawablePadding="10dp"
                 android:background="@drawable/signup_lastname_input"
-                android:padding="10dp"
-                android:layout_marginStart="20dp">
+                android:padding="8dp"
+                android:layout_marginStart="0dp">
             </EditText>
 
         </LinearLayout>
@@ -108,17 +113,21 @@
                 android:id="@+id/gender"
                 android:layout_weight="0"
                 android:layout_width="130dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
                 android:layout_height="40dp"
                 tools:listitem="@layout/item_dropdown"
+                android:background="@drawable/genderpicker_background"
             ></Spinner>
 
             <Button
                 android:id="@+id/selectBirthdateButton"
                 android:layout_width="100dp"
                 android:layout_height="40dp"
-                android:layout_marginStart="20dp"
-                android:text="BirthDate"
-                android:textStyle="bold"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="5dp"
+                android:text="Birth  Date"
+                android:background="@drawable/signup_birthdatebtn_background"
                 android:onClick="showDatePickerDialog"
                 />
 
@@ -129,7 +138,7 @@
             android:id="@+id/invalidUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Invalid username"
+            android:text=""
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="0dp"
             android:textStyle="bold"
@@ -141,7 +150,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/signup_username_input"
             android:drawableStart="@drawable/login_icon"
@@ -156,10 +165,10 @@
             android:id="@+id/invalidPassword"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="invalid password"
+            android:text=""
             android:textColor="@color/red"
             android:textStyle="bold"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_gravity="center_horizontal"></TextView>
 
         <EditText
@@ -170,7 +179,7 @@
             android:layout_marginStart="0dp"
             android:layout_marginTop="0dp"
             android:layout_marginEnd="0dp"
-            android:background="@drawable/signupbtn_background"
+            android:background="@drawable/signup_password_background"
             android:drawableStart="@drawable/password_icon"
             android:drawablePadding="10dp"
             android:hint="Password"
@@ -190,7 +199,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
-            android:background="@drawable/signupbtn_background"
+            android:background="@drawable/signup_password_background"
             android:drawableStart="@drawable/password_icon"
             android:drawablePadding="10dp"
             android:hint="Confirm Password"
@@ -206,7 +215,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:background="@drawable/loginbtn_background"
+            android:background="@drawable/signup_signupbtn_background"
             android:text="Sign Up"
             android:textAllCaps="false"
             android:layout_marginTop="30dp"
