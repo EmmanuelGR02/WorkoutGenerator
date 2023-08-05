@@ -11,7 +11,7 @@ class Friend(private val username : String?) {
 
     // Get friend name method
     fun getName(callback: (name: String?) -> Unit) {
-        database.getUserInfo(username.toString()) { snapshot ->
+        database.getUserInfo(username.toString(), "user info") { snapshot ->
             val name = snapshot?.child("name")?.value?.toString() ?: "N/A"
             callback(name)
         }
@@ -19,8 +19,8 @@ class Friend(private val username : String?) {
 
     // Gets PRs wanted from database
     private fun getPersonalRecords(key: String, callback: (record: String?) -> Unit) {
-        database.getUserInfo(username.toString()) { snapshot ->
-            val record = snapshot?.child("personal records")?.child(key)?.value?.toString() ?: "N/A"
+        database.getUserInfo(username.toString(), "peronal records") { snapshot ->
+            val record = snapshot?.child(key)?.value?.toString() ?: "N/A"
             callback(record)
         }
     }

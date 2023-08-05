@@ -41,7 +41,6 @@ class MainActivity : ComponentActivity() {
             setContentView(R.layout.signup_layout)
             signUp()
         }
-
         signInButton.setOnClickListener {
             signIn()
         }
@@ -57,20 +56,15 @@ class MainActivity : ComponentActivity() {
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, genderOptions)
         genderSpinner.adapter = adapter
         var selectedGender = ""
-        var year = 0
-        var month = 0
-        var day = 0
+        var selectedDateString = ""
 
         val birthdateBtn = findViewById<Button>(R.id.selectBirthdateButton)
         birthdateBtn.setOnClickListener {
             showDatePickerDialog { selectedDate ->
                 val calendar = Calendar.getInstance()
                 calendar.time = selectedDate
-                year = calendar.get(Calendar.YEAR)
-                month = calendar.get(Calendar.MONTH)
-                day = calendar.get(Calendar.DAY_OF_MONTH)
 
-                val selectedDateString = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(selectedDate)
+                selectedDateString = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(selectedDate)
                 birthdateBtn.text = selectedDateString
             }
         }
@@ -85,7 +79,6 @@ class MainActivity : ComponentActivity() {
                 // Get the selected gender from the adapter using the position
                 selectedGender = genderOptions[position]
             }
-
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
         }
@@ -99,7 +92,7 @@ class MainActivity : ComponentActivity() {
             val reEnteredPswd = findViewById<EditText>(R.id.signUp_reEnteredPassword).text.toString()
             val signUpErrMessage = findViewById<TextView>(R.id.signUp_errMessage)
 
-            val userInfo = SignUpActivity(name, lastName, username, password,year, month, day, selectedGender)
+            val userInfo = SignUpActivity(name, lastName, username, password, selectedDateString,selectedGender)
 
             userInfo.isValidInputs(signUpErrMessage, reEnteredPswd) { isValid ->
                 if (isValid) {
@@ -139,11 +132,14 @@ class MainActivity : ComponentActivity() {
         si.isLoginValid(errMessage) { isValid ->
             if (isValid) {
                 // Retrieve the user name using Database.getInstance()
-                Database.getInstance().getUserInfo(username) { snapshot ->
+                Database.getInstance().getUserInfo(username, "user info") { snapshot ->
                     val name = snapshot?.child("name")?.value?.toString() ?: "N/A"
                     setContentView(R.layout.welcome_layout)
                     val welcome = findViewById<TextView>(R.id.welcome_message)
-                    welcome.text = "Welcome $name"
+                    welcome.text = "Welcome $name "
+                    User("KarlaG").getAge { age ->
+                        Toast.makeText(this, "$age", Toast.LENGTH_LONG).show()
+                    }
                     startTimer()
                 }
             } else {

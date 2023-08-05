@@ -1,17 +1,23 @@
 
 package com.example.workoutgenerator
 
+import android.provider.ContactsContract.Data
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 class Database {
     // database instance
     private val database = FirebaseDatabase.getInstance().reference
+
+    fun getDatabase(): DatabaseReference {
+        return database
+    }
 
     // Singleton pattern for database instance
     companion object {
@@ -85,8 +91,8 @@ class Database {
     }
 
     // this method can be called when any personal info needs to be retrieved. (ex. name, lastname, gender, password, birth date)
-    fun getUserInfo(username: String, callback: (DataSnapshot?) -> Unit) {
-        database.child("users").child(username).child("user info").addListenerForSingleValueEvent(object : ValueEventListener {
+    fun getUserInfo(username: String, path: String, callback: (DataSnapshot?) -> Unit) {
+        database.child("users").child(username).child(path).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 callback(snapshot)
             }

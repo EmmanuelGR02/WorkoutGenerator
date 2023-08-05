@@ -12,7 +12,7 @@ data class LoginActivity(val username : String? = null, val password : String? =
     fun getName(callback: (name: String?) -> Unit) {
         Database.getInstance().isUsernameValid(username.toString()) { isValid ->
             if (isValid) {
-                Database.getInstance().getUserInfo(username.toString()) { snapshot ->
+                Database.getInstance().getUserInfo(username.toString(), "user info") { snapshot ->
                     val name = snapshot?.child("name")?.value?.toString() ?: "N/A"
                     callback(name)
                 }
