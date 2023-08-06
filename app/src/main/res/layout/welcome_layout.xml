@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/black">
 
     <TextView
         android:id="@+id/welcome_message"
@@ -10,8 +11,10 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:textSize="40dp"
-        android:textColor="@color/black"
+        android:gravity="center_horizontal"
+        android:textSize="25dp"
+        android:text="jfhdih"
+        android:textColor="@color/dark_orange"
         android:textStyle="bold"></TextView>
 
 </RelativeLayout>

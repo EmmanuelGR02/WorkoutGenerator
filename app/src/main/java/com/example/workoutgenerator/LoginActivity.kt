@@ -22,8 +22,6 @@ data class LoginActivity(val username : String? = null, val password : String? =
         }
     }
 
-
-
     // Checks if the given username and password are in the database
     // returns true if yes, false otherwise
     fun isLoginValid(msg : TextView, callback: (Boolean) -> Unit) {

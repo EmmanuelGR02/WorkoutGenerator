@@ -14,26 +14,6 @@ class User(private val username : String? = null) {
             callback(name)
         }
     }
-
-    fun getAge(callback: (age: Int) -> Unit) {
-        database.getUserInfo(username.toString(), "user info") { snapshot ->
-            val birthdate = snapshot?.child("birthdate")?.value?.toString() ?: "N/A"
-            val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-            val birthDate = sdf.parse(birthdate)
-
-            val today = Calendar.getInstance()
-            val birthCalendar = Calendar.getInstance()
-            birthCalendar.time = birthDate
-
-            var age = today.get(Calendar.YEAR) - birthCalendar.get(Calendar.YEAR)
-            if (today.get(Calendar.MONTH) < birthCalendar.get(Calendar.MONTH) ||
-                (today.get(Calendar.MONTH) == birthCalendar.get(Calendar.MONTH) && today.get(Calendar.DAY_OF_MONTH) < birthCalendar.get(Calendar.DAY_OF_MONTH))) {
-                age--
-            }
-            callback(age)
-        }
-    }
-
     fun addFriend(friend: String) {
         database.getUserInfo(username.toString(), "friends") { snapshot ->
             val friendsList = mutableListOf<String>()
@@ -46,6 +26,77 @@ class User(private val username : String? = null) {
             }
             friendsList.add(friend)
             Database.getInstance().getDatabase().child("users").child(username.toString()).child("friends").setValue(friendsList)
+        }
+    }
+
+    fun getBirthdate(callback: (birthdate: String) -> Unit) {
+        database.getUserInfo(username.toString(), "user info") { snapshot ->
+            val birthdate = snapshot?.child("birthdate")?.value?.toString() ?: "N/A"
+            callback(birthdate)
+        }
+    }
+
+    fun isBirthday(callback: (Boolean) -> Unit) {
+        getBirthdate { birthdate ->
+            if (birthdate == "N/A") {
+                callback(false) // If birthdate is not available, not the user's birthday
+            } else {
+                val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                val birthDate = sdf.parse(birthdate)
+
+                val today = Calendar.getInstance()
+                val birthCalendar = Calendar.getInstance()
+                birthCalendar.time = birthDate
+
+                val isTodayBirthday =
+                    today.get(Calendar.MONTH) == birthCalendar.get(Calendar.MONTH) &&
+                            today.get(Calendar.DAY_OF_MONTH) == birthCalendar.get(Calendar.DAY_OF_MONTH)
+
+                callback(isTodayBirthday)
+            }
+        }
+    }
+
+    fun getAge(callback: (age: Int) -> Unit) {
+        getBirthdate { birthdate ->
+            if (birthdate == "N/A") {
+                callback(0) // If birthdate is not available, age is set to 0
+            } else {
+                val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                val birthDate = sdf.parse(birthdate)
+
+                val today = Calendar.getInstance()
+                val birthCalendar = Calendar.getInstance()
+                birthCalendar.time = birthDate
+
+                var age = today.get(Calendar.YEAR) - birthCalendar.get(Calendar.YEAR)
+                if (today.get(Calendar.MONTH) < birthCalendar.get(Calendar.MONTH) ||
+                    (today.get(Calendar.MONTH) == birthCalendar.get(Calendar.MONTH) && today.get(Calendar.DAY_OF_MONTH) < birthCalendar.get(Calendar.DAY_OF_MONTH))) {
+                    age--
+                }
+                callback(age)
+            }
+        }
+    }
+
+    fun welcomeText(callback: (String) -> Unit) {
+        val randomInt = (1..5).random()
+
+        getName { name ->
+            isBirthday { birthday ->
+                val text = if (birthday) {
+                    "Happy Birthday, $name! \nHave a good one"
+                } else {
+                    when (randomInt) {
+                        1 -> "Welcome, $name. \nWe hope you are having a great day"
+                        2 -> "Hello, $name. \nWe hope it's going well"
+                        3 -> "What's up, $name! \nStart the grind!"
+                        4 -> "Hello, $name. \nHappy to see you again"
+                        else -> "Welcome, $name!"
+                    }
+                }
+                callback(text)
+            }
         }
     }
 

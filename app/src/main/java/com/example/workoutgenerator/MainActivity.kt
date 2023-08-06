@@ -136,11 +136,11 @@ class MainActivity : ComponentActivity() {
                     val name = snapshot?.child("name")?.value?.toString() ?: "N/A"
                     setContentView(R.layout.welcome_layout)
                     val welcome = findViewById<TextView>(R.id.welcome_message)
-                    welcome.text = "Welcome $name "
-                    User("KarlaG").getAge { age ->
-                        Toast.makeText(this, "$age", Toast.LENGTH_LONG).show()
+
+                    // welcome the user and check if today its their birthday
+                    User(username).welcomeText { text ->
+                        welcome.text = text
                     }
-                    startTimer()
                 }
             } else {
                 errMessage.text = "Invalid Credentials"
@@ -182,7 +182,6 @@ class MainActivity : ComponentActivity() {
     private fun startTimer() {
         countDownTimer = object : CountDownTimer(3000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                val secondsRemaining = millisUntilFinished / 1000
             }
             override fun onFinish() {
                 setContentView(R.layout.main_layout)
