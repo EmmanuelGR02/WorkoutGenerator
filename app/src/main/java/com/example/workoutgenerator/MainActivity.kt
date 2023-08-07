@@ -6,6 +6,8 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -25,6 +27,8 @@ val database = FirebaseDatabase.getInstance().reference
 class MainActivity : ComponentActivity() {
     private lateinit var countDownTimer: CountDownTimer
     private lateinit var database: Database
+    private lateinit var slideInRightAnimation: Animation
+    private lateinit var slideOutLeftAnimation: Animation
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -122,6 +126,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    @SuppressLint("MissingInflatedId")
     private fun signIn() {
         val username = findViewById<EditText>(R.id.logIn_username).text.toString()
         val password = findViewById<EditText>(R.id.logIn_password).text.toString()
@@ -134,11 +139,15 @@ class MainActivity : ComponentActivity() {
                 Database.getInstance().getUserInfo(username, "user info") { snapshot ->
                     setContentView(R.layout.welcome_layout)
                     val welcome = findViewById<TextView>(R.id.welcome_message)
+                    val getStartedBtn = findViewById<Button>(R.id.getStartedBtn)
                     val welcomeBackBtn = findViewById<Button>(R.id.welcome_backButton)
                     goBack(welcomeBackBtn)
                     // welcome the user and check if today its their birthday
                     User(username).welcomeText { text ->
                         welcome.text = text
+                    }
+                    getStartedBtn.setOnClickListener {
+                        main(R.layout.profile_layout)
                     }
                 }
             } else {
@@ -171,6 +180,46 @@ class MainActivity : ComponentActivity() {
         datePickerDialog.show()
     }
 
+    private fun main(layout: Int) {
+        setContentView(layout)
+
+        slideInRightAnimation = AnimationUtils.loadAnimation(this, R.anim.slide_in_right)
+        slideOutLeftAnimation = AnimationUtils.loadAnimation(this, R.anim.slide_out_left)
+
+        val friendsBtn = findViewById<Button>(R.id.friendsBtn)
+        val workoutBtn = findViewById<Button>(R.id.workoutBtn)
+        val profileBtn = findViewById<Button>(R.id.profileBtn)
+        val settingsBtn = findViewById<Button>(R.id.settingsBtn)
+
+        friendsBtn.setOnClickListener {
+            it.startAnimation(slideOutLeftAnimation)
+            setContentView(R.layout.friends_layout)
+            main(R.layout.friends_layout)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        }
+
+        workoutBtn.setOnClickListener {
+            it.startAnimation(slideOutLeftAnimation)
+            setContentView(R.layout.workout_layout)
+            main(R.layout.workout_layout)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        }
+
+        profileBtn.setOnClickListener {
+            it.startAnimation(slideOutLeftAnimation)
+            setContentView(R.layout.profile_layout)
+            main(R.layout.profile_layout)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        }
+
+        settingsBtn.setOnClickListener {
+            it.startAnimation(slideOutLeftAnimation)
+            setContentView(R.layout.settings_layout)
+            main(R.layout.settings_layout)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        }
+    }
+
     // Back to Log In Page
     private fun goBack(button: Button) {
         button.setOnClickListener {
@@ -183,7 +232,6 @@ class MainActivity : ComponentActivity() {
             override fun onTick(millisUntilFinished: Long) {
             }
             override fun onFinish() {
-                setContentView(R.layout.main_layout)
             }
         }.start()
     }

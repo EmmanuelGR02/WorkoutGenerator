@@ -100,22 +100,15 @@ class User(private val username : String? = null) {
         }
     }
 
-    // Gets PRs wanted from database
-    private fun getPersonalRecords(key: String, callback: (record: String?) -> Unit) {
-        database.getUserInfo(username.toString(), "personal records") { snapshot ->
-            val record = snapshot?.child(key)?.value?.toString() ?: "N/A"
-            callback(record)
-        }
-    }
     // Specifies the child path to get the wanted PR on "getPersonalRecords()"
     fun getBenchPR(callback: (benchPR: String?) -> Unit) {
-        getPersonalRecords("bench PR", callback)
+        database.getPersonalRecords(username.toString(), "bench PR", callback)
     }
     fun getSquatPR(callback: (squatPR: String?) -> Unit) {
-        getPersonalRecords("squat PR", callback)
+        database.getPersonalRecords(username.toString(),"squat PR", callback)
     }
     fun getDeadliftPR(callback: (deadliftPR: String?) -> Unit) {
-        getPersonalRecords("deadlift PR", callback)
+        database.getPersonalRecords(username.toString(),"deadlift PR", callback)
     }
 
     // Get the last workout done by this user

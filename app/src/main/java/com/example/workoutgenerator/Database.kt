@@ -118,21 +118,11 @@ class Database {
         })
     }
 
-    fun isLoginValid(username: String, password: String, msg : TextView, callback: (Boolean) -> Unit) {
-        Database.getInstance().isUsernameValid(username.toString()) { isUsernameValid ->
-            if (isUsernameValid) {
-                Database.getInstance().isPasswordValid(password.toString(), username.toString()) { isPswdValid ->
-                    if(isPswdValid) {
-                        callback(true)
-                    } else {
-                        msg.text = "Invalid password"
-                        callback(false)
-                    }
-                }
-            } else {
-                msg.text = "Invalid username"
-                callback(false)
-            }
+    // Get the personal record wanted from the database
+    fun getPersonalRecords(username: String, key: String, callback: (record: String?) -> Unit) {
+        getUserInfo(username, "personal records") { snapshot ->
+            val record = snapshot?.child(key)?.value?.toString() ?: "N/A"
+            callback(record)
         }
     }
 }
