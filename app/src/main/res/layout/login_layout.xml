@@ -5,7 +5,7 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_background">
+    android:background="@color/black">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,54 +19,60 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Workout Generator"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:padding="10dp"
             android:textSize="40sp"
             android:textStyle="bold"
-            android:textColor="@color/navy"></TextView>
+            android:textColor="@color/dark_orange"></TextView>
 
         <!-- logo -->
         <ImageView
             android:id="@+id/login_logo"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:src="@drawable/main_logo"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_gravity="center_horizontal"
             ></ImageView>
 
         <!-- Error Message -->
+
+        <!-- Login edit text inputs -->
+
         <TextView
             android:id="@+id/signIn_errMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=""
+            android:layout_marginTop="10dp"
             android:gravity="center_horizontal"
             android:padding="10dp"
+            android:text=""
+            android:textColor="@color/red"
             android:textSize="12sp"
-            android:textStyle="bold"
-            android:textColor="@color/red"></TextView>
+            android:textStyle="bold"></TextView>
 
-        <!-- Login edit text inputs -->
         <EditText
             android:id="@+id/logIn_username"
-            android:layout_width="match_parent"
+            android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/login_icon"
             android:hint="Username"
             android:drawablePadding="10dp"
             android:background="@drawable/logininput_background"
             android:padding="10dp"
-
+            android:layout_gravity="center"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginTop="20dp"></EditText>
+            android:layout_marginTop="0dp"></EditText>
 
         <EditText
             android:id="@+id/logIn_password"
-            android:layout_width="match_parent"
+            android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/password_icon"
             android:hint="Passsword"
+            android:layout_gravity="center"
             android:drawablePadding="1dp"
             android:background="@drawable/logininput_background"
             android:padding="10dp"
@@ -90,21 +96,23 @@
         <!-- Login button -->
         <Button
             android:id="@+id/signIn_btn"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:background="@drawable/loginbtn_background"
             android:text="Sign In"
+            android:layout_gravity="center"
             android:textAllCaps="false"
             android:textSize="21sp"></Button>
 
         <!-- Sign up Button -->
         <Button
             android:id="@+id/logIn_signUpBtn"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/signupbtn_background"
             android:text="Sign Up"
+            android:layout_gravity="center"
             android:textAllCaps="false"
             android:textSize="21sp"></Button>
 

@@ -122,7 +122,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-
     private fun signIn() {
         val username = findViewById<EditText>(R.id.logIn_username).text.toString()
         val password = findViewById<EditText>(R.id.logIn_password).text.toString()
@@ -133,10 +132,10 @@ class MainActivity : ComponentActivity() {
             if (isValid) {
                 // Retrieve the user name using Database.getInstance()
                 Database.getInstance().getUserInfo(username, "user info") { snapshot ->
-                    val name = snapshot?.child("name")?.value?.toString() ?: "N/A"
                     setContentView(R.layout.welcome_layout)
                     val welcome = findViewById<TextView>(R.id.welcome_message)
-
+                    val welcomeBackBtn = findViewById<Button>(R.id.welcome_backButton)
+                    goBack(welcomeBackBtn)
                     // welcome the user and check if today its their birthday
                     User(username).welcomeText { text ->
                         welcome.text = text

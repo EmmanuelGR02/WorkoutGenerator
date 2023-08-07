@@ -14,17 +14,13 @@
         ></padding>
 
     <stroke
-        android:width="3dp"
+        android:width="5dp"
+        android:color="@color/white"
         ></stroke>
 
 
     <solid
         android:color="@color/black"
         ></solid>
-
-    <gradient
-        android:startColor="@color/dark_blue"
-        android:endColor="@color/light_orange"
-        ></gradient>
 
 </shape>

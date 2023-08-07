@@ -3,18 +3,68 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/black">
+    android:background="@color/black"
+    >
 
-    <TextView
-        android:id="@+id/welcome_message"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <Button
+        android:id="@+id/welcome_backButton"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:text="BACK"
+        android:textStyle="bold"
+        android:background="@drawable/welcomebtn_background"
+        android:drawableStart="@drawable/back_icon"
+        ></Button>
+
+    <ImageView
+        android:id="@+id/login_logo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_centerHorizontal="true"
+        android:src="@drawable/main_logo"
+        android:layout_marginTop="60dp"
+        ></ImageView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_centerVertical="true"
-        android:gravity="center_horizontal"
-        android:textSize="25dp"
-        android:text="jfhdih"
-        android:textColor="@color/dark_orange"
-        android:textStyle="bold"></TextView>
+        android:layout_centerHorizontal="true"
+        >
+
+        <TextView
+            android:id="@+id/welcome_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:elevation="15dp"
+            android:gravity="center_horizontal"
+            android:padding="16dp"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            android:textStyle="italic"></TextView>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/welcomebtn_background"
+            android:drawableEnd="@drawable/bicep_icon"
+            android:text="Get Started"
+            android:padding="5dp"
+            android:drawablePadding="5dp"
+            android:layout_marginBottom="10dp"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
 </RelativeLayout>

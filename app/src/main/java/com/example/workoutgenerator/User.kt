@@ -88,9 +88,9 @@ class User(private val username : String? = null) {
                     "Happy Birthday, $name! \nHave a good one"
                 } else {
                     when (randomInt) {
-                        1 -> "Welcome, $name. \nWe hope you are having a great day"
-                        2 -> "Hello, $name. \nWe hope it's going well"
-                        3 -> "What's up, $name! \nStart the grind!"
+                        1 -> "Welcome, $name. \nWe hope that you're having a great day"
+                        2 -> "Hello, $name. \nHope it's going well"
+                        3 -> "What's up, $name? \nLet's Start the grind!"
                         4 -> "Hello, $name. \nHappy to see you again"
                         else -> "Welcome, $name!"
                     }
