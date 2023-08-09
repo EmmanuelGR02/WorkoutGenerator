@@ -17,12 +17,49 @@
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.WorkoutGenerator">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".WorkoutActivity"
+            android:exported="true"
+            android:label="Workout Activity"
+            android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="true"
+            android:label="Profile Activity"
+            android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".FriendsActivity"
+            android:exported="true"
+            android:label="Friends Activity"
+            android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

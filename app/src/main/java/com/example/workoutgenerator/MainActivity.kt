@@ -1,10 +1,14 @@
 
 package com.example.workoutgenerator
 
+import com.example.workoutgenerator.R
+import com.example.workoutgenerator.databinding.ProfileLayoutBinding
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -23,12 +27,15 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
+
 val database = FirebaseDatabase.getInstance().reference
 class MainActivity : ComponentActivity() {
     private lateinit var countDownTimer: CountDownTimer
     private lateinit var database: Database
     private lateinit var slideInRightAnimation: Animation
     private lateinit var slideOutLeftAnimation: Animation
+    private lateinit var binding: ProfileLayoutBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -157,6 +164,38 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    private fun main(layout: Int) {
+        setContentView(layout)
+        val workoutBtn = findViewById<Button>(R.id.workoutBtn)
+        val profileBtn = findViewById<Button>(R.id.profileBtn)
+        val friendsBtn = findViewById<Button>(R.id.friendsBtn)
+
+        workoutBtn.setOnClickListener {
+            val workoutIntent = Intent(this, WorkoutActivity::class.java)
+            startActivity(workoutIntent)
+            main(R.layout.workout_layout)
+        }
+
+        profileBtn.setOnClickListener{
+            val profileIntent = Intent(this, ProfileActivity::class.java)
+            startActivity(profileIntent)
+            main(R.layout.profile_layout)
+        }
+
+        friendsBtn.setOnClickListener{
+            val friendsIntent = Intent(this, FriendsActivity::class.java)
+            startActivity(friendsIntent)
+            main(R.layout.friends_layout)
+        }
+    }
+
+    private fun newActivity() {
+        val intent = Intent(this, WorkoutActivity::class.java)
+        startActivity(intent)
+        Log.d("AnimationDebug", "Starting new activity with slide animation")
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+    }
+
     fun showDatePickerDialog(callback: DateCallback) {
         val calendar = Calendar.getInstance()
         val currentYear = calendar.get(Calendar.YEAR)
@@ -180,45 +219,6 @@ class MainActivity : ComponentActivity() {
         datePickerDialog.show()
     }
 
-    private fun main(layout: Int) {
-        setContentView(layout)
-
-        slideInRightAnimation = AnimationUtils.loadAnimation(this, R.anim.slide_in_right)
-        slideOutLeftAnimation = AnimationUtils.loadAnimation(this, R.anim.slide_out_left)
-
-        val friendsBtn = findViewById<Button>(R.id.friendsBtn)
-        val workoutBtn = findViewById<Button>(R.id.workoutBtn)
-        val profileBtn = findViewById<Button>(R.id.profileBtn)
-        val settingsBtn = findViewById<Button>(R.id.settingsBtn)
-
-        friendsBtn.setOnClickListener {
-            it.startAnimation(slideOutLeftAnimation)
-            setContentView(R.layout.friends_layout)
-            main(R.layout.friends_layout)
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-        }
-
-        workoutBtn.setOnClickListener {
-            it.startAnimation(slideOutLeftAnimation)
-            setContentView(R.layout.workout_layout)
-            main(R.layout.workout_layout)
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-        }
-
-        profileBtn.setOnClickListener {
-            it.startAnimation(slideOutLeftAnimation)
-            setContentView(R.layout.profile_layout)
-            main(R.layout.profile_layout)
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-        }
-
-        settingsBtn.setOnClickListener {
-            it.startAnimation(slideOutLeftAnimation)
-            setContentView(R.layout.settings_layout)
-            main(R.layout.settings_layout)
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-        }
-    }
 
     // Back to Log In Page
     private fun goBack(button: Button) {
@@ -227,20 +227,11 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun startTimer() {
-        countDownTimer = object : CountDownTimer(3000, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-            }
-            override fun onFinish() {
-            }
-        }.start()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        // Cancel the timer if the activity is destroyed to avoid memory leaks
-        countDownTimer.cancel()
-    }
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        // Cancel the timer if the activity is destroyed to avoid memory leaks
+//        countDownTimer.cancel()
+//    }
 }
 
 typealias DateCallback = (Date) -> Unit
