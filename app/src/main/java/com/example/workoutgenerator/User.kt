@@ -29,6 +29,12 @@ class User(private val username : String? = null) {
         }
     }
 
+    fun unAddFriend(friend: String) {
+        database.getUserInfo(username.toString(), "friends") { snapshot ->
+
+        }
+    }
+
     fun getBirthdate(callback: (birthdate: String) -> Unit) {
         database.getUserInfo(username.toString(), "user info") { snapshot ->
             val birthdate = snapshot?.child("birthdate")?.value?.toString() ?: "N/A"
@@ -120,7 +126,18 @@ class User(private val username : String? = null) {
     }
 
     // Get a list of the users friends
-    fun getFriends(callback: (Boolean) -> Unit) : ArrayList<String>? {
-        return null
+    fun getFriends(callback: (ArrayList<String>) -> Unit) {
+        database.getUserInfo(username.toString(), "friends") { snapshot ->
+            val friendsList = ArrayList<String>()
+
+            if (snapshot != null && snapshot.exists()) {
+                for (childSnapshot in snapshot.children) {
+                    val friendUsername = childSnapshot.value.toString()
+                    friendsList.add(friendUsername)
+                }
+            }
+            callback(friendsList)
+        }
     }
+
 }

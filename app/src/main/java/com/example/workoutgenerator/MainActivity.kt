@@ -29,6 +29,7 @@ import java.util.Locale
 
 
 val database = FirebaseDatabase.getInstance().reference
+var currentUser = ""
 class MainActivity : ComponentActivity() {
     private lateinit var database: Database
 
@@ -135,6 +136,7 @@ class MainActivity : ComponentActivity() {
         val password = findViewById<EditText>(R.id.logIn_password).text.toString()
         val errMessage = findViewById<TextView>(R.id.signIn_errMessage)
         val si = LoginActivity(username, password)
+        currentUser = username
         // Check login credentials directly using Database.getInstance()
         si.isLoginValid(errMessage) { isValid ->
             if (isValid) {
