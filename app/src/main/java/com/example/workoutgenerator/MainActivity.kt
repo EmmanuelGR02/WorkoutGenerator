@@ -30,17 +30,13 @@ import java.util.Locale
 
 val database = FirebaseDatabase.getInstance().reference
 class MainActivity : ComponentActivity() {
-    private lateinit var countDownTimer: CountDownTimer
     private lateinit var database: Database
-    private lateinit var slideInRightAnimation: Animation
-    private lateinit var slideOutLeftAnimation: Animation
-    private lateinit var binding: ProfileLayoutBinding
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         database = Database.getInstance()
         logIn()
+
     }
 
     private fun logIn() {
@@ -143,57 +139,57 @@ class MainActivity : ComponentActivity() {
         si.isLoginValid(errMessage) { isValid ->
             if (isValid) {
                 // Retrieve the user name using Database.getInstance()
-                Database.getInstance().getUserInfo(username, "user info") { snapshot ->
-                    setContentView(R.layout.welcome_layout)
-                    val welcome = findViewById<TextView>(R.id.welcome_message)
-                    val getStartedBtn = findViewById<Button>(R.id.getStartedBtn)
-                    val welcomeBackBtn = findViewById<Button>(R.id.welcome_backButton)
-                    goBack(welcomeBackBtn)
-                    // welcome the user and check if today its their birthday
-                    User(username).welcomeText { text ->
-                        welcome.text = text
-                    }
-                    getStartedBtn.setOnClickListener {
-                        main(R.layout.profile_layout)
-                    }
+                setContentView(R.layout.welcome_layout)
+                val welcome = findViewById<TextView>(R.id.welcome_message)
+                val getStartedBtn = findViewById<Button>(R.id.getStartedBtn)
+                val welcomeBackBtn = findViewById<Button>(R.id.welcome_backButton)
+                goBack(welcomeBackBtn)
+                // welcome the user and check if today its their birthday
+                User(username).welcomeText { text ->
+                    welcome.text = text
                 }
-            } else {
-                errMessage.text = "Invalid Credentials"
-                Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_LONG).show()
+                getStartedBtn.setOnClickListener {
+                    setContentView(R.layout.profile_layout)
+                    openActivities()
+                }
             }
         }
     }
 
-    private fun main(layout: Int) {
-        setContentView(layout)
+    private fun openWorkoutActivity() {
         val workoutBtn = findViewById<Button>(R.id.workoutBtn)
-        val profileBtn = findViewById<Button>(R.id.profileBtn)
-        val friendsBtn = findViewById<Button>(R.id.friendsBtn)
 
         workoutBtn.setOnClickListener {
             val workoutIntent = Intent(this, WorkoutActivity::class.java)
             startActivity(workoutIntent)
-            main(R.layout.workout_layout)
-        }
-
-        profileBtn.setOnClickListener{
-            val profileIntent = Intent(this, ProfileActivity::class.java)
-            startActivity(profileIntent)
-            main(R.layout.profile_layout)
-        }
-
-        friendsBtn.setOnClickListener{
-            val friendsIntent = Intent(this, FriendsActivity::class.java)
-            startActivity(friendsIntent)
-            main(R.layout.friends_layout)
+            openActivities()
         }
     }
 
-    private fun newActivity() {
-        val intent = Intent(this, WorkoutActivity::class.java)
-        startActivity(intent)
-        Log.d("AnimationDebug", "Starting new activity with slide animation")
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+    private fun openProfileActivity() {
+        val profileBtn = findViewById<Button>(R.id.profileBtn)
+
+        profileBtn.setOnClickListener {
+            val profileIntent = Intent(this, ProfileActivity::class.java)
+            startActivity(profileIntent)
+            openActivities()
+        }
+    }
+
+    fun openActivities() {
+        openWorkoutActivity()
+        openProfileActivity()
+        openFriendsActivity()
+    }
+
+    private fun openFriendsActivity() {
+        val friendsBtn = findViewById<Button>(R.id.friendsBtn)
+
+        friendsBtn.setOnClickListener {
+            val friendsIntent = Intent(this, FriendsActivity::class.java)
+            startActivity(friendsIntent)
+            openActivities()
+        }
     }
 
     fun showDatePickerDialog(callback: DateCallback) {
@@ -227,11 +223,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-//    override fun onDestroy() {
-//        super.onDestroy()
-//        // Cancel the timer if the activity is destroyed to avoid memory leaks
-//        countDownTimer.cancel()
-//    }
 }
 
 typealias DateCallback = (Date) -> Unit
