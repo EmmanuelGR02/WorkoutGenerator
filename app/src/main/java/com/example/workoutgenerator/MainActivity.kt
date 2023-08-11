@@ -37,7 +37,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         database = Database.getInstance()
         logIn()
-
     }
 
     private fun logIn() {
@@ -151,46 +150,10 @@ class MainActivity : ComponentActivity() {
                     welcome.text = text
                 }
                 getStartedBtn.setOnClickListener {
-                    setContentView(R.layout.profile_layout)
-                    openActivities()
+                    val profileIntent = Intent(this, ProfileActivity::class.java)
+                    startActivity(profileIntent)
                 }
             }
-        }
-    }
-
-    private fun openWorkoutActivity() {
-        val workoutBtn = findViewById<Button>(R.id.workoutBtn)
-
-        workoutBtn.setOnClickListener {
-            val workoutIntent = Intent(this, WorkoutActivity::class.java)
-            startActivity(workoutIntent)
-            openActivities()
-        }
-    }
-
-    private fun openProfileActivity() {
-        val profileBtn = findViewById<Button>(R.id.profileBtn)
-
-        profileBtn.setOnClickListener {
-            val profileIntent = Intent(this, ProfileActivity::class.java)
-            startActivity(profileIntent)
-            openActivities()
-        }
-    }
-
-    fun openActivities() {
-        openWorkoutActivity()
-        openProfileActivity()
-        openFriendsActivity()
-    }
-
-    private fun openFriendsActivity() {
-        val friendsBtn = findViewById<Button>(R.id.friendsBtn)
-
-        friendsBtn.setOnClickListener {
-            val friendsIntent = Intent(this, FriendsActivity::class.java)
-            startActivity(friendsIntent)
-            openActivities()
         }
     }
 
@@ -224,7 +187,6 @@ class MainActivity : ComponentActivity() {
             logIn()
         }
     }
-
 }
 
 typealias DateCallback = (Date) -> Unit
