@@ -1,5 +1,6 @@
 package com.example.workoutgenerator
 
+import android.util.Log
 import com.google.firebase.database.FirebaseDatabase
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -14,18 +15,28 @@ class User(private val username : String? = null) {
             callback(name)
         }
     }
-    fun addFriend(friend: String) {
-        database.getUserInfo(username.toString(), "friends") { snapshot ->
-            val friendsList = mutableListOf<String>()
 
-            if (snapshot != null && snapshot.exists()) {
-                for (childSnapshot in snapshot.children) {
-                    val friendUsername = childSnapshot.value.toString()
-                    friendsList.add(friendUsername)
+    fun addFriend(friend: String) {
+        val friendsList =   ArrayList<String>()
+
+        Database.getInstance().isUsernameValid(friend) {isValid ->
+            if (isValid) {
+                Log.e("User", "Username is not valid")
+
+            } else {
+                database.getUserInfo(username.toString(), "friends") { snapshot ->
+
+                    if (snapshot != null && snapshot.exists()) {
+                        for (childSnapshot in snapshot.children) {
+                            val friendUsername = childSnapshot.value.toString()
+                            friendsList.add(friendUsername)
+                        }
+                    }
+                    friendsList.add(friend)
+                    Database.getInstance().getDatabase().child("users").child(username.toString()).child("friends").setValue(friendsList)
                 }
+                Log.e("User", friendsList.toString())
             }
-            friendsList.add(friend)
-            Database.getInstance().getDatabase().child("users").child(username.toString()).child("friends").setValue(friendsList)
         }
     }
 
