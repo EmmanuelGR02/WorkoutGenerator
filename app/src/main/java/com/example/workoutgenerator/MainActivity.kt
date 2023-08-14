@@ -2,17 +2,12 @@
 package com.example.workoutgenerator
 
 import com.example.workoutgenerator.R
-import com.example.workoutgenerator.databinding.ProfileLayoutBinding
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
-import android.content.Intent
 import android.os.Bundle
-import android.os.CountDownTimer
-import android.util.Log
 import android.view.View
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.widget.AdapterView
+import androidx.appcompat.app.AppCompatActivity
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.DatePicker
@@ -30,7 +25,7 @@ import java.util.Locale
 
 val database = FirebaseDatabase.getInstance().reference
 var currentUser = ""
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
     private lateinit var database: Database
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -150,8 +145,7 @@ class MainActivity : ComponentActivity() {
                     welcome.text = text
                 }
                 getStartedBtn.setOnClickListener {
-                    val profileIntent = Intent(this, ProfileActivity::class.java)
-                    startActivity(profileIntent)
+                    supportFragmentManager.beginTransaction().replace(R.id.nav_container, ProfileFragment()).commit()
                 }
             }
         }
