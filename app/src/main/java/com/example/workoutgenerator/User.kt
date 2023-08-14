@@ -19,6 +19,16 @@ class User(private val username : String? = null) {
     fun addFriend(friend: String) {
         val friendsList =   ArrayList<String>()
 
+        val a = "a"
+        val b = "b"
+        val c = "c"
+        val d = "d"
+
+        friendsList.add(a)
+        friendsList.add(b)
+        friendsList.add(c)
+        friendsList.add(d)
+
         Database.getInstance().isUsernameValid(friend) {isValid ->
             if (isValid) {
                 Log.e("User", "Username is not valid")

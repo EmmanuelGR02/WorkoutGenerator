@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainActivity">
+
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.workoutgenerator.MainActivity"
+        android:label="MainActivity" />
+    <activity
+        android:id="@+id/profileActivity"
+        android:name="com.example.workoutgenerator.ProfileActivity"
+        android:label="ProfileActivity" />
+    <activity
+        android:id="@+id/friendsActivity"
+        android:name="com.example.workoutgenerator.FriendsActivity"
+        android:label="FriendsActivity" />
+    <activity
+        android:id="@+id/workoutActivity"
+        android:name="com.example.workoutgenerator.WorkoutActivity"
+        android:label="WorkoutActivity" />
+</navigation>
