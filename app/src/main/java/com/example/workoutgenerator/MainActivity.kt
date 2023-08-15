@@ -145,8 +145,10 @@ class MainActivity : AppCompatActivity() {
                     welcome.text = text
                 }
                 getStartedBtn.setOnClickListener {
-                    supportFragmentManager.beginTransaction().replace(R.id.nav_container, ProfileFragment()).commit()
-                }
+                    val fragment = WelcomePageFragment()
+                    val transaction = supportFragmentManager.beginTransaction()
+                    transaction.replace(R.id.nav_container, fragment)
+                    transaction.commit()                }
             }
         }
     }
