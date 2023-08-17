@@ -35,15 +35,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun logIn() {
-        setContentView(R.layout.login_layout)
-        val signUpButton = findViewById<Button>(R.id.logIn_signUpBtn)
-        val signInButton = findViewById<Button>(R.id.signIn_btn)
+        val fragment = SignInFragment()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.nav_container, fragment)
+        transaction.commit()
 
-        signUpButton.setOnClickListener {
+        // Move these lines to inside the SignInFragment's view
+        val signUpButton = fragment.view?.findViewById<Button>(R.id.logIn_signUpBtn)
+        val signInButton = fragment.view?.findViewById<Button>(R.id.signIn_btn)
+
+        signUpButton?.setOnClickListener {
             setContentView(R.layout.signup_layout)
             signUp()
         }
-        signInButton.setOnClickListener {
+        signInButton?.setOnClickListener {
             signIn()
         }
     }
@@ -134,21 +139,25 @@ class MainActivity : AppCompatActivity() {
         // Check login credentials directly using Database.getInstance()
         si.isLoginValid(errMessage) { isValid ->
             if (isValid) {
+                val fragment = WelcomePageFragment()
+                val transaction = supportFragmentManager.beginTransaction()
+                transaction.replace(R.id.nav_container, fragment)
+                transaction.commit()
                 // Retrieve the user name using Database.getInstance()
-                setContentView(R.layout.welcome_layout)
-                val welcome = findViewById<TextView>(R.id.welcome_message)
-                val getStartedBtn = findViewById<Button>(R.id.getStartedBtn)
-                val welcomeBackBtn = findViewById<Button>(R.id.welcome_backButton)
-                goBack(welcomeBackBtn)
-                // welcome the user and check if today its their birthday
-                User(username).welcomeText { text ->
-                    welcome.text = text
-                }
-                getStartedBtn.setOnClickListener {
-                    val fragment = WelcomePageFragment()
-                    val transaction = supportFragmentManager.beginTransaction()
-                    transaction.replace(R.id.nav_container, fragment)
-                    transaction.commit()                }
+//                setContentView(R.layout.welcome_layout)
+//                val welcome = findViewById<TextView>(R.id.welcome_message)
+//                val getStartedBtn = findViewById<Button>(R.id.getStartedBtn)
+//                val welcomeBackBtn = findViewById<Button>(R.id.welcome_backButton)
+//                goBack(welcomeBackBtn)
+//                // welcome the user and check if today its their birthday
+//                User(username).welcomeText { text ->
+//                    welcome.text = text
+//                }
+//                getStartedBtn.setOnClickListener {
+//                    val fragment = WelcomePageFragment()
+//                    val transaction = supportFragmentManager.beginTransaction()
+//                    transaction?.replace(R.id.nav_container, fragment)?.commit()
+//                }
             }
         }
     }
