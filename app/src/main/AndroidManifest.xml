@@ -24,5 +24,9 @@
             </intent-filter>
         </activity>
 
+        <meta-data
+            android:name="android:name"
+            android:value="com.example.workoutgenerator.SignInFragment" />
+
     </application>
 </manifest>

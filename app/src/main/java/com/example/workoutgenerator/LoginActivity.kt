@@ -1,5 +1,6 @@
 package com.example.workoutgenerator
 
+import android.util.Log
 import android.widget.TextView
 import androidx.annotation.ContentView
 import com.google.firebase.database.DataSnapshot
@@ -23,10 +24,10 @@ data class LoginActivity(val username : String? = null, val password : String? =
     }
 
     // Checks if the given username and password are in the database
-    // returns true if yes, false otherwise
     fun isLoginValid(msg : TextView, callback: (Boolean) -> Unit) {
         Database.getInstance().isUsernameValid(username.toString()) { isUsernameValid ->
-            if (!       isUsernameValid) {
+            if (!isUsernameValid) {
+                Log.e("isLogInValid", "works")
                 Database.getInstance().isPasswordValid(password.toString(), username.toString()) { isPswdValid ->
                     if(isPswdValid) {
                         callback(true)
