@@ -20,7 +20,13 @@ class WelcomePageFragment : Fragment() {
         val welcomeMsg = binding.welcomeMessage
         val getStartedBtn = binding.getStartedBtn
         val backBtn = binding.welcomeBackButton
-        backToSignIn(backBtn)
+
+        // send user back to sign in layout
+        backBtn.setOnClickListener {
+            val fragment = SignInFragment()
+            val transaction = fragmentManager?.beginTransaction()
+            transaction?.replace(R.id.nav_container, fragment)?.commit()
+        }
 
         // welcome the user and check if today its their birthday
         User(currentUser).welcomeText { text ->
@@ -36,13 +42,5 @@ class WelcomePageFragment : Fragment() {
         return view
     }
 
-    // Back to Log In Page
-    private fun backToSignIn(button: Button) {
-        button.setOnClickListener {
-            val fragment = SignInFragment()
-            val transaction = fragmentManager?.beginTransaction()
-            transaction?.replace(R.id.nav_container, fragment)?.commit()
-        }
-    }
 }
 

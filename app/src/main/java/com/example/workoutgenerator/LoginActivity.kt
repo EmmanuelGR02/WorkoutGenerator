@@ -27,17 +27,16 @@ data class LoginActivity(val username : String? = null, val password : String? =
     fun isLoginValid(msg : TextView, callback: (Boolean) -> Unit) {
         Database.getInstance().isUsernameValid(username.toString()) { isUsernameValid ->
             if (!isUsernameValid) {
-                Log.e("isLogInValid", "works")
                 Database.getInstance().isPasswordValid(password.toString(), username.toString()) { isPswdValid ->
                     if(isPswdValid) {
                         callback(true)
                     } else {
-                        msg.text = "Invalid password"
+                        msg.text = "Invalid credentials"
                         callback(false)
                     }
                 }
             } else {
-                msg.text = "Invalid username"
+                msg.text = "Invalid credentials"
                 callback(false)
             }
         }

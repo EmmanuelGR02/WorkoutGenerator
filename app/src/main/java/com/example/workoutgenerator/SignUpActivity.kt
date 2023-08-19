@@ -43,8 +43,6 @@ data class SignUpActivity(val name : String? = null, val lastName : String? = nu
                 callback(!isUsernameValid)
             }
         }
-        // If none of the above conditions are met, it means all inputs are valid.
-        // Therefore, return true.
         return true
     }
 

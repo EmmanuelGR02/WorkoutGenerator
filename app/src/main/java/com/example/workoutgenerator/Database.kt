@@ -14,9 +14,8 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-class Database {
-    // database instance
-    private val database = FirebaseDatabase.getInstance().reference
+class Database private constructor() {
+    private val database: DatabaseReference = FirebaseDatabase.getInstance().reference
 
     fun getDatabase(): DatabaseReference {
         return database
@@ -24,12 +23,13 @@ class Database {
 
     // Singleton pattern for database instance
     companion object {
+        @Volatile
         private var instance: Database? = null
+
         fun getInstance(): Database {
-            if (instance == null) {
-                instance = Database()
+            return instance ?: synchronized(this) {
+                instance ?: Database().also { instance = it }
             }
-            return instance!!
         }
     }
 
@@ -77,7 +77,7 @@ class Database {
 
     // Check if given password matches with the username
     fun isPasswordValid(password : String,username: String, callback : (Boolean) -> Unit) {
-        com.example.workoutgenerator.database.child("users").child(username.toString()).child("user info").addListenerForSingleValueEvent(object : ValueEventListener {
+        database.child("users").child(username).child("user info").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val arr = ArrayList<String>()
                 val pswd = snapshot.child("password").value.toString()
