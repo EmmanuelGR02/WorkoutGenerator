@@ -4,6 +4,7 @@ package com.example.workoutgenerator
 import com.example.workoutgenerator.R
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -31,9 +32,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportFragmentManager.beginTransaction().replace(R.id.nav_container, SignInFragment()).commit()
+        //supportFragmentManager.beginTransaction().replace(R.id.nav_container, SignInFragment()).commit()
         database = Database.getInstance()
-//        logIn()
+        logIn()
     }
 
     fun replaceFragment(fragment: Fragment) {
@@ -144,25 +145,23 @@ class MainActivity : AppCompatActivity() {
         // Check login credentials directly using Database.getInstance()
         si.isLoginValid(errMessage) { isValid ->
             if (isValid) {
-                val fragment = WelcomePageFragment()
-                val transaction = supportFragmentManager.beginTransaction()
-                transaction.replace(R.id.nav_container, fragment)
-                transaction.commit()
+                val intent = Intent(this, WelcomePageFragment::class.java)
+                startActivity(intent)
                 // Retrieve the user name using Database.getInstance()
-                setContentView(R.layout.welcome_layout)
-                val welcome = findViewById<TextView>(R.id.welcome_message)
-                val getStartedBtn = findViewById<Button>(R.id.getStartedBtn)
-                val welcomeBackBtn = findViewById<Button>(R.id.welcome_backButton)
-                goBack(welcomeBackBtn)
-                // welcome the user and check if today its their birthday
-                User(username).welcomeText { text ->
-                    welcome.text = text
-                }
-                getStartedBtn.setOnClickListener {
-                    val fragment = WelcomePageFragment()
-                    val transaction = supportFragmentManager.beginTransaction()
-                    transaction?.replace(R.id.nav_container, fragment)?.commit()
-                }
+                //setContentView(R.layout.welcome_layout)
+//                val welcome = findViewById<TextView>(R.id.welcome_message)
+//                val getStartedBtn = findViewById<Button>(R.id.getStartedBtn)
+//                val welcomeBackBtn = findViewById<Button>(R.id.welcome_backButton)
+//                goBack(welcomeBackBtn)
+//                // welcome the user and check if today its their birthday
+//                User(username).welcomeText { text ->
+//                    welcome.text = text
+//                }
+//                getStartedBtn.setOnClickListener {
+//                    val fragment = WelcomePageFragment()
+//                    val transaction = supportFragmentManager.beginTransaction()
+//                    transaction?.replace(R.id.nav_container, fragment)?.commit()
+//                }
             }
         }
     }

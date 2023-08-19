@@ -11,7 +11,6 @@ import com.example.workoutgenerator.databinding.WelcomeLayoutBinding
 
 class WelcomePageFragment : Fragment() {
     private lateinit var binding: FragmentWelcomePageBinding
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
