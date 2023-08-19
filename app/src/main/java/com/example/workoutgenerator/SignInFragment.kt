@@ -11,10 +11,10 @@ import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.workoutgenerator.databinding.FragmentSignInBinding
 
+var currentUser = ""
 class SignInFragment : Fragment() {
     private lateinit var database: Database
     private lateinit var binding: FragmentSignInBinding
-    var currentUser = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,12 +39,13 @@ class SignInFragment : Fragment() {
 
         logIn.isLoginValid(errMessage) { isValid ->
             if (isValid) {
-                // Inform the MainActivity to perform the fragment transaction
-                (requireActivity() as MainActivity).replaceFragment(WelcomePageFragment())
+                val fragment = WelcomePageFragment()
+                val transaction = fragmentManager?.beginTransaction()
+                transaction?.replace(R.id.nav_container, fragment)?.commit()
+
             } else {
                 Log.e("signIn", "Sign in failed")
             }
         }
-
     }
 }

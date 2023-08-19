@@ -108,7 +108,6 @@ class User(private val username : String? = null) {
 
     fun welcomeText(callback: (String) -> Unit) {
         val randomInt = (1..5).random()
-
         getName { name ->
             isBirthday { birthday ->
                 val text = if (birthday) {

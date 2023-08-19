@@ -28,8 +28,8 @@ class WelcomePageFragment : Fragment() {
         }
         getStartedBtn.setOnClickListener {
             val fragment = ProfileFragment()
-            val transaction = childFragmentManager.beginTransaction()
-            transaction.replace(R.id.nav_container, fragment).commit()
+            val transaction = fragmentManager?.beginTransaction()
+            transaction?.replace(R.id.nav_container, fragment)?.commit()
         }
 
         // Inflate the layout for this fragment
@@ -40,8 +40,8 @@ class WelcomePageFragment : Fragment() {
     private fun backToSignIn(button: Button) {
         button.setOnClickListener {
             val fragment = SignInFragment()
-            val transaction = childFragmentManager.beginTransaction()
-            transaction.replace(R.id.nav_container, fragment).commit()
+            val transaction = fragmentManager?.beginTransaction()
+            transaction?.replace(R.id.nav_container, fragment)?.commit()
         }
     }
 }
