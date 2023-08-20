@@ -6,21 +6,38 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import com.example.workoutgenerator.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
-
+    private lateinit var binding: FragmentProfileBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_profile, container, false)
-        val nextBtn : Button = view.findViewById(R.id.next)
-        nextBtn.setOnClickListener {
+        binding = FragmentProfileBinding.inflate(inflater, container, false)
+        val view = binding.root
+
+        val profileBtn = binding.profileBtn
+        val friendsBtn = binding.friendsBtn
+        val workoutBtn = binding.workoutBtn
+
+        profileBtn.setOnClickListener {
+            val fragment = ProfileFragment()
+            val transaction = fragmentManager?.beginTransaction()
+            transaction?.replace(R.id.nav_container, fragment)?.commit()
+        }
+        friendsBtn.setOnClickListener {
             val fragment = FriendsFragment()
             val transaction = fragmentManager?.beginTransaction()
             transaction?.replace(R.id.nav_container, fragment)?.commit()
         }
+        workoutBtn.setOnClickListener {
+            val fragment = WorkoutGeneratorFragment()
+            val transaction = fragmentManager?.beginTransaction()
+            transaction?.replace(R.id.nav_container, fragment)?.commit()
+        }
+
         return view
     }
 
