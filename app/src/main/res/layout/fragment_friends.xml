@@ -20,22 +20,19 @@
             android:layout_marginEnd="16dp"
             android:layout_marginTop="16dp" />
 
-        <LinearLayout
+
+        <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center_vertical">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Friends"
-                android:textSize="40sp"
-                android:gravity="center"
-                />
+        </ScrollView>
 
-        </LinearLayout>
-
+        <LinearLayout
+            android:id="@+id/friendContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
 
         <!-- Linear layout containing the main buttons to navigate through the fragments -->
         <LinearLayout
