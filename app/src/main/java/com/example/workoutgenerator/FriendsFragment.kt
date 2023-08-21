@@ -20,23 +20,16 @@ class FriendsFragment : Fragment() {
         val view = binding.root
 
         val profileBtn = binding.profileBtn
-        val friendsBtn = binding.friendsBtn
         val workoutBtn = binding.workoutBtn
 
         profileBtn.setOnClickListener {
             val fragment = ProfileFragment()
-            val transaction = fragmentManager?.beginTransaction()
-            transaction?.replace(R.id.nav_container, fragment)?.commit()
+            (requireActivity() as MainActivity).navigateToFragment(fragment)
         }
-        friendsBtn.setOnClickListener {
-            val fragment = FriendsFragment()
-            val transaction = fragmentManager?.beginTransaction()
-            transaction?.replace(R.id.nav_container, fragment)?.commit()
-        }
+
         workoutBtn.setOnClickListener {
             val fragment = WorkoutGeneratorFragment()
-            val transaction = fragmentManager?.beginTransaction()
-            transaction?.replace(R.id.nav_container, fragment)?.commit()
+            (requireActivity() as MainActivity).navigateToFragment(fragment)
         }
 
         return view

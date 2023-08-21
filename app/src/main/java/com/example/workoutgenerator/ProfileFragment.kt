@@ -18,24 +18,17 @@ class ProfileFragment : Fragment() {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        val profileBtn = binding.profileBtn
         val friendsBtn = binding.friendsBtn
         val workoutBtn = binding.workoutBtn
 
-        profileBtn.setOnClickListener {
-            val fragment = ProfileFragment()
-            val transaction = fragmentManager?.beginTransaction()
-            transaction?.replace(R.id.nav_container, fragment)?.commit()
-        }
         friendsBtn.setOnClickListener {
             val fragment = FriendsFragment()
-            val transaction = fragmentManager?.beginTransaction()
-            transaction?.replace(R.id.nav_container, fragment)?.commit()
+            (requireActivity() as MainActivity).navigateToFragment(fragment)
         }
+
         workoutBtn.setOnClickListener {
             val fragment = WorkoutGeneratorFragment()
-            val transaction = fragmentManager?.beginTransaction()
-            transaction?.replace(R.id.nav_container, fragment)?.commit()
+            (requireActivity() as MainActivity).navigateToFragment(fragment)
         }
 
         return view
