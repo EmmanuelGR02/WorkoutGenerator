@@ -40,9 +40,6 @@
         <action
             android:id="@+id/action_friendsFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
-        <action
-            android:id="@+id/action_friendsFragment_to_addFriendsFragment"
-            app:destination="@id/addFriendsFragment" />
     </fragment>
     <fragment
         android:id="@+id/workoutGeneratorFragment"
@@ -81,9 +78,5 @@
         android:id="@+id/addFriendsFragment"
         android:name="com.example.workoutgenerator.AddFriendsFragment"
         android:label="fragment_add_friends"
-        tools:layout="@layout/fragment_add_friends" >
-        <action
-            android:id="@+id/action_addFriendsFragment_to_friendsFragment"
-            app:destination="@id/friendsFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_add_friends" />
 </navigation>

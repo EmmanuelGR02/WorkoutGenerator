@@ -11,7 +11,6 @@ import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
 import com.example.workoutgenerator.databinding.FragmentFriendsBinding
-import com.example.workoutgenerator.databinding.FragmentProfileBinding
 
 class FriendsFragment : Fragment() {
     private lateinit var binding: FragmentFriendsBinding
@@ -23,7 +22,6 @@ class FriendsFragment : Fragment() {
         binding = FragmentFriendsBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        createFriendLayouts()
 
         val profileBtn = binding.profileBtn
         val workoutBtn = binding.workoutBtn
@@ -38,10 +36,6 @@ class FriendsFragment : Fragment() {
             (requireActivity() as MainActivity).navigateToFragment(fragment)
         }
 
-        return view
-    }
-
-    private fun createFriendLayouts() {
         val scrollView = binding.scrollView
         val friendContainer = binding.friendContainer
 
@@ -51,45 +45,54 @@ class FriendsFragment : Fragment() {
             myFriendsList.clear()
             myFriendsList.addAll(friendsList)
 
-            // After fetching friends list, fetch and add friend layouts
+            // Fetch and add friend layouts
             fetchAndAddFriendLayouts(myFriendsList, friendContainer, scrollView)
         }
+
+        return view
     }
+
+//    fun createFriendLayout(imageResource: Int, friendName: String): View {
+//        val inflater = LayoutInflater.from(requireContext())
+//        val friendLayout = inflater.inflate(R.layout.friend_layout_item, null)
+//
+//        val friendAvatar = friendLayout.findViewById<ImageView>(R.id.friendAvatar)
+//        val friendNameTextView = friendLayout.findViewById<TextView>(R.id.friendName)
+//
+//        friendAvatar.setImageResource(imageResource)
+//        friendNameTextView.text = friendName
+//
+//        return friendLayout
+//    }
 
     private fun fetchAndAddFriendLayouts(
         friendsList: List<String>,
         friendContainer: LinearLayout,
         scrollView: ScrollView
     ) {
-        var friendCount = 0
+        friendContainer.removeAllViews() // Clear existing views
+
+        val inflater = LayoutInflater.from(requireContext())
 
         for (friend in friendsList) {
             Friend(friend).getName { tempName ->
-                val friendLayout = layoutInflater.inflate(R.layout.friend_layout_item, null)
+                val imageResource = R.drawable.main_logo // Replace with actual image resource
+
+                // Create a new instance of the friend layout
+                val friendLayout = inflater.inflate(R.layout.friend_layout_item, null)
 
                 val friendAvatar = friendLayout.findViewById<ImageView>(R.id.friendAvatar)
-                val friendName = friendLayout.findViewById<TextView>(R.id.friendName)
+                val friendNameTextView = friendLayout.findViewById<TextView>(R.id.friendName)
 
-                // Set friend's information in the layout
-                friendName.text = tempName.toString()
-
-                // Remove any existing parent before adding the view to the container
-                val parent = friendLayout.parent as? ViewGroup
-                parent?.removeView(friendLayout)
+                friendAvatar.setImageResource(imageResource)
+                friendNameTextView.text = tempName.toString()
 
                 // Add the friend's layout to the container
                 friendContainer.addView(friendLayout)
-
-                // Check if all friend layouts have been added
-                friendCount++
-                if (friendCount == friendsList.size) {
-                    // All friend layouts added, now add the container to the scroll view
-                    scrollView.addView(friendContainer)
-                }
             }
-
         }
+
+        // Add the container to the scroll view after all friend layouts have been added
+        scrollView.addView(friendContainer)
     }
-
-
 }
