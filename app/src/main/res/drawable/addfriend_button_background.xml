@@ -1,0 +1,17 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Shape drawable -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="10dp" />
+            <gradient
+                android:startColor="@color/dark_blue"
+                android:endColor="@color/dark_orange"
+                android:angle="-90" />
+        </shape>
+    </item>
+
+    <!-- Add Friend Icon -->
+    <item
+        android:drawable="@drawable/addfriend_icon"
+        android:gravity="start|center_vertical"/>
+</layer-list>

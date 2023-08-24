@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileFragment">
+    tools:context=".ProfileFragment"
+    android:background="@color/black">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -20,6 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:text="Profile"
+                android:textColor="@color/white"
                 android:textSize="40sp"
                 android:gravity="center"
                 />
@@ -42,21 +44,25 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Friends" />
+                android:background="@drawable/friends_button_background"
+                android:text="" />
 
             <Button
                 android:id="@+id/profileBtn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Profile" />
+                android:background="@drawable/profile_button_background"
+                android:text="" />
 
             <Button
                 android:id="@+id/workoutBtn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Workout" />
+                android:background="@drawable/workout_button_background"
+                android:text="" />
+
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

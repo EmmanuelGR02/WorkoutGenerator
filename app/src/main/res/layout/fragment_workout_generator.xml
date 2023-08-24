@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".WorkoutGeneratorFragment">
+    tools:context=".WorkoutGeneratorFragment"
+    android:background="@color/black">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,8 +21,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:text="Workout"
+                android:text="Workout Generator"
                 android:textSize="40sp"
+                android:textColor="@color/white"
                 android:gravity="center"
                 />
 
@@ -43,21 +45,25 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Friends" />
+                android:background="@drawable/friends_button_background"
+                android:text="" />
 
             <Button
                 android:id="@+id/profileBtn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Profile" />
+                android:background="@drawable/profile_button_background"
+                android:text="" />
 
             <Button
                 android:id="@+id/workoutBtn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Workout" />
+                android:background="@drawable/workout_button_background"
+                android:text="" />
+
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

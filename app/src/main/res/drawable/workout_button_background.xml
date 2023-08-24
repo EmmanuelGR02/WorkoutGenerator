@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Shape drawable -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="30dp" />
+            <solid android:color="@color/dark_orange"/>
+        </shape>
+    </item>
+
+    <!-- Add Friend Icon -->
+    <item
+        android:drawable="@drawable/deadlift_icon"
+        android:gravity="center" />
+</layer-list>

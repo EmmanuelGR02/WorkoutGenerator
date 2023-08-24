@@ -74,7 +74,7 @@
 
                 <!-- Add text views for user's latest workout here -->
                 <TextView
-                    android:id="@+id/latestWorkoutType"
+                    android:id="@+id/LatestWorkoutLength"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Latest Workout: WORKOUT"
@@ -83,7 +83,7 @@
                     android:textSize="13sp" />
 
                 <TextView
-                    android:id="@+id/latestWorkoutLength"
+                    android:id="@+id/workoutLength"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Duration: MINUTES"
@@ -92,7 +92,7 @@
                     android:textSize="13sp" />
 
                 <TextView
-                    android:id="@+id/latestSong"
+                    android:id="@+id/dailySong"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Song of the Day: Example Song"
@@ -101,7 +101,7 @@
                     android:textSize="13sp" />
 
                 <TextView
-                    android:id="@+id/latestDate"
+                    android:id="@+id/datePosted"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Date: Month, Day, Year"

@@ -13,13 +13,16 @@
 
         <Button
             android:id="@+id/addFriendBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add Friend"
+            android:layout_width="80dp"
+            android:layout_height="35dp"
+            android:text="Add friend"
+            android:textSize="10sp"
+            android:gravity="end|center_vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginEnd="16dp"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="16dp"
+            android:background="@drawable/addfriend_button_background"/>
 
         <ScrollView
             android:id="@+id/scrollView"
@@ -50,21 +53,24 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Friends" />
+                android:background="@drawable/friends_button_background"
+                android:text="" />
 
             <Button
                 android:id="@+id/profileBtn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Profile" />
+                android:background="@drawable/profile_button_background"
+                android:text="" />
 
             <Button
                 android:id="@+id/workoutBtn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Workout" />
+                android:background="@drawable/workout_button_background"
+                android:text="" />
 
         </LinearLayout>
 
