@@ -64,8 +64,8 @@ class FriendsFragment : Fragment() {
                 // Create a new instance of the friend layout
                 val friendLayout = inflater.inflate(R.layout.friend_layout_item, friendContainer, false)
 
-                val friendAvatar = friendLayout.findViewById<ImageView>(R.id.friendAvatar)
-                val friendNameTextView = friendLayout.findViewById<TextView>(R.id.friendName)
+                val friendAvatar = friendLayout.findViewById<ImageView>(R.id.friendImage)
+                val friendNameTextView = friendLayout.findViewById<TextView>(R.id.friendUsername)
 
                 friendAvatar.setImageResource(imageResource)
                 friendNameTextView.text = tempName.toString()
