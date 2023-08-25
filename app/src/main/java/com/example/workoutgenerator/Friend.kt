@@ -17,6 +17,10 @@ class Friend(private val username : String?) {
         }
     }
 
+    fun getUsername() : String {
+        return this.username.toString()
+    }
+
     // Specifies the child path to get the wanted PR on "getPersonalRecords()"
     fun getBenchPR(callback: (benchPR: String?) -> Unit) {
         database.getPersonalRecords(username.toString(), "bench PR", callback)

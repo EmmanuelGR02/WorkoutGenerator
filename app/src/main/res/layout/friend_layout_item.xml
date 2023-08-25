@@ -20,12 +20,11 @@
             android:layout_margin="5dp"
             android:elevation="10dp">
 
-            <ImageView
+            <Button
                 android:id="@+id/roundedImageView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/main_logo"
-                android:background="@color/white"
+                android:background="@drawable/main_logo"
                 android:scaleType="centerCrop"
                 />
         </androidx.cardview.widget.CardView>
@@ -110,18 +109,27 @@
             </LinearLayout>
         </LinearLayout>
 
-        <Button
-            android:layout_width="45dp"
-            android:layout_height="25dp"
-            android:text="99"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginStart="5dp"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            android:background="@drawable/likes_background"
-            android:drawablePadding="-3dp"
-            android:drawableStart="@drawable/liked_icon" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="45dp"
+                android:layout_height="25dp"
+                android:text="99"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginStart="5dp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:background="@drawable/likes_background"
+                android:drawablePadding="-3dp"
+                android:drawableStart="@drawable/liked_icon" />
+
+
+        </LinearLayout>
+
 
     </LinearLayout>
 

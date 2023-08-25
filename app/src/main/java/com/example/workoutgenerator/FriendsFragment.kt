@@ -58,21 +58,21 @@ class FriendsFragment : Fragment() {
         val inflater = LayoutInflater.from(requireContext())
 
         for (friend in friendsList) {
-            Friend(friend).getName { tempName ->
-                val imageResource = R.drawable.main_logo // Replace with actual image resource
+            val friendUsername = Friend(friend).getUsername() // Get the friend's username
 
-                // Create a new instance of the friend layout
-                val friendLayout = inflater.inflate(R.layout.friend_layout_item, friendContainer, false)
+            val imageResource = R.drawable.main_logo // Replace with actual image resource
 
-                val friendAvatar = friendLayout.findViewById<ImageView>(R.id.friendImage)
-                val friendNameTextView = friendLayout.findViewById<TextView>(R.id.friendUsername)
+            // Create a new instance of the friend layout
+            val friendLayout = inflater.inflate(R.layout.friend_layout_item, friendContainer, false)
 
-                friendAvatar.setImageResource(imageResource)
-                friendNameTextView.text = tempName.toString()
+            val friendAvatar = friendLayout.findViewById<ImageView>(R.id.friendImage)
+            val friendNameTextView = friendLayout.findViewById<TextView>(R.id.friendUsername)
 
-                // Add the friend's layout to the container
-                friendContainer.addView(friendLayout)
-            }
+            friendAvatar.setImageResource(imageResource)
+            friendNameTextView.text = friendUsername // Use the username instead of the name
+
+            // Add the friend's layout to the container
+            friendContainer.addView(friendLayout)
         }
     }
 }
