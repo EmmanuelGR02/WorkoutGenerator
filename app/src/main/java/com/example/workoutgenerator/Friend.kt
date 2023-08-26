@@ -32,13 +32,14 @@ class Friend(private val username : String?) {
         database.getPersonalRecords(username.toString(),"deadlift PR", callback)
     }
 
-    // Get the last workout done by this friend
-    fun getLastWorkout(callback: (lastWorkout: String?) -> Unit) {
-        database.getUserWorkout(username.toString()) { snapshot ->
-            val lastWorkout = snapshot?.child("workout")?.value?.toString() ?: "N/A"
-            callback(lastWorkout)
+    // Get info needed from the latest workout
+    fun getLatestWorkoutInfo(info: String, callback: (data: String?) -> Unit) {
+        database.getLatestWorkoutInfo(username.toString()) { snapshot ->
+            val data = snapshot?.child(info)?.value?.toString() ?: "N/A"
+            callback(data)
         }
     }
+
 
     // Get a list of the friend's friends
     fun getFriends(callback: (Boolean) -> Unit) : ArrayList<String>? {

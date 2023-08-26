@@ -139,7 +139,7 @@ class User(private val username : String? = null) {
 
     // Get the last workout done by this user
     fun getLastWorkout(callback: (lastWorkout: String?) -> Unit) {
-        database.getUserWorkout(username.toString()) { snapshot ->
+        database.getLatestWorkoutInfo(username.toString()) { snapshot ->
             val lastWorkout = snapshot?.child("workout")?.value?.toString() ?: "N/A"
             callback(lastWorkout)
         }

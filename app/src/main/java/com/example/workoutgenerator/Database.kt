@@ -11,6 +11,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import java.text.SimpleDateFormat
+import java.time.Duration
 import java.util.Calendar
 import java.util.Locale
 
@@ -31,6 +32,15 @@ class Database private constructor() {
                 instance ?: Database().also { instance = it }
             }
         }
+    }
+
+    // saves the info for the latest workout
+    fun saveLatestWorkoutInfo(username: String, workout: String, duration: String, song: String, date: String, caption: String) {
+        database.child("users").child(username).child("latest workout").child("workout").setValue(workout)
+        database.child("users").child(username).child("latest workout").child("duration").setValue(duration)
+        database.child("users").child(username).child("latest workout").child("song").setValue(song)
+        database.child("users").child(username).child("latest workout").child("date").setValue(date)
+        database.child("users").child(username).child("latest workout").child("caption").setValue(caption)
     }
 
     fun saveUserInfo(username: String, userInfo: SignUpActivity, onSuccess: () -> Unit, onFailure: () -> Unit) {
@@ -106,8 +116,8 @@ class Database private constructor() {
         })
     }
 
-    fun getUserWorkout(username: String, callback: (DataSnapshot?) -> Unit) {
-        database.child("users").child(username).child("workouts").addListenerForSingleValueEvent(object : ValueEventListener {
+    fun getLatestWorkoutInfo(username: String, callback: (DataSnapshot?) -> Unit) {
+        database.child("users").child(username).child("latest workout").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 callback(snapshot)
             }
