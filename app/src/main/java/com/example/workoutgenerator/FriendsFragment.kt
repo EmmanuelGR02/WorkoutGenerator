@@ -42,8 +42,8 @@ class FriendsFragment : Fragment() {
             (requireActivity() as MainActivity).navigateToFragment(fragment)
         }
 
+        // linear layout where all the friends items will go
         val friendContainer = binding.friendContainer
-
         val myFriendsList: ArrayList<String> = ArrayList()
 
         User(currentUser).getFriends { friendsList ->
@@ -81,6 +81,23 @@ class FriendsFragment : Fragment() {
             val songTextView = friendLayout.findViewById<TextView>(R.id.dailySong)
             val dateTextView = friendLayout.findViewById<TextView>(R.id.datePosted)
             val captionTextView = friendLayout.findViewById<TextView>(R.id.caption)
+            val friendPfpBtn = friendLayout.findViewById<Button>(R.id.pfpButton)
+
+            // take the user to the users friend profile when clicked on their pfp
+            // Send the friends username as an argument to the "ViewFriendProfile" fragment
+            friendPfpBtn.setOnClickListener {
+                val fragment = ViewFriendProfile()
+
+                val bundle = Bundle()
+                bundle.putString("friendUsername", friendObject.getUsername())
+                fragment.arguments = bundle
+
+                val fragmentManager = requireActivity().supportFragmentManager
+                val transaction = fragmentManager.beginTransaction()
+                transaction.replace(R.id.nav_container, fragment)
+                transaction.addToBackStack(null)
+                transaction.commit()
+            }
 
             // set view values
             // Workout
@@ -206,26 +223,6 @@ class FriendsFragment : Fragment() {
             friendContainer.addView(friendLayout)
         }
     }
-
-    // Function to fill out friend's post information
-    private fun fillFriendPostInfo(
-        workoutType: String,
-        duration: String,
-        song: String,
-        date: String,
-        friendLayout: View
-    ) {
-        val latestWorkoutTextView = friendLayout.findViewById<TextView>(R.id.LatestWorkoutLength)
-        val workoutLengthTextView = friendLayout.findViewById<TextView>(R.id.workoutLength)
-        val dailySongTextView = friendLayout.findViewById<TextView>(R.id.dailySong)
-        val datePostedTextView = friendLayout.findViewById<TextView>(R.id.datePosted)
-
-        latestWorkoutTextView.text = "Latest Workout: $workoutType"
-        workoutLengthTextView.text = "Duration: $duration"
-        dailySongTextView.text = "Song of the Day: $song"
-        datePostedTextView.text = "Date: $date"
-    }
-
 }
 
 

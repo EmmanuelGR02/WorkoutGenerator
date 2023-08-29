@@ -6,6 +6,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/black">
 
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:text="BACK"
+        android:textStyle="bold"
+        android:background="@drawable/welcomebtn_background"
+        android:drawableStart="@drawable/back_icon"/>
+
 
     <!-- Linear Layout containing profile image and username -->
     <LinearLayout
@@ -22,7 +33,7 @@
             android:elevation="10dp">
 
             <Button
-                android:id="@+id/pfp"
+                android:id="@+id/friendPfp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/main_logo"
@@ -35,7 +46,7 @@
             android:id="@+id/friendUsername"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="FRIEND'S USERNAME"
+            android:text=""
             android:textSize="30sp"
             android:textColor="@color/dark_orange"
             android:textStyle="bold"
@@ -64,9 +75,10 @@
         <!--Friends bench max-->
 
         <TextView
+            android:id="@+id/benchPR"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Bench PR: "
+            android:text=""
             android:textStyle="bold"
             android:textColor="@color/white"/>
 

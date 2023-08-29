@@ -40,6 +40,12 @@
         <action
             android:id="@+id/action_friendsFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_friendsFragment_to_viewFriendProfile"
+            app:destination="@id/viewFriendProfile" />
+        <action
+            android:id="@+id/action_friendsFragment_to_addFriendsFragment"
+            app:destination="@id/addFriendsFragment" />
     </fragment>
     <fragment
         android:id="@+id/workoutGeneratorFragment"
@@ -78,5 +84,21 @@
         android:id="@+id/addFriendsFragment"
         android:name="com.example.workoutgenerator.AddFriendsFragment"
         android:label="fragment_add_friends"
-        tools:layout="@layout/fragment_add_friends" />
+        tools:layout="@layout/fragment_add_friends" >
+        <action
+            android:id="@+id/action_addFriendsFragment_to_friendsFragment"
+            app:destination="@id/friendsFragment" />
+        <action
+            android:id="@+id/action_addFriendsFragment_to_viewFriendProfile"
+            app:destination="@id/viewFriendProfile" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewFriendProfile"
+        android:name="com.example.workoutgenerator.ViewFriendProfile"
+        android:label="fragment_view_friend_profile"
+        tools:layout="@layout/fragment_view_friend_profile" >
+        <action
+            android:id="@+id/action_viewFriendProfile_to_friendsFragment"
+            app:destination="@id/friendsFragment" />
+    </fragment>
 </navigation>

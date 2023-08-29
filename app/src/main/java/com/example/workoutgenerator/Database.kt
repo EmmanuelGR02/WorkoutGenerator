@@ -130,9 +130,16 @@ class Database private constructor() {
 
     // Get the personal record wanted from the database
     fun getPersonalRecords(username: String, key: String, callback: (record: String?) -> Unit) {
-        getUserInfo(username, "personal records") { snapshot ->
-            val record = snapshot?.child(key)?.value?.toString() ?: "N/A"
-            callback(record)
-        }
+        database.child("users").child(username).child("personal records").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val record = snapshot.child(key).value?.toString()
+                callback(record)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                callback(null)
+            }
+        })
     }
+
 }
