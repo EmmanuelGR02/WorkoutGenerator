@@ -41,25 +41,31 @@ class ViewFriendProfile : Fragment() {
 
     // fill out the layout with friends stats
     private fun friendsStats(username: String?) {
+        val friendObject = Friend(username)
         val benchPR = binding.benchPR
         val squatPR = binding.squatPR
         val deadliftPR = binding.deadliftPR
-        val age = binding.age
+        val ageView = binding.age
         val weight = binding.weight
         val height = binding.height
 
         // Use the passed username to get friend's stats
-        Friend(username).getBenchPR { benchPRValue ->
+        friendObject.getBenchPR { benchPRValue ->
             benchPR.text = "Bench PR: $benchPRValue lbs"
         }
 
-        Friend(username).getSquatPR { squatPRValue ->
+        friendObject.getSquatPR { squatPRValue ->
             squatPR.text = "Bench PR: $squatPRValue lbs"
         }
 
-        Friend(username).getDeadliftPR { deadliftPRValue ->
+        friendObject.getDeadliftPR { deadliftPRValue ->
             deadliftPR.text = "Bench PR: $deadliftPRValue lbs"
         }
+
+        friendObject.getAge { age ->
+            ageView.text = age.toString()
+        }
+
     }
 
 }

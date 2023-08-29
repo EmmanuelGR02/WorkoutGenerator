@@ -4,6 +4,9 @@ package com.example.workoutgenerator
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 import javax.security.auth.callback.Callback
 
 class Friend(private val username : String?) {
@@ -21,15 +24,38 @@ class Friend(private val username : String?) {
         return this.username.toString()
     }
 
+    // get friends age
+    fun getAge(callback: (age: Int) -> Unit) {
+        User(username).getBirthdate { birthdate ->
+            if (birthdate == "N/A") {
+                callback(0) // If birthdate is not available, age is set to 0
+            } else {
+                val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                val birthDate = sdf.parse(birthdate)
+
+                val today = Calendar.getInstance()
+                val birthCalendar = Calendar.getInstance()
+                birthCalendar.time = birthDate
+
+                var age = today.get(Calendar.YEAR) - birthCalendar.get(Calendar.YEAR)
+                if (today.get(Calendar.MONTH) < birthCalendar.get(Calendar.MONTH) ||
+                    (today.get(Calendar.MONTH) == birthCalendar.get(Calendar.MONTH) && today.get(Calendar.DAY_OF_MONTH) < birthCalendar.get(Calendar.DAY_OF_MONTH))) {
+                    age--
+                }
+                callback(age)
+            }
+        }
+    }
+
     // Specifies the child path to get the wanted PR on "getPersonalRecords()"
     fun getBenchPR(callback: (benchPR: String?) -> Unit) {
-        database.getPersonalRecords(username.toString(), "bench PR", callback)
+        database.getPersonalRecords(username.toString(), "benchPR", callback)
     }
     fun getSquatPR(callback: (squatPR: String?) -> Unit) {
-        database.getPersonalRecords(username.toString(),"squat PR", callback)
+        database.getPersonalRecords(username.toString(),"squatPR", callback)
     }
     fun getDeadliftPR(callback: (deadliftPR: String?) -> Unit) {
-        database.getPersonalRecords(username.toString(),"deadlift PR", callback)
+        database.getPersonalRecords(username.toString(),"deadliftPR", callback)
     }
 
     // Get info needed from the latest workout

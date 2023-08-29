@@ -32,6 +32,7 @@ class WelcomePageFragment : Fragment() {
             welcomeMsg.text = text
         }
         getStartedBtn.setOnClickListener {
+            Database.getInstance().saveUserStats("AlanC", "225", "315", "350", "160", "5'5")
             val fragment = ProfileFragment()
             val transaction = fragmentManager?.beginTransaction()
             transaction?.replace(R.id.nav_container, fragment)?.commit()

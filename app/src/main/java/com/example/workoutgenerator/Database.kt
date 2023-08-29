@@ -134,17 +134,10 @@ class Database private constructor() {
 
     // Save the stats of the user
     fun saveUserStats(username: String, benchPR: String?, squatPR: String?, deadliftPR: String?, weight: String?, height: String?) {
-        var age = 0
-
-        User(currentUser).getAge { temAge ->
-            age = temAge
-        }
-
         val userStatsMap = mapOf(
             "benchPR" to benchPR,
             "squatPR" to squatPR,
             "deadliftPR" to deadliftPR,
-            "age" to age,
             "weight" to weight,
             "height" to height
         )

@@ -159,5 +159,4 @@ class User(private val username : String? = null) {
             callback(friendsList)
         }
     }
-
 }
