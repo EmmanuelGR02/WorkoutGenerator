@@ -17,7 +17,15 @@ class ViewFriendProfile : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding =  FriendProfileBinding.inflate(inflater, container, false)
+
         val usernameView = binding.friendUsername
+        val backBtn = binding.backButton
+
+        backBtn.setOnClickListener {
+            val fragment = FriendsFragment()
+            (requireActivity() as MainActivity).navigateToFragment(fragment)
+        }
+
         // Retrieve friend's username from arguments
         val friendUsername = arguments?.getString("friendUsername")
 
@@ -34,10 +42,23 @@ class ViewFriendProfile : Fragment() {
     // fill out the layout with friends stats
     private fun friendsStats(username: String?) {
         val benchPR = binding.benchPR
+        val squatPR = binding.squatPR
+        val deadliftPR = binding.deadliftPR
+        val age = binding.age
+        val weight = binding.weight
+        val height = binding.height
 
         // Use the passed username to get friend's stats
         Friend(username).getBenchPR { benchPRValue ->
-            benchPR.text = "Bench PR: $benchPRValue"
+            benchPR.text = "Bench PR: $benchPRValue lbs"
+        }
+
+        Friend(username).getSquatPR { squatPRValue ->
+            squatPR.text = "Bench PR: $squatPRValue lbs"
+        }
+
+        Friend(username).getDeadliftPR { deadliftPRValue ->
+            deadliftPR.text = "Bench PR: $deadliftPRValue lbs"
         }
     }
 

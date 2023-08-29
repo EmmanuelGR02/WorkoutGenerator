@@ -46,13 +46,12 @@
             android:id="@+id/friendUsername"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text=""
+            android:text="jnjjjnj"
             android:textSize="30sp"
             android:textColor="@color/dark_orange"
             android:textStyle="bold"
             android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_marginStart="0dp"
+            android:layout_marginStart="30dp"
             />
 
     </LinearLayout>
@@ -67,34 +66,72 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Stats:"
-            android:textSize="25dp"
+            android:textSize="35dp"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:layout_marginStart="20dp" />
 
         <!--Friends bench max-->
-
         <TextView
             android:id="@+id/benchPR"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""
             android:textStyle="bold"
+            android:textSize="25sp"
+            android:textColor="@color/white"/>
+
+        <!--friends squat max -->
+        <TextView
+            android:id="@+id/squatPR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:textColor="@color/white"/>
+
+        <!-- Friends deadlift max -->
+        <TextView
+            android:id="@+id/deadliftPR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:textColor="@color/white"/>
+
+        <!-- friends age -->
+        <TextView
+            android:id="@+id/age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:textColor="@color/white"/>
+
+        <!--Friends weight -->
+        <TextView
+            android:id="@+id/weight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:textColor="@color/white"/>
+
+        <!--Friends height -->
+        <TextView
+            android:id="@+id/height"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textStyle="bold"
+            android:textSize="25sp"
             android:textColor="@color/white"/>
 
 
-        <!--friends squat max -->
-
-        <!-- Friends deadlift max -->
-
-        <!-- friends age -->
-
-        <!--Friends weight -->
-
-        <!--Friends height -->
-
-
     </LinearLayout>
-
 
 </LinearLayout>
