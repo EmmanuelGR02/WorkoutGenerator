@@ -63,6 +63,13 @@
 
         <!--Friends bench max-->
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bench PR: "
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
+
 
         <!--friends squat max -->
 
