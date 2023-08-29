@@ -58,6 +58,10 @@ class Friend(private val username : String?) {
         database.getPersonalRecords(username.toString(),"deadliftPR", callback)
     }
 
+    fun getWeight(callback: (weight: String?) -> Unit) {
+        database.getPersonalRecords(username.toString(), "weight", callback)
+    }
+
     // Get info needed from the latest workout
     fun getLatestWorkoutInfo(info: String, callback: (data: String?) -> Unit) {
         database.getLatestWorkoutInfo(username.toString()) { snapshot ->
