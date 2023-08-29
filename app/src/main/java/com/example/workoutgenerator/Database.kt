@@ -36,11 +36,15 @@ class Database private constructor() {
 
     // saves the info for the latest workout
     fun saveLatestWorkoutInfo(username: String, workout: String, duration: String, song: String, date: String, caption: String) {
-        database.child("users").child(username).child("latest workout").child("workout").setValue(workout)
-        database.child("users").child(username).child("latest workout").child("duration").setValue(duration)
-        database.child("users").child(username).child("latest workout").child("song").setValue(song)
-        database.child("users").child(username).child("latest workout").child("date").setValue(date)
-        database.child("users").child(username).child("latest workout").child("caption").setValue(caption)
+        val workoutInfoMap = mapOf(
+            "workout" to workout,
+            "duration" to duration,
+            "song" to song,
+            "date" to date,
+            "caption" to caption
+        )
+
+        database.child("users").child(username).child("latest workout").setValue(workoutInfoMap)
     }
 
     fun saveUserInfo(username: String, userInfo: SignUpActivity, onSuccess: () -> Unit, onFailure: () -> Unit) {
@@ -128,9 +132,28 @@ class Database private constructor() {
         })
     }
 
+    // Save the stats of the user
+    fun saveUserStats(username: String, benchPR: String?, squatPR: String?, deadliftPR: String?, weight: String?, height: String?) {
+        var age = 0
+
+        User(currentUser).getAge { temAge ->
+            age = temAge
+        }
+
+        val userStatsMap = mapOf(
+            "benchPR" to benchPR,
+            "squatPR" to squatPR,
+            "deadliftPR" to deadliftPR,
+            "age" to age,
+            "weight" to weight,
+            "height" to height
+        )
+        database.child("users").child(username).child("user stats").setValue(userStatsMap)
+    }
+
     // Get the personal record wanted from the database
     fun getPersonalRecords(username: String, key: String, callback: (record: String?) -> Unit) {
-        database.child("users").child(username).child("personal records").addListenerForSingleValueEvent(object : ValueEventListener {
+        database.child("users").child(username).child("user stats").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val record = snapshot.child(key).value?.toString()
                 callback(record)
@@ -141,5 +164,4 @@ class Database private constructor() {
             }
         })
     }
-
 }
