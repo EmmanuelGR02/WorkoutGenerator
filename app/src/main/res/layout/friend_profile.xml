@@ -46,7 +46,7 @@
             android:id="@+id/friendUsername"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="jnjjjnj"
+            android:text=""
             android:textSize="30sp"
             android:textColor="@color/dark_orange"
             android:textStyle="bold"
@@ -79,6 +79,8 @@
             android:text=""
             android:textStyle="bold"
             android:textSize="25sp"
+            android:gravity="center"
+            android:layout_marginTop="40dp"
             android:textColor="@color/white"/>
 
         <!--friends squat max -->
@@ -89,6 +91,8 @@
             android:text=""
             android:textStyle="bold"
             android:textSize="25sp"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
             android:textColor="@color/white"/>
 
         <!-- Friends deadlift max -->
@@ -99,6 +103,8 @@
             android:text=""
             android:textStyle="bold"
             android:textSize="25sp"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
             android:textColor="@color/white"/>
 
         <!-- friends age -->

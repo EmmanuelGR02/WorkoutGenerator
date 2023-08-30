@@ -66,7 +66,9 @@ class ViewFriendProfile : Fragment() {
             ageView.text = age.toString()
         }
 
+        // weight
 
+        // height
 
     }
 
