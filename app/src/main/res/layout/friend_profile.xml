@@ -60,14 +60,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="16dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Stats:"
-            android:textSize="35dp"
-            android:textColor="@color/white"
+            android:textSize="25dp"
+            android:textColor="@color/dark_blue"
             android:textStyle="bold"
             android:layout_marginStart="20dp" />
 
@@ -78,9 +78,9 @@
             android:layout_height="wrap_content"
             android:text=""
             android:textStyle="bold"
-            android:textSize="25sp"
+            android:textSize="18sp"
             android:gravity="center"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
             android:textColor="@color/white"/>
 
         <!--friends squat max -->
@@ -90,9 +90,9 @@
             android:layout_height="wrap_content"
             android:text=""
             android:textStyle="bold"
-            android:textSize="25sp"
+            android:textSize="18sp"
             android:gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:textColor="@color/white"/>
 
         <!-- Friends deadlift max -->
@@ -102,9 +102,9 @@
             android:layout_height="wrap_content"
             android:text=""
             android:textStyle="bold"
-            android:textSize="25sp"
+            android:textSize="18sp"
             android:gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:textColor="@color/white"/>
 
         <!-- friends age -->
@@ -114,7 +114,9 @@
             android:layout_height="wrap_content"
             android:text=""
             android:textStyle="bold"
-            android:textSize="25sp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:textSize="18sp"
             android:gravity="center"
             android:textColor="@color/white"/>
 
@@ -124,11 +126,36 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""
+            android:gravity="center"
             android:textStyle="bold"
-            android:textSize="25sp"
+            android:textSize="18sp"
             android:textColor="@color/white"/>
 
-
     </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Latest Workout:"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/dark_orange"
+        android:textSize="20sp"/>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/friendContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"/>
+
+    </ScrollView>
 
 </LinearLayout>

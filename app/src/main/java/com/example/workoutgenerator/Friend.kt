@@ -49,17 +49,19 @@ class Friend(private val username : String?) {
 
     // Specifies the child path to get the wanted PR on "getPersonalRecords()"
     fun getBenchPR(callback: (benchPR: String?) -> Unit) {
-        database.getPersonalRecords(username.toString(), "benchPR", callback)
+        database.getUserStats(username.toString(), "benchPR", callback)
     }
     fun getSquatPR(callback: (squatPR: String?) -> Unit) {
-        database.getPersonalRecords(username.toString(),"squatPR", callback)
+        database.getUserStats(username.toString(),"squatPR", callback)
     }
     fun getDeadliftPR(callback: (deadliftPR: String?) -> Unit) {
-        database.getPersonalRecords(username.toString(),"deadliftPR", callback)
+        database.getUserStats(username.toString(),"deadliftPR", callback)
     }
-
     fun getWeight(callback: (weight: String?) -> Unit) {
-        database.getPersonalRecords(username.toString(), "weight", callback)
+        database.getUserStats(username.toString(), "weight", callback)
+    }
+    fun getHeight(callback: (height: String?) -> Unit) {
+        database.getUserStats(username.toString(), "height", callback)
     }
 
     // Get info needed from the latest workout
