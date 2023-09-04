@@ -100,7 +100,7 @@ class ViewFriendProfile : Fragment() {
 
         // Create a new instance of the friend_layout_single layout
         val friendLayout = inflater.inflate(
-            R.layout.friend_profile_item, // Replace with your layout resource
+            R.layout.friend_profile_item,
             friendContainer,
             false
         )

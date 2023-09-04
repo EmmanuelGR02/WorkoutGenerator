@@ -31,6 +31,12 @@ class FriendsFragment : Fragment() {
 
         val profileBtn = binding.profileBtn
         val workoutBtn = binding.workoutBtn
+        val addFriendBtn = binding.addFriendBtn
+
+        addFriendBtn.setOnClickListener {
+            val fragment = AddFriendsFragment()
+            (requireActivity() as MainActivity).navigateToFragment(fragment)
+        }
 
         profileBtn.setOnClickListener {
             val fragment = ProfileFragment()
