@@ -27,6 +27,11 @@ class AddFriendsFragment : Fragment() {
         binding = FragmentAddFriendsBinding.inflate(inflater, container, false)
 
         val backBtn = binding.backButton
+        val friendsBtn = binding.friends
+        val requestsBtn = binding.friendRequests
+
+        friendsBtn.setOnClickListener {
+        }
 
         // Go back to previous fragment
         backBtn.setOnClickListener {
