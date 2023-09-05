@@ -3,6 +3,8 @@ package com.example.workoutgenerator
 import android.annotation.SuppressLint
 import android.graphics.Typeface
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -45,7 +47,51 @@ class AddFriendsFragment : Fragment() {
             fetchAndAddFriendLayouts(myFriendsList, friendContainer)
         }
 
+        val editText = binding.editText
+
+        // Set a text change listener to the EditText
+        editText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Not needed, but required to implement the interface
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Called when the text in the EditText changes
+                val searchText = s.toString().trim() // Get the current input text
+                filterAndDisplayFriends(searchText) // Filter and display friends based on input
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                // Not needed, but required to implement the interface
+            }
+        })
+
         return binding.root
+    }
+
+    private fun filterAndDisplayFriends(searchText: String) {
+        val friendContainer = binding.friendContainer
+        friendContainer.removeAllViews() // Clear existing views
+
+        User(currentUser).getFriends { friendsList ->
+            // Iterate through the list of friends
+            for (friendUsername in friendsList) {
+                // Check if the username contains the search text (case-insensitive)
+                if (friendUsername.contains(searchText, ignoreCase = true)) {
+                    // Create a view for the matching friend
+                    val friendLayout = layoutInflater.inflate(
+                        R.layout.friends_item_addfriend, // Your friend layout
+                        friendContainer,
+                        false
+                    )
+
+                    // Initialize the friendLayout (set image, username, etc.)
+
+                    // Add the friend's layout to the container
+                    friendContainer.addView(friendLayout)
+                }
+            }
+        }
     }
 
     private fun fetchAndAddFriendLayouts(

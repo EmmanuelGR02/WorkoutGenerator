@@ -59,7 +59,8 @@
             android:gravity="center"
             android:layout_marginTop="5dp"
             app:layout_constraintTop_toBottomOf="@id/view"
-            android:background="@color/dark_blue"/>
+            android:background="@color/dark_blue"
+            android:imeOptions="actionSearch"/>
 
         <!-- Separator Line -->
         <View
