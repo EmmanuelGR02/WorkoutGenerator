@@ -157,4 +157,26 @@ class Database private constructor() {
             }
         })
     }
+
+    //get all the users in the database
+    fun getAllUsers(callback: (ArrayList<String>) -> Unit) {
+        val userList = ArrayList<String>()
+
+        database.child("users").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (userSnapshot in snapshot.children) {
+                    val username = userSnapshot.key
+                    username?.let {
+                        userList.add(it)
+                    }
+                }
+                callback(userList)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+    }
+
 }

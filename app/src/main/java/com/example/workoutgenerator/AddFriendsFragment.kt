@@ -1,11 +1,9 @@
 package com.example.workoutgenerator
 
-import android.annotation.SuppressLint
-import android.graphics.Typeface
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -30,14 +28,24 @@ class AddFriendsFragment : Fragment() {
         val friendsBtn = binding.friends
         val requestsBtn = binding.friendRequests
 
+        // change the "friends" and "requests" buttons color when clicked
         friendsBtn.setOnClickListener {
+            friendsBtn.setBackgroundColor(Color.rgb(26,66,91))
+            requestsBtn.setBackgroundColor(Color.WHITE)
+            val fragment = AddFriendsFragment()
+            (requireActivity() as MainActivity).navigateToFragment(fragment)
+        }
+        requestsBtn.setOnClickListener {
+            requestsBtn.setBackgroundColor(Color.rgb(26,66,91))
+            friendsBtn.setBackgroundColor(Color.WHITE)
+            val fragment = RequestsFragment()
+            (requireActivity() as MainActivity).navigateToFragment(fragment)
         }
 
         // Go back to previous fragment
         backBtn.setOnClickListener {
             val fragment = FriendsFragment()
             (requireActivity() as MainActivity).navigateToFragment(fragment)
-            Log.e("test", "Back button working")
         }
 
         // linear layout where all the friends items will go
@@ -78,26 +86,55 @@ class AddFriendsFragment : Fragment() {
         val friendContainer = binding.friendContainer
         friendContainer.removeAllViews() // Clear existing views
 
+        // Initialize lists for friends and all users
+        val matchingFriends = ArrayList<String>()
+        val matchingUsers = ArrayList<String>()
+
+        // Get the current user's friends
         User(currentUser).getFriends { friendsList ->
             // Iterate through the list of friends
             for (friendUsername in friendsList) {
                 // Check if the username contains the search text (case-insensitive)
                 if (friendUsername.contains(searchText, ignoreCase = true)) {
-                    // Create a view for the matching friend
+                    // Add matching friend to the list
+                    matchingFriends.add(friendUsername)
+                }
+            }
+
+            // Get all users from the database
+            Database.getInstance().getAllUsers { userList ->
+                // Iterate through the list of all users
+                for (username in userList) {
+                    // Check if the username contains the search text (case-insensitive)
+                    if (username.contains(searchText, ignoreCase = true)) {
+                        // Add matching user to the list
+                        matchingUsers.add(username)
+                    }
+                }
+
+                // Combine matching friends and matching users
+                val combinedList = matchingFriends + matchingUsers
+
+                // Create views for matching friends and users
+                for (username in combinedList) {
+                    // Create a view for the matching friend/user
                     val friendLayout = layoutInflater.inflate(
                         R.layout.friends_item_addfriend, // Your friend layout
                         friendContainer,
                         false
                     )
 
-                    // Initialize the friendLayout (set image, username, etc.)
+                    // Set the username or other relevant data to the view
+                    val friendNameTextView = friendLayout.findViewById<TextView>(R.id.friendUsername)
+                    friendNameTextView.text = username
 
-                    // Add the friend's layout to the container
+                    // Add the friend's/user's layout to the container
                     friendContainer.addView(friendLayout)
                 }
             }
         }
     }
+
 
     private fun fetchAndAddFriendLayouts(
         friendsList: List<String>,

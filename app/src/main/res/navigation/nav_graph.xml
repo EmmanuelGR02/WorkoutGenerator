@@ -91,6 +91,9 @@
         <action
             android:id="@+id/action_addFriendsFragment_to_viewFriendProfile"
             app:destination="@id/viewFriendProfile" />
+        <action
+            android:id="@+id/action_addFriendsFragment_to_requests_fragment"
+            app:destination="@id/requests_fragment" />
     </fragment>
     <fragment
         android:id="@+id/viewFriendProfile"
@@ -100,5 +103,17 @@
         <action
             android:id="@+id/action_viewFriendProfile_to_friendsFragment"
             app:destination="@id/friendsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/requests_fragment"
+        android:name="com.example.workoutgenerator.RequestsFragment"
+        android:label="fragment_requests_fragment"
+        tools:layout="@layout/fragment_requests_fragment" >
+        <action
+            android:id="@+id/action_requests_fragment_to_addFriendsFragment"
+            app:destination="@id/addFriendsFragment" />
+        <action
+            android:id="@+id/action_requests_fragment_to_viewFriendProfile"
+            app:destination="@id/viewFriendProfile" />
     </fragment>
 </navigation>
