@@ -28,16 +28,7 @@ class AddFriendsFragment : Fragment() {
         val friendsBtn = binding.friends
         val requestsBtn = binding.friendRequests
 
-        // change the "friends" and "requests" buttons color when clicked
-        friendsBtn.setOnClickListener {
-            friendsBtn.setBackgroundColor(Color.rgb(26,66,91))
-            requestsBtn.setBackgroundColor(Color.WHITE)
-            val fragment = AddFriendsFragment()
-            (requireActivity() as MainActivity).navigateToFragment(fragment)
-        }
         requestsBtn.setOnClickListener {
-            requestsBtn.setBackgroundColor(Color.rgb(26,66,91))
-            friendsBtn.setBackgroundColor(Color.WHITE)
             val fragment = RequestsFragment()
             (requireActivity() as MainActivity).navigateToFragment(fragment)
         }
@@ -107,8 +98,11 @@ class AddFriendsFragment : Fragment() {
                 for (username in userList) {
                     // Check if the username contains the search text (case-insensitive)
                     if (username.contains(searchText, ignoreCase = true)) {
-                        // Add matching user to the list
-                        matchingUsers.add(username)
+                        // Check if this username is not already in matchingFriends
+                        if (!matchingFriends.contains(username)) {
+                            // Add matching user to the list
+                            matchingUsers.add(username)
+                        }
                     }
                 }
 
@@ -134,6 +128,7 @@ class AddFriendsFragment : Fragment() {
             }
         }
     }
+
 
 
     private fun fetchAndAddFriendLayouts(

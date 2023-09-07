@@ -179,4 +179,15 @@ class Database private constructor() {
         })
     }
 
+    fun setLike(username: String) {
+
+    }
+
+    fun removeLike(username: String) {
+
+    }
+
+    fun getLikes(username: String, callback: (Int) -> Unit) {
+
+    }
 }
