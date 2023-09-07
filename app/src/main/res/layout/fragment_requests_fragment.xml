@@ -26,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Friends"
+                android:background="@drawable/addfriends_friends_requestsbts_whitebackground"
                 android:textAllCaps="false"/>
 
             <Button
@@ -34,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Requests"
-                android:background="@color/dark_blue"
+                android:background="@drawable/addfriends_friends_requestbtns_background"
                 android:textAllCaps="false"
                 />
 
