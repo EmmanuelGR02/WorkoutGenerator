@@ -77,57 +77,43 @@ class AddFriendsFragment : Fragment() {
         val friendContainer = binding.friendContainer
         friendContainer.removeAllViews() // Clear existing views
 
-        // Initialize lists for friends and all users
-        val matchingFriends = ArrayList<String>()
-        val matchingUsers = ArrayList<String>()
-
         // Get the current user's friends
         User(currentUser).getFriends { friendsList ->
-            // Iterate through the list of friends
-            for (friendUsername in friendsList) {
-                // Check if the username contains the search text (case-insensitive)
-                if (friendUsername.contains(searchText, ignoreCase = true)) {
-                    // Add matching friend to the list
-                    matchingFriends.add(friendUsername)
-                }
-            }
-
             // Get all users from the database
             Database.getInstance().getAllUsers { userList ->
                 // Iterate through the list of all users
                 for (username in userList) {
                     // Check if the username contains the search text (case-insensitive)
                     if (username.contains(searchText, ignoreCase = true)) {
-                        // Check if this username is not already in matchingFriends
-                        if (!matchingFriends.contains(username)) {
-                            // Add matching user to the list
-                            matchingUsers.add(username)
+                        // Check if the user is a friend of the current user
+                        val isFriend = friendsList.contains(username)
+
+                        // Inflate the appropriate layout based on friend status
+                        val layoutResId = if (isFriend) {
+                            R.layout.friends_item_addfriend
+                        } else {
+                            R.layout.friends_item_removefriend
                         }
+
+                        // Create a view for the matching friend/user
+                        val friendLayout = layoutInflater.inflate(
+                            layoutResId,
+                            friendContainer,
+                            false
+                        )
+
+                        // Set the username or other relevant data to the view
+                        val friendNameTextView = friendLayout.findViewById<TextView>(R.id.friendUsername)
+                        friendNameTextView.text = username
+
+                        // Add the friend's/user's layout to the container
+                        friendContainer.addView(friendLayout)
                     }
-                }
-
-                // Combine matching friends and matching users
-                val combinedList = matchingFriends + matchingUsers
-
-                // Create views for matching friends and users
-                for (username in combinedList) {
-                    // Create a view for the matching friend/user
-                    val friendLayout = layoutInflater.inflate(
-                        R.layout.friends_item_addfriend, // Your friend layout
-                        friendContainer,
-                        false
-                    )
-
-                    // Set the username or other relevant data to the view
-                    val friendNameTextView = friendLayout.findViewById<TextView>(R.id.friendUsername)
-                    friendNameTextView.text = username
-
-                    // Add the friend's/user's layout to the container
-                    friendContainer.addView(friendLayout)
                 }
             }
         }
     }
+
 
 
 
