@@ -63,7 +63,8 @@ class User(private val username : String? = null) {
         }
     }
 
-    fun isBirthday(callback: (Boolean) -> Unit) {
+    // check if the current day is the users birthdate
+    private fun isBirthday(callback: (Boolean) -> Unit) {
         getBirthdate { birthdate ->
             if (birthdate == "N/A") {
                 callback(false) // If birthdate is not available, not the user's birthday

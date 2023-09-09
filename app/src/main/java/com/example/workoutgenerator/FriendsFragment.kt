@@ -221,14 +221,16 @@ class FriendsFragment : Fragment() {
 
             val friendAvatar = friendLayout.findViewById<ImageView>(R.id.friendImage)
             val friendNameTextView = friendLayout.findViewById<TextView>(R.id.friendUsername)
+            val friendUsername = friendObject.getUsername()
 
             friendAvatar.setImageResource(imageResource)
-            friendNameTextView.text = friendObject.getUsername()
+            friendNameTextView.text = friendUsername
+
+            // Implement the liking logic
+
 
             // Add the friend's layout to the container
             friendContainer.addView(friendLayout)
         }
     }
 }
-
-

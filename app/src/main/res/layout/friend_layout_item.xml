@@ -122,7 +122,7 @@
                 android:background="@drawable/likes_background"
                 android:drawableStart="@drawable/liked_icon"
                 android:drawablePadding="-2dp"
-                android:text="99"
+                android:text=""
                 android:textAlignment="center"
                 android:textStyle="bold" />
 

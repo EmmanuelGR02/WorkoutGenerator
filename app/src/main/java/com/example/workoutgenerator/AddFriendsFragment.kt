@@ -25,7 +25,6 @@ class AddFriendsFragment : Fragment() {
         binding = FragmentAddFriendsBinding.inflate(inflater, container, false)
 
         val backBtn = binding.backButton
-        val friendsBtn = binding.friends
         val requestsBtn = binding.friendRequests
 
         requestsBtn.setOnClickListener {
@@ -56,7 +55,6 @@ class AddFriendsFragment : Fragment() {
         // Set a text change listener to the EditText
         editText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // Not needed, but required to implement the interface
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -66,7 +64,6 @@ class AddFriendsFragment : Fragment() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                // Not needed, but required to implement the interface
             }
         })
 
@@ -113,8 +110,6 @@ class AddFriendsFragment : Fragment() {
             }
         }
     }
-
-
 
 
     private fun fetchAndAddFriendLayouts(

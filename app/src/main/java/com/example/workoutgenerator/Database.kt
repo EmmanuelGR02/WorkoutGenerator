@@ -2,9 +2,11 @@
 package com.example.workoutgenerator
 
 import android.provider.ContactsContract.Data
+import android.util.Log
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.compose.animation.core.snap
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -179,15 +181,4 @@ class Database private constructor() {
         })
     }
 
-    fun setLike(username: String) {
-
-    }
-
-    fun removeLike(username: String) {
-
-    }
-
-    fun getLikes(username: String, callback: (Int) -> Unit) {
-
-    }
 }
