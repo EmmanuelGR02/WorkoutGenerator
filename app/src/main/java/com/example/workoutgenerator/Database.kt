@@ -289,15 +289,34 @@ class Database private constructor() {
     // and it increase or decreases a like depending on if the friend is already in there or not
     fun setLikes(username: String) {
         getUsernamesForLikedPic(currentUser) { likedUsernamesList ->
-            if (!likedUsernamesList.contains(username)) {
-                increaseLike(username)
+            val hasLikes = likedUsernamesList.contains(username)
+            val likesRef = database.child("users").child(username).child("likes")
+
+            // Check if the user has any likes, if not, set their current likes to 0
+            likesRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (!snapshot.exists()) {
+                        // Set current likes to 0
+                        likesRef.setValue(0)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                }
+
+            })
+
+            if (!hasLikes) {
                 setUsernameForLikedPic(currentUser, username)
+                increaseLike(username)
+
             } else {
-                decrementLike(username)
                 removeUserFromLikedPic(currentUser, username)
+                decrementLike(username)
             }
         }
     }
+
 
     // returns likes
     fun getLikes(username: String, callback: (likes: Int) -> Unit) {
