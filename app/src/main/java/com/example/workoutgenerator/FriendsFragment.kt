@@ -227,6 +227,15 @@ class FriendsFragment : Fragment() {
             friendNameTextView.text = friendUsername
 
             // Implement the liking logic
+            val likeBtn = friendLayout.findViewById<Button>(R.id.likes)
+
+            likeBtn.setOnClickListener {
+                Database.getInstance().setLikes(friendUsername)
+                Database.getInstance().setUsernameForLikedPic(currentUser, friendUsername)
+                Database.getInstance().getLikes(friendUsername) { likes ->
+                    likeBtn.text = likes.toString()
+                }
+            }
 
 
             // Add the friend's layout to the container

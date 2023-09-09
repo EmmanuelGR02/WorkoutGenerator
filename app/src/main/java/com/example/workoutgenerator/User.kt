@@ -167,4 +167,9 @@ class User(private val username : String? = null) {
             callback(friendsList)
         }
     }
+
+    // functions that adds the username of a friend that the current user already liked their workout picture
+    fun setUsernameForLikedPic(username: String) {
+
+    }
 }
