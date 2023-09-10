@@ -33,6 +33,8 @@ class FriendsFragment : Fragment() {
         val workoutBtn = binding.workoutBtn
         val addFriendBtn = binding.addFriendBtn
 
+            //Database.getInstance().saveLatestWorkoutInfo("AlanC", "Chest", "20", "Aware", "10/02/2023", "Quick lil ches sesh", 0)
+
         addFriendBtn.setOnClickListener {
             val fragment = AddFriendsFragment()
             (requireActivity() as MainActivity).navigateToFragment(fragment)
@@ -229,6 +231,11 @@ class FriendsFragment : Fragment() {
             // Implement the liking logic
             val likeBtn = friendLayout.findViewById<Button>(R.id.likes)
 
+            // set pic likes
+            Database.getInstance().getLikes(friendUsername) { likes ->
+                likeBtn.text = likes.toString()
+            }
+
             likeBtn.setOnClickListener {
                 Database.getInstance().setLikes(friendUsername)
                 Database.getInstance().setUsernameForLikedPic(currentUser, friendUsername)
@@ -236,7 +243,6 @@ class FriendsFragment : Fragment() {
                     likeBtn.text = likes.toString()
                 }
             }
-
 
             // Add the friend's layout to the container
             friendContainer.addView(friendLayout)

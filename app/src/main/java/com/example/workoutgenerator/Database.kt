@@ -37,13 +37,14 @@ class Database private constructor() {
     }
 
     // saves the info for the latest workout
-    fun saveLatestWorkoutInfo(username: String, workout: String, duration: String, song: String, date: String, caption: String) {
+    fun saveLatestWorkoutInfo(username: String, workout: String, duration: String, song: String, date: String, caption: String, likes: Int) {
         val workoutInfoMap = mapOf(
             "workout" to workout,
             "duration" to duration,
             "song" to song,
             "date" to date,
-            "caption" to caption
+            "caption" to caption,
+            "likes" to likes
         )
 
         database.child("users").child(username).child("latest workout").setValue(workoutInfoMap)
@@ -143,7 +144,6 @@ class Database private constructor() {
             "weight" to weight,
             "height" to height
         )
-        setLastWorkoutDate(username)
         database.child("users").child(username).child("user stats").setValue(userStatsMap)
     }
 
@@ -214,7 +214,7 @@ class Database private constructor() {
 
 
     // returns the list of usernames which the current user has liked their friends workout pic
-    fun getUsernamesForLikedPic(username: String, callback: (ArrayList<String>) -> Unit) {
+    private fun getUsernamesForLikedPic(username: String, callback: (ArrayList<String>) -> Unit) {
         val usernameRef = database.child("users").child(username).child("liked pic usernames")
         val friendsList = ArrayList<String>()
 
@@ -228,28 +228,51 @@ class Database private constructor() {
                 }
                 callback(friendsList)
             }
-
             override fun onCancelled(error: DatabaseError) {
-
             }
         })
     }
 
-    // increase likes
-    fun increaseLike(username: String) {
-        val likesRef = database.child("users").child(username).child("likes")
-
+    // Increase likes
+    private fun increaseLike(username: String) {
+        val likesRef = database.child("users").child(username).child("latest workout").child("likes")
+        // Add the liked user to the list
+        setUsernameForLikedPic(currentUser, username)
         // Get the current likes count
         likesRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    val currentLikes = snapshot.value as Long
-                    val newLikes = currentLikes + 1
+                val currentLikes = snapshot.getValue(Long::class.java) ?: 0
+                val newLikes = currentLikes + 1
+
+                // Update likes count
+                likesRef.setValue(newLikes)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle onCancelled if needed
+            }
+        })
+    }
+
+    // Decrease likes
+    private fun decrementLike(username: String) {
+        val likesRef = database.child("users").child(username).child("latest workout").child("likes")
+
+        // Remove the unliked user from the list
+        removeUserFromLikedPic(currentUser, username)
+        // Get the current likes count
+        likesRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val currentLikes = snapshot.getValue(Long::class.java) ?: 0
+
+                // Ensure likes don't go negative
+                if (currentLikes > 0) {
+                    val newLikes = currentLikes - 1
+
+                    // Update likes count
                     likesRef.setValue(newLikes)
-                } else {
-                    // If the likes node doesn't exist, create it with a value of 1
-                    likesRef.setValue(1)
                 }
+
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -258,60 +281,16 @@ class Database private constructor() {
         })
     }
 
-
-    // decrease likes
-    fun decrementLike(username: String) {
-        val likesRef = database.child("users").child(username).child("likes")
-
-        // Get the current likes count
-        likesRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    val currentLikes = snapshot.value as Long
-                    if (currentLikes > 0) {
-                        val newLikes = currentLikes - 1
-                        likesRef.setValue(newLikes)
-                    }
-                    // You might want to handle the case where likes are already zero
-                } else {
-                    // If the likes node doesn't exist, create it with a value of 0
-                    likesRef.setValue(0)
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                // Handle onCancelled if needed
-            }
-        })
-    }
 
     // check for the current user is in the "liked pic username"
     // and it increase or decreases a like depending on if the friend is already in there or not
     fun setLikes(username: String) {
         getUsernamesForLikedPic(currentUser) { likedUsernamesList ->
             val hasLikes = likedUsernamesList.contains(username)
-            val likesRef = database.child("users").child(username).child("likes")
-
-            // Check if the user has any likes, if not, set their current likes to 0
-            likesRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (!snapshot.exists()) {
-                        // Set current likes to 0
-                        likesRef.setValue(0)
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                }
-
-            })
 
             if (!hasLikes) {
-                setUsernameForLikedPic(currentUser, username)
                 increaseLike(username)
-
             } else {
-                removeUserFromLikedPic(currentUser, username)
                 decrementLike(username)
             }
         }
@@ -320,7 +299,7 @@ class Database private constructor() {
 
     // returns likes
     fun getLikes(username: String, callback: (likes: Int) -> Unit) {
-        val likesRef = database.child("users").child(username).child("likes")
+        val likesRef = database.child("users").child(username).child("latest workout").child("likes")
 
         likesRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -337,41 +316,5 @@ class Database private constructor() {
                 // Handle onCancelled if needed
             }
         })
-    }
-
-    // returns the date of the previous workout
-    fun getLastWorkoutDate(username: String, callback: (date: String) -> Unit) {
-        database.child("users").child(username).child("last workout date").addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val date = snapshot.value?.toString() ?: "N/A"
-                callback(date)
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-            }
-
-        })
-    }
-
-    // returns the date of the current friend workout
-    fun getCurrentWorkoutDate(username: String, callback: (date: String) -> Unit) {
-        database.child("users").child(username).child("last workout").addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val date = snapshot.child("date").value?.toString() ?: "N/A"
-                callback(date)
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-            }
-
-        })
-    }
-
-    // save the date of the previous workout
-    fun setLastWorkoutDate(username: String) {
-        getLatestWorkoutInfo(username) { snapshot ->
-            val data = snapshot?.child("date")?.value?.toString() ?: "N/A"
-            database.child("users").child(username).child("last workout date").setValue(data)
-        }
     }
 }
