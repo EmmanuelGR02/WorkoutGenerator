@@ -317,4 +317,36 @@ class Database private constructor() {
             }
         })
     }
+
+    // send friend request logic
+    fun sendFriendRequest(username: String) {
+        val requestsRef = database.child("users").child(username).child("friend requests")
+
+        // Retrieve the current list of friend requests for the target user
+        requestsRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val requestsList = if (snapshot.exists()) {
+                    // If the friend requests node exists, retrieve the existing list
+                    snapshot.value as? ArrayList<String> ?: ArrayList()
+                } else {
+                    // If the friend requests node doesn't exist, create a new list
+                    ArrayList()
+                }
+
+                // Check if the current user is not already in the list
+                if (!requestsList.contains(currentUser)) {
+                    // Add the current user to the list
+                    requestsList.add(currentUser)
+
+                    // Update the friend requests in the database
+                    requestsRef.setValue(requestsList)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle onCancelled if needed
+            }
+        })
+    }
+
 }

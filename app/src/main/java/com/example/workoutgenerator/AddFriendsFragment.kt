@@ -1,5 +1,6 @@
 package com.example.workoutgenerator
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
@@ -70,6 +71,7 @@ class AddFriendsFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("MissingInflatedId")
     private fun filterAndDisplayFriends(searchText: String) {
         val friendContainer = binding.friendContainer
         friendContainer.removeAllViews() // Clear existing views
@@ -84,6 +86,7 @@ class AddFriendsFragment : Fragment() {
                     if (username.contains(searchText, ignoreCase = true)) {
                         // Check if the user is a friend of the current user
                         val isFriend = friendsList.contains(username)
+                        val friendObject = Friend(username)
 
                         // Inflate the appropriate layout based on friend status
                         val layoutResId = if (isFriend) {
@@ -99,9 +102,33 @@ class AddFriendsFragment : Fragment() {
                             false
                         )
 
+                        // send to users profile
+                        val friendPfpBtn = friendLayout.findViewById<Button>(R.id.pfpButton)
+
                         // Set the username or other relevant data to the view
                         val friendNameTextView = friendLayout.findViewById<TextView>(R.id.friendUsername)
                         friendNameTextView.text = username
+
+                        // take user to the profile of the user he is searching for when their pfp is pressed
+                        friendPfpBtn.setOnClickListener {
+                            val fragment = ViewFriendProfile()
+
+                            val bundle = Bundle()
+                            bundle.putString("friendUsername", friendObject.getUsername())
+                            fragment.arguments = bundle
+
+                            val fragmentManager = requireActivity().supportFragmentManager
+                            val transaction = fragmentManager.beginTransaction()
+                            transaction.replace(R.id.nav_container, fragment)
+                            transaction.addToBackStack(null)
+                            transaction.commit()
+                        }
+
+                        // send friend requests when clicked on "add" btn
+                        val addBtn = friendLayout.findViewById<Button>(R.id.addFriendBtn)
+                        addBtn?.setOnClickListener {
+                            Database.getInstance().sendFriendRequest(username)
+                        }
 
                         // Add the friend's/user's layout to the container
                         friendContainer.addView(friendLayout)
@@ -126,7 +153,7 @@ class AddFriendsFragment : Fragment() {
 
             val imageResource = R.drawable.main_logo // Replace with actual image resource
 
-            // Create a new instance of the friend_layout_single layout
+            // Create a new instance of the friends_item_addfriend layout
             val friendLayout = inflater.inflate(
                 R.layout.friends_item_addfriend,
                 friendContainer,
