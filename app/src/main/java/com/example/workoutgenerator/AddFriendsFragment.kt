@@ -138,7 +138,6 @@ class AddFriendsFragment : Fragment() {
         }
     }
 
-
     private fun fetchAndAddFriendLayouts(
         friendsList: List<String>,
         friendContainer: LinearLayout

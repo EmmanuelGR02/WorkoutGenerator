@@ -16,46 +16,6 @@ class User(private val username : String? = null) {
         }
     }
 
-    fun addFriend(friend: String) {
-        val friendsList =   ArrayList<String>()
-
-        val a = "a"
-        val b = "b"
-        val c = "c"
-        val d = "d"
-
-        friendsList.add(a)
-        friendsList.add(b)
-        friendsList.add(c)
-        friendsList.add(d)
-
-        Database.getInstance().isUsernameValid(friend) {isValid ->
-            if (isValid) {
-                Log.e("User", "Username is not valid")
-
-            } else {
-                database.getUserInfo(username.toString(), "friends") { snapshot ->
-
-                    if (snapshot != null && snapshot.exists()) {
-                        for (childSnapshot in snapshot.children) {
-                            val friendUsername = childSnapshot.value.toString()
-                            friendsList.add(friendUsername)
-                        }
-                    }
-                    friendsList.add(friend)
-                    Database.getInstance().getDatabase().child("users").child(username.toString()).child("friends").setValue(friendsList)
-                }
-                Log.e("User", friendsList.toString())
-            }
-        }
-    }
-
-    fun unAddFriend(friend: String) {
-        database.getUserInfo(username.toString(), "friends") { snapshot ->
-
-        }
-    }
-
     fun getBirthdate(callback: (birthdate: String) -> Unit) {
         database.getUserInfo(username.toString(), "user info") { snapshot ->
             val birthdate = snapshot?.child("birthdate")?.value?.toString() ?: "N/A"
@@ -166,10 +126,5 @@ class User(private val username : String? = null) {
             }
             callback(friendsList)
         }
-    }
-
-    // functions that adds the username of a friend that the current user already liked their workout picture
-    fun setUsernameForLikedPic(username: String) {
-
     }
 }
