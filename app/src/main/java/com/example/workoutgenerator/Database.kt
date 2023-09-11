@@ -400,4 +400,23 @@ class Database private constructor() {
         }
     }
 
+    // remove friend
+    fun removeFriend(username: String) {
+        val friendsRef = database.child("users").child(currentUser).child("friends")
+
+        User(currentUser).getFriends { friends ->
+            if (friends.contains(username)) {
+                friends.remove(username)
+                friendsRef.setValue(friends)
+            }
+        }
+    }
+
+    // Function to add the the user that the friend request was sent to, to the current users friends whenever the other user accepts the friend request
+    fun addCurrUserToRequested(username: String) {
+        val requestedFriendsRef = database.child("users").child(username).child("friends")
+
+        User(username).getFriends { friendsv -> }
+    }
+
 }
