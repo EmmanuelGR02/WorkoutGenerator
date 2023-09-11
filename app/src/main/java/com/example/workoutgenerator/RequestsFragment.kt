@@ -90,8 +90,9 @@ class RequestsFragment : Fragment() {
             // accept request
             val addBtn = friendLayout.findViewById<Button>(R.id.addFriendBtn)
             addBtn?.setOnClickListener {
-                Database.getInstance().addFriend(request)
-                Database.getInstance().removeRequest(request)
+                Database.getInstance().addFriend(request) // Adds the friend that sent the friend request to the current user's friends
+                Database.getInstance().addCurrUserToRequested(request) // Adds the current user to the list of friends from the friend that sent the request
+                Database.getInstance().removeRequest(request) // removes the user from the friend requests list
             }
 
             // deny request

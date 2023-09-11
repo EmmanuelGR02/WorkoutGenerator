@@ -181,6 +181,13 @@ class AddFriendsFragment : Fragment() {
 
             friendNameTextView.text = friendObject.getUsername()
 
+            // remove friend
+            val removeFriendBtn = friendLayout.findViewById<Button>(R.id.removeFriendBtn)
+            removeFriendBtn?.setOnClickListener {
+                Database.getInstance().removeFriend(friendObject.getUsername()) // remove friend
+                Database.getInstance().removeCurrUserFromOtherUserFriends(friendObject.getUsername()) // remove current user from other other user's friends list
+            }
+
             // Add the friend's layout to the container
             friendContainer.addView(friendLayout)
         }

@@ -416,7 +416,24 @@ class Database private constructor() {
     fun addCurrUserToRequested(username: String) {
         val requestedFriendsRef = database.child("users").child(username).child("friends")
 
-        User(username).getFriends { friendsv -> }
+        User(username).getFriends { friends ->
+            if (!friends.contains(currentUser)) {
+                friends.add(currentUser)
+                requestedFriendsRef.setValue(friends)
+            }
+        }
+    }
+
+    // If the current user removes a friend. this function will remove the current user from the other user's friends list
+    fun removeCurrUserFromOtherUserFriends(username: String) {
+        val otherUsersFriendsRef = database.child("users").child(username).child("friends")
+
+        User(username).getFriends { friends ->
+            if (friends.contains(currentUser)) {
+                friends.remove(currentUser)
+                otherUsersFriendsRef.setValue(friends)
+            }
+        }
     }
 
 }
