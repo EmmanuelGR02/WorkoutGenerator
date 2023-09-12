@@ -11,54 +11,97 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- linear layout holding users name, last name and username -->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintBaseline_toTopOf="parent">
+        <!-- settings button -->
+        <Button
+            android:id="@+id/settingBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
-            <TextView
-                android:id="@+id/name_lastname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Name Lastname"
-                app:layout_constraintBottom_toTopOf="@id/username"
-                android:textColor="@color/white"
-                android:textSize="25sp"
-                android:textStyle="bold"/>
+        <!-- button containing the profile picture of the user -->
+        <Button
+            android:id="@+id/pfpButton"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/main_logo"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintLeft_toLefttOf="@+id/usernameLinearLayout"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- linear layout holding users name, last name and username -->
+        <LinearLayout
+            android:id="@+id/usernameLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/username"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Username"
-                android:textSize="20sp"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@id/name_lastname"/>
+                android:textSize="30sp"
+                android:layout_marginStart="55dp"
+                android:textColor="@color/dark_orange"
+                android:textStyle="bold"/>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center_vertical">
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:layout_marginStart="50dp"
+                    android:textColor="@color/light_blue"
+                    android:textSize="15sp"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Profile"
-                android:textColor="@color/white"
-                android:textSize="40sp"
-                android:gravity="center"
-                />
+                <TextView
+                    android:id="@+id/lastname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="lastname"
+                    android:textColor="@color/light_blue"
+                    android:layout_marginStart="5dp"
+                    android:textSize="15sp"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
+        <!-- Separator line -->
+        <View
+            android:id="@+id/separatorLine"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/usernameLinearLayout"/>
 
-        <!-- Linear layout containing the main buttons to navigate through the fragments -->
+        <!-- Users current stats -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/separatorLine">
+
+
+
+        </RelativeLayout>
+
+
+
         <LinearLayout
             android:id="@+id/buttonLayout"
             android:layout_width="0dp"

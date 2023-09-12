@@ -34,17 +34,17 @@ class ProfileFragment : Fragment() {
         }
 
         // Set the values of the name, lastname and username text views
-        val nameLastnameView = binding.nameLastname
+        val nameView = binding.name
+        val lastnameView = binding.lastname
         val usernameView = binding.username
-        var name = ""
-        var lastname = ""
+
         user.getName {tempName ->
-            name = tempName.toString()
+            nameView.text = tempName.toString()
         }
         user.getLastname { tempLastname ->
-            lastname = tempLastname.toString()
+            lastnameView.text = tempLastname.toString()
         }
-        nameLastnameView.text = "$name $lastname"
+
         usernameView.text = currentUser
 
         return view
