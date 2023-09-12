@@ -110,6 +110,25 @@ class Database private constructor() {
         })
     }
 
+    // check of the user stats child is empty
+    fun isUserStatsEmpty(username: String, callback: (Boolean) -> Unit) {
+        val userStatsRef = database.child("users").child(username).child("user stats")
+        userStatsRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    callback(true)
+                } else if (!snapshot.exists()) {
+                    callback(false)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("Database-isUserStatsEmpty", "Error")
+            }
+
+        })
+    }
+
     // this method can be called when any personal info needs to be retrieved. (ex. name, lastname, gender, password, birth date)
     fun getUserInfo(username: String, path: String, callback: (DataSnapshot?) -> Unit) {
         database.child("users").child(username).child(path).addListenerForSingleValueEvent(object : ValueEventListener {
@@ -196,7 +215,7 @@ class Database private constructor() {
         }
     }
 
-    fun removeUserFromLikedPic(username: String, likedUsername: String) {
+    private fun removeUserFromLikedPic(username: String, likedUsername: String) {
         getUsernamesForLikedPic(username) { likedUsernamesList ->
             // Check if the likedUsername is in the list
             if (likedUsernamesList.contains(likedUsername)) {

@@ -111,7 +111,6 @@ class User(private val username : String? = null) {
         database.getUserStats(username.toString(), "height", callback)
     }
 
-
     // Get the last workout done by this user
     fun getLastWorkout(callback: (lastWorkout: String?) -> Unit) {
         database.getLatestWorkoutInfo(username.toString()) { snapshot ->

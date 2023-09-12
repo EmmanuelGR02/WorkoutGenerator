@@ -18,6 +18,9 @@ class ProfileFragment : Fragment() {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        // display setCurrStats layout or just currStats layout
+        displaySetCurrStats()
+
         // user instance
         val user = User(currentUser)
 
@@ -54,6 +57,20 @@ class ProfileFragment : Fragment() {
         }
 
         return view
+    }
+
+    // if the user does not have any stats saved, it will display a layout to take in their stats and save them
+    // if the user already has stats saved, it will display a layout with all of their stats
+    private fun displaySetCurrStats(){
+        val userStatsInputs = binding.userStatsInputs
+
+        Database.getInstance().isUserStatsEmpty(currentUser) { tempBool ->
+            if (tempBool) {
+                userStatsInputs.visibility = View.INVISIBLE
+            } else {
+                userStatsInputs.visibility = View.VISIBLE
+            }
+        }
     }
 
 }
