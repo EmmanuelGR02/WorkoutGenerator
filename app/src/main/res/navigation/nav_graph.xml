@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_profileFragment_to_workoutGeneratorFragment"
             app:destination="@id/workoutGeneratorFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_settingsFragment2"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/friendsFragment"
@@ -115,5 +118,17 @@
         <action
             android:id="@+id/action_requests_fragment_to_viewFriendProfile"
             app:destination="@id/viewFriendProfile" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.workoutgenerator.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
     </fragment>
 </navigation>

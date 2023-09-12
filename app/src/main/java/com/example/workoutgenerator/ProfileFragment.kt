@@ -44,8 +44,14 @@ class ProfileFragment : Fragment() {
         user.getLastname { tempLastname ->
             lastnameView.text = tempLastname.toString()
         }
-
         usernameView.text = currentUser
+
+        // sent user to setting fragment
+        val settingsBtn = binding.settingBtn
+        settingsBtn?.setOnClickListener {
+            val fragment = SettingsFragment()
+            (requireActivity() as MainActivity).navigateToFragment(fragment)
+        }
 
         return view
     }
