@@ -11,6 +11,35 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!-- linear layout holding users name, last name and username -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBaseline_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/name_lastname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Name Lastname"
+                app:layout_constraintBottom_toTopOf="@id/username"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Username"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/name_lastname"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

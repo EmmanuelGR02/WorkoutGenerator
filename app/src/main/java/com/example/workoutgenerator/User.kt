@@ -16,6 +16,13 @@ class User(private val username : String? = null) {
         }
     }
 
+    fun getLastname(callback: (lastname: String?) -> Unit) {
+        database.getUserInfo(username.toString(), "user info") { snapshot ->
+            val lastname = snapshot?.child("lastName")?.value?.toString() ?: "N/A"
+            callback(lastname)
+        }
+    }
+
     fun getBirthdate(callback: (birthdate: String) -> Unit) {
         database.getUserInfo(username.toString(), "user info") { snapshot ->
             val birthdate = snapshot?.child("birthdate")?.value?.toString() ?: "N/A"
