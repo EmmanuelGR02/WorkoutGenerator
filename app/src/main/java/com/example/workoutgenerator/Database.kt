@@ -12,10 +12,6 @@ import java.util.Locale
 class Database private constructor() {
     private val database: DatabaseReference = FirebaseDatabase.getInstance().reference
 
-    fun getDatabase(): DatabaseReference {
-        return database
-    }
-
     // Singleton pattern for database instance
     companion object {
         @Volatile

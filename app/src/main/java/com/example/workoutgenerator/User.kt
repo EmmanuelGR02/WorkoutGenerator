@@ -96,19 +96,29 @@ class User(private val username : String? = null) {
 
     // Specifies the child path to get the wanted PR on "getPersonalRecords()"
     fun getBenchPR(callback: (benchPR: String?) -> Unit) {
-        database.getUserStats(username.toString(), "bench PR", callback)
+        database.getUserStats(username.toString(), "bench PR"){ benchPR ->
+            callback(benchPR)
+        }
     }
     fun getSquatPR(callback: (squatPR: String?) -> Unit) {
-        database.getUserStats(username.toString(),"squat PR", callback)
+        database.getUserStats(username.toString(),"squat PR"){ squatPR ->
+            callback(squatPR)
+        }
     }
     fun getDeadliftPR(callback: (deadliftPR: String?) -> Unit) {
-        database.getUserStats(username.toString(),"deadlift PR", callback)
+        database.getUserStats(username.toString(),"deadlift PR"){ deadliftPR ->
+            callback(deadliftPR)
+        }
     }
     fun getWeight(callback: (weight: String?) -> Unit) {
-        database.getUserStats(username.toString(), "weight", callback)
+        database.getUserStats(username.toString(), "weight"){ weight ->
+            callback(weight)
+        }
     }
     fun getHeight(callback: (height: String?) -> Unit) {
-        database.getUserStats(username.toString(), "height", callback)
+        database.getUserStats(username.toString(), "height") { height ->
+            callback(height)
+        }
     }
 
     // Get the last workout done by this user
