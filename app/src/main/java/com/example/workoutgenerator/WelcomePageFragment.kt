@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import com.example.workoutgenerator.databinding.FragmentWelcomePageBinding
 
 class WelcomePageFragment : Fragment() {
@@ -32,7 +31,6 @@ class WelcomePageFragment : Fragment() {
             welcomeMsg.text = text
         }
         getStartedBtn.setOnClickListener {
-            Database.getInstance().saveUserStats("AlanC", "225", "315", "350", "160", "5'5")
             val fragment = ProfileFragment()
             val transaction = fragmentManager?.beginTransaction()
             transaction?.replace(R.id.nav_container, fragment)?.commit()

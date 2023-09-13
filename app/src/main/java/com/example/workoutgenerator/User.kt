@@ -25,7 +25,7 @@ class User(private val username : String? = null) {
 
     fun getBirthdate(callback: (birthdate: String) -> Unit) {
         database.getUserInfo(username.toString(), "user info") { snapshot ->
-            val birthdate = snapshot?.child("birthdate")?.value?.toString() ?: "N/A"
+            val birthdate = snapshot?.child("birthDate")?.value?.toString() ?: "N/A"
             callback(birthdate)
         }
     }
@@ -116,6 +116,12 @@ class User(private val username : String? = null) {
         database.getLatestWorkoutInfo(username.toString()) { snapshot ->
             val lastWorkout = snapshot?.child("workout")?.value?.toString() ?: "N/A"
             callback(lastWorkout)
+        }
+    }
+    fun getCurrentWorkout(callback: (workout: String?) -> Unit) {
+        database.getUserInfo(username.toString(), "latest workout") { snapshot ->
+            val currWorkout = snapshot?.child("workout")?.value?.toString() ?: "N/A"
+            callback(currWorkout)
         }
     }
 

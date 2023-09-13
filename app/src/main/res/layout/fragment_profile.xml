@@ -98,6 +98,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
+            android:visibility="invisible"
             app:layout_constraintTop_toBottomOf="@+id/separatorLine">
 
             <TextView
@@ -187,21 +188,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/setWeight" />
 
-            <EditText
-                android:id="@+id/setAge"
-                android:layout_width="80dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="15dp"
-                android:background="@drawable/main_profile_input_bacground_orange"
-                android:hint="    Age"
-                android:textSize="18dp"
-                android:inputType="number"
-                android:maxLength="6"
-                android:maxLines="1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/setHeight" />
-
             <Button
                 android:id="@+id/currStatsBtn"
                 android:layout_width="wrap_content"
@@ -209,13 +195,163 @@
                 android:text="Submit"
                 android:layout_marginTop="25dp"
                 android:background="@drawable/signup_signupbtn_background"
-                app:layout_constraintTop_toBottomOf="@+id/setAge"
+                app:layout_constraintTop_toBottomOf="@+id/setDeadliftPR"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!-- Linear layout to display the users stats  as text views -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/currStatsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@+id/separatorLine"
+            app:layout_constraintBottom_toTopOf="@id/buttonLayout"
+            android:visibility="invisible">
+
+            <TextView
+                android:id="@+id/currStats"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Current Stats"
+                android:textSize="30sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:id="@+id/age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="age"
+                android:textColor="@color/dark_orange"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="@id/currStats"
+                app:layout_constraintBottom_toBottomOf="@id/benchPR"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/currStats"/>
+
+
+            <TextView
+                android:id="@+id/weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="weight"
+                android:textColor="@color/dark_blue"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="@id/currStats"
+                app:layout_constraintBottom_toBottomOf="@id/benchPR"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+
+            <TextView
+                android:id="@+id/height"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="height"
+                android:textColor="@color/dark_orange"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_marginEnd="15dp"
+                app:layout_constraintTop_toTopOf="@id/currStats"
+                app:layout_constraintBottom_toBottomOf="@id/benchPR"
+                app:layout_constraintStart_toEndOf="@id/currStats"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+
+            <!-- Users Main Image -->
+            <ImageView
+                android:id="@+id/mainImage"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                app:layout_constraintTop_toBottomOf="@id/currStats"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@drawable/main_logo"/>
+
+            <TextView
+                android:id="@+id/benchPR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bench PR"
+                android:textColor="@color/dark_orange"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_marginTop="-50dp"
+                app:layout_constraintTop_toBottomOf="@id/currStats"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/mainImage"
+                app:layout_constraintBaseline_toBaselineOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:id="@+id/squatPR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Squat PR"
+                android:textColor="@color/dark_blue"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/mainImage"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:id="@+id/deadliftPR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="deadlift PR"
+                android:textColor="@color/dark_orange"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/mainImage"/>
+
+
+            <TextView
+                android:id="@+id/lastWorkout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Previous Workout"
+                android:textColor="@color/dark_blue"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_marginTop="-100dp"
+                app:layout_constraintTop_toBottomOf="@id/mainImage"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/mainImage"/>
+
+
+            <TextView
+                android:id="@+id/currWorkout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="curr workout"
+                android:textColor="@color/dark_orange"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_marginStart="190dp"
+                app:layout_constraintTop_toBottomOf="@id/mainImage"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/mainImage"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <!-- Linear layout containing the 3 main buttons to navigate through the main fragments -->

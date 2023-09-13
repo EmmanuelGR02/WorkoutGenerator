@@ -1,20 +1,12 @@
 
 package com.example.workoutgenerator
 
-import android.provider.ContactsContract.Data
 import android.util.Log
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
-import androidx.compose.animation.core.snap
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import java.text.SimpleDateFormat
-import java.time.Duration
-import java.util.Calendar
 import java.util.Locale
 
 class Database private constructor() {
@@ -143,7 +135,7 @@ class Database private constructor() {
     }
 
     fun getLatestWorkoutInfo(username: String, callback: (DataSnapshot?) -> Unit) {
-        database.child("users").child(username).child("latest workout").addListenerForSingleValueEvent(object : ValueEventListener {
+        database.child("users").child(username).child("previous workout").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 callback(snapshot)
             }
