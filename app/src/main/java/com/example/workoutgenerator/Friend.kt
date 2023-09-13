@@ -72,7 +72,6 @@ class Friend(private val username : String?) {
         }
     }
 
-
     // Get a list of the friend's friends
     fun getFriends(callback: (Boolean) -> Unit) : ArrayList<String>? {
         return null

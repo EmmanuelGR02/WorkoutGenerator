@@ -1,7 +1,10 @@
 package com.example.workoutgenerator
 
 import android.util.Log
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -96,17 +99,17 @@ class User(private val username : String? = null) {
 
     // Specifies the child path to get the wanted PR on "getPersonalRecords()"
     fun getBenchPR(callback: (benchPR: String?) -> Unit) {
-        database.getUserStats(username.toString(), "bench PR"){ benchPR ->
+        database.getUserStats(username.toString(), "benchPR"){ benchPR ->
             callback(benchPR)
         }
     }
     fun getSquatPR(callback: (squatPR: String?) -> Unit) {
-        database.getUserStats(username.toString(),"squat PR"){ squatPR ->
+        database.getUserStats(username.toString(),"squatPR"){ squatPR ->
             callback(squatPR)
         }
     }
     fun getDeadliftPR(callback: (deadliftPR: String?) -> Unit) {
-        database.getUserStats(username.toString(),"deadlift PR"){ deadliftPR ->
+        database.getUserStats(username.toString(),"deadliftPR"){ deadliftPR ->
             callback(deadliftPR)
         }
     }
@@ -122,12 +125,14 @@ class User(private val username : String? = null) {
     }
 
     // Get the last workout done by this user
-    fun getLastWorkout(callback: (lastWorkout: String?) -> Unit) {
-        database.getLatestWorkoutInfo(username.toString()) { snapshot ->
-            val lastWorkout = snapshot?.child("workout")?.value?.toString() ?: "N/A"
-            callback(lastWorkout)
+    fun getPrevWorkout(callback: (lastWorkout: String?) -> Unit) {
+        database.getUserInfo(username.toString(), "prev workout") { snapshot ->
+           val workout = snapshot?.value?.toString() ?: "N/A"
+            callback(workout)
         }
     }
+
+    // get users current workout
     fun getCurrentWorkout(callback: (workout: String?) -> Unit) {
         database.getUserInfo(username.toString(), "latest workout") { snapshot ->
             val currWorkout = snapshot?.child("workout")?.value?.toString() ?: "N/A"

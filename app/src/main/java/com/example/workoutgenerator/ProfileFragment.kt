@@ -1,6 +1,7 @@
 package com.example.workoutgenerator
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,35 +18,8 @@ class ProfileFragment : Fragment() {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        // display setCurrStats layout or just currStats layout
-        val userStatsInputs = binding.userStatsInputs
-        val currStatsLayout = binding.currStatsLayout
-
-        Database.getInstance().isUserStatsEmpty(currentUser) { tempBool ->
-            if (tempBool) {
-                userStatsInputs.visibility = View.INVISIBLE
-                currStatsLayout.visibility = View.VISIBLE
-                setCurrentStats()
-            } else {
-                userStatsInputs.visibility = View.VISIBLE
-
-                val submitBtn = binding.currStatsBtn
-
-                // Set the users stats
-                submitBtn?.setOnClickListener {
-                    val benchPR = binding.setBenchPR.text.toString()
-                    val squatPR = binding.setSquatPR.text.toString()
-                    val deadliftPR = binding.setDeadliftPR.text.toString()
-                    val weight = binding.setWeight.text.toString()
-                    val height = binding.setHeight.text.toString()
-
-                    Database.getInstance().saveUserStats(currentUser, benchPR, squatPR, deadliftPR, weight, height)
-                    userStatsInputs.visibility = View.INVISIBLE
-                    currStatsLayout.visibility = View.VISIBLE
-                    setCurrentStats()
-                }
-            }
-        }
+        displaySetCurrStats()
+        Log.e("login fragment", "current user $currentUser")
 
         // user instance
         val user = User(currentUser)
@@ -134,24 +108,24 @@ class ProfileFragment : Fragment() {
 
         // set values
         user.getBenchPR { tempPR ->
-            benchPR.text = "B-pr: $tempPR"
+            benchPR.text = "B-pr: $tempPR lbs"
         }
         user.getSquatPR { tempPR ->
-            squatPR.text = "S-pr: $tempPR"
+            squatPR.text = "S-pr: $tempPR lbs"
         }
         user.getDeadliftPR { tempPR ->
-            deadliftPR.text = "D-pr: $tempPR"
+            deadliftPR.text = "D-pr: $tempPR lbs"
         }
         user.getAge { tempAge ->
             age.text = "Age: $tempAge"
         }
         user.getWeight { tempWeight ->
-            weight.text = "Weight: $tempWeight"
+            weight.text = "Weight: $tempWeight lbs"
         }
         user.getHeight { tempHeight ->
             height.text = "Height: $tempHeight"
         }
-        user.getLastWorkout { tempWorkout ->
+        user.getPrevWorkout { tempWorkout ->
             prevWorkout.text = "Previous: $tempWorkout"
         }
         user.getCurrentWorkout { tempWorkout->

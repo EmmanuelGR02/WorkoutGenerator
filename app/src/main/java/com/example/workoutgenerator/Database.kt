@@ -131,7 +131,7 @@ class Database private constructor() {
     }
 
     fun getLatestWorkoutInfo(username: String, callback: (DataSnapshot?) -> Unit) {
-        database.child("users").child(username).child("previous workout").addListenerForSingleValueEvent(object : ValueEventListener {
+        database.child("users").child(username).child("latest workout").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 callback(snapshot)
             }
@@ -216,9 +216,6 @@ class Database private constructor() {
             }
         }
     }
-
-
-
 
     // returns the list of usernames which the current user has liked their friends workout pic
     private fun getUsernamesForLikedPic(username: String, callback: (ArrayList<String>) -> Unit) {

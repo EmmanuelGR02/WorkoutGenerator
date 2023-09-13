@@ -33,6 +33,7 @@ class SignInFragment : Fragment() {
         val password = binding.logInPassword.text.toString()
         val errMessage = binding.signInErrMessage
         val logIn = LoginActivity(username, password)
+
         currentUser = username
 
         if (username.isBlank() || password.isBlank()) {
