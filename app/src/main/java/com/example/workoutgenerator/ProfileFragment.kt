@@ -19,7 +19,6 @@ class ProfileFragment : Fragment() {
         val view = binding.root
 
         displaySetCurrStats()
-        Log.e("login fragment", "current user $currentUser")
 
         // user instance
         val user = User(currentUser)
