@@ -61,6 +61,9 @@
         <action
             android:id="@+id/action_workoutGeneratorFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_workoutGeneratorFragment_to_generateWorkout"
+            app:destination="@id/generateWorkout" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -130,5 +133,14 @@
         <action
             android:id="@+id/action_settingsFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/generateWorkout"
+        android:name="com.example.workoutgenerator.GenerateWorkout"
+        android:label="fragment_generate_workout"
+        tools:layout="@layout/fragment_generate_workout" >
+        <action
+            android:id="@+id/action_generateWorkout_to_workoutGeneratorFragment"
+            app:destination="@id/workoutGeneratorFragment" />
     </fragment>
 </navigation>

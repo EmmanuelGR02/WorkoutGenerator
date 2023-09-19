@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".GenerateWorkout"
+    android:background="@color/black">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:text="BACK"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/welcomebtn_background"
+            android:drawableStart="@drawable/back_icon"/>
+
+        <!-- Linear layout containing chest and back buttons -->
+        <LinearLayout
+            android:id="@+id/chestBackBtns"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStarttOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/legsArmsBtns"
+            android:layout_marginEnd="10dp">
+
+            <Button
+                android:id="@+id/chestBtn"
+                android:text="Chest"
+                android:layout_width="100dp"
+                android:layout_height="50dp"/>
+
+            <Button
+                android:id="@+id/backBtn"
+                android:text="Back"
+                android:layout_width="100dp"
+                android:layout_height="50dp"/>
+        </LinearLayout>
+
+        <!-- Linear layout containing legs and arms buttons -->
+        <LinearLayout
+            android:id="@+id/legsArmsBtns"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <Button
+                android:id="@+id/legsBtn"
+                android:text="Legs"
+                android:layout_width="100dp"
+                android:layout_height="50dp"/>
+
+            <Button
+                android:id="@+id/amrsBtn"
+                android:text="Arms"
+                android:layout_width="100dp"
+                android:layout_height="50dp"/>
+        </LinearLayout>
+
+        <!-- Linear layout containing cardio and abs buttons -->
+        <LinearLayout
+            android:id="@+id/cardioAbs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndtOf="parent"
+            app:layout_constraintStart_toEndOf="@id/legsArmsBtns"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="10dp">
+
+            <Button
+                android:id="@+id/cardioBtn"
+                android:text="Cardio"
+                android:layout_width="100dp"
+                android:layout_height="50dp"/>
+
+            <Button
+                android:id="@+id/absBtn"
+                android:text="Arms"
+                android:layout_width="100dp"
+                android:layout_height="50dp"/>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</FrameLayout>
