@@ -27,5 +27,181 @@ class GenerateWorkout : Fragment() {
     }
 
 
+    // generate chest workout
+    fun generateChestWorkout(duration: String, bool: Boolean) {
+        val chestWorkouts = arrayListOf(
+            "Bench Press", "Incline Bench Press", "Decline Bench Press", "Dumbbell Bench Press",
+            "Incline Dumbbell Bench Press", "Decline Dumbbell Bench Press", "Chest Flyes", "Dumbbell Flyes",
+            "Incline Dumbbell Flyes", "Cable Flyes", "Pec Deck Flyes", "Push-Ups", "Wide-Grip Push-Ups",
+            "Diamond Push-Ups", "Decline Push-Ups", "Weighted Push-Ups", "Chest Dips", "Weighted Chest Dips",
+            "Machine Chest Press", "Smith Machine Bench Press", "Landmine Press", "Barbell Pullovers",
+            "Dumbbell Pullovers", "Cable Crossovers", "Incline Cable Crossovers", "Dumbbell Squeeze Press",
+            "Seated Chest Press Machine", "Chest Press Machine", "Incline Chest Press Machine",
+            "Decline Chest Press Machine", "Hammer Strength Chest Press", "Machine Flyes", "Incline Machine Flyes",
+            "Decline Machine Flyes", "Smith Machine Incline Bench Press", "Smith Machine Decline Bench Press",
+            "Push-Up Variations (e.g., wide grip, close grip)", "Isometric Chest Squeezes", "Chest Pulsing",
+            "Chest Stretching Exercises"
+        )
 
+        var randIntOne = 0
+        var randIntTwo = 0
+
+        if (duration == "short") {
+            if (bool) {
+
+            } else if (!bool) {
+
+            }
+
+        } else if (duration == "medium") {
+            if (bool) {
+
+            } else if (!bool) {
+
+            }
+
+        } else if (duration == "long") {
+            if (bool) {
+
+            } else if (!bool) {
+
+            }
+        }
+    }
+
+
+    // generate back workout
+    fun generateBackWorkout(duration: String, bool: Boolean) {
+
+
+        if (duration == "short") {
+            if (bool) {
+
+            } else if (!bool) {
+
+            }
+
+        } else if (duration == "medium") {
+            if (bool) {
+
+            } else if (!bool) {
+
+            }
+
+        } else if (duration == "long") {
+            if (bool) {
+
+            } else if (!bool) {
+
+            }
+        }
+    }
+
+    // generate legs workout
+    fun generateLegWorkout(duration: String, bool: Boolean) {
+
+
+        if (duration == "short") {
+            if (bool) {
+
+            } else if (!bool) {
+
+            }
+
+        } else if (duration == "medium") {
+            if (bool) {
+
+            } else if (!bool) {
+
+            }
+
+        } else if (duration == "long") {
+            if (bool) {
+
+            } else if (!bool) {
+
+            }
+        }
+    }
+
+    // generate arms workout
+    fun generateArmWorkout(duration: String, bool: Boolean) {
+
+
+        if (duration == "short") {
+            if (bool) {
+
+            } else if (!bool) {
+
+            }
+
+        } else if (duration == "medium") {
+            if (bool) {
+
+            } else if (!bool) {
+
+            }
+
+        } else if (duration == "long") {
+            if (bool) {
+
+            } else if (!bool) {
+
+            }
+        }
+    }
+
+    // generate cardio workout
+    fun generateCardioWorkout(duration: String, bool: Boolean){
+
+
+        if (duration == "short") {
+            if (bool) {
+
+            } else if (!bool) {
+
+            }
+
+        } else if (duration == "medium") {
+            if (bool) {
+
+            } else if (!bool) {
+
+            }
+
+        } else if (duration == "long") {
+            if (bool) {
+
+            } else if (!bool) {
+
+            }
+        }
+    }
+
+    // generate abs workout
+    fun generateAbWorkout(duration: String, bool: Boolean) {
+
+
+        if (duration == "short") {
+            if (bool) {
+
+            } else if (!bool) {
+
+            }
+
+        } else if (duration == "medium") {
+            if (bool) {
+
+            } else if (!bool) {
+
+            }
+
+        } else if (duration == "long") {
+            if (bool) {
+
+            } else if (!bool) {
+
+            }
+        }
+    }
 }
