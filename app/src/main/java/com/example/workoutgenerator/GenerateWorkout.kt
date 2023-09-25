@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.workoutgenerator.databinding.FragmentGenerateWorkoutBinding
+import java.util.Random
 
 class GenerateWorkout : Fragment() {
     private lateinit var binding: FragmentGenerateWorkoutBinding
@@ -29,6 +30,7 @@ class GenerateWorkout : Fragment() {
 
     // generate chest workout
     fun generateChestWorkout(duration: String, bool: Boolean) {
+        // array list containing different chest workouts
         val chestWorkouts = arrayListOf(
             "Bench Press", "Incline Bench Press", "Decline Bench Press", "Dumbbell Bench Press",
             "Incline Dumbbell Bench Press", "Decline Dumbbell Bench Press", "Chest Flyes", "Dumbbell Flyes",
@@ -72,6 +74,7 @@ class GenerateWorkout : Fragment() {
 
     // generate back workout
     fun generateBackWorkout(duration: String, bool: Boolean) {
+        // array list containing back Workouts
         val backWorkouts = arrayListOf(
             "Deadlifts", "Pull-Ups", "Bent-Over Rows", "Lat Pulldowns", "T-Bar Rows",
             "Seated Cable Rows", "Face Pulls", "Single-Arm Dumbbell Rows", "Chin-Ups",
@@ -109,6 +112,7 @@ class GenerateWorkout : Fragment() {
 
     // generate legs workout
     fun generateLegWorkout(duration: String, bool: Boolean) {
+        // arrayList containing different leg workouts
         val legWorkouts = arrayListOf(
             "Squats", "Deadlifts", "Leg Press", "Lunges", "Step-Ups",
             "Hack Squats", "Romanian Deadlifts", "Bulgarian Split Squats", "Calf Raises",
@@ -145,6 +149,7 @@ class GenerateWorkout : Fragment() {
 
     // generate arms workout
     fun generateArmWorkout(duration: String, bool: Boolean) {
+        // array lists containing different bicep, triceps, and shoulder workouts
         val bicepWorkouts = arrayListOf(
             "Barbell Curls", "Dumbbell Curls", "Hammer Curls", "Preacher Curls", "Concentration Curls",
             "Spider Curls", "Cable Curls", "EZ Bar Curls", "Reverse Curls", "21s",
@@ -155,7 +160,6 @@ class GenerateWorkout : Fragment() {
             "Standing Barbell Curls", "Cheat Curls", "Machine Preacher Curls", "Pulley Curls", "Scott Curl Machine",
             "Dumbbell Hammer Curls", "Bicep Curl Machine", "Cable Preacher Curls", "Resistance Band Hammer Curls", "Isometric Hammer Curls"
         )
-
         val tricepsWorkouts = arrayListOf(
             "Tricep Dips", "Tricep Pushdowns", "Skull Crushers", "Close-Grip Bench Press", "Overhead Tricep Extensions",
             "Diamond Push-Ups", "Rope Pushdowns", "Tricep Kickbacks", "Bench Dips", "French Press",
@@ -165,7 +169,6 @@ class GenerateWorkout : Fragment() {
             "V-Bar Pushdowns", "Plate Tricep Extensions", "Lying Tricep Press", "Cable Overhead Tricep Extensions", "Reverse Grip Tricep Push-Ups",
             "Close-Grip Smith Machine Bench Press", "Tricep Machine", "Cable Rope Overhead Tricep Extensions", "Cable Lying Tricep Extensions", "Tricep Isolation Machine"
         )
-
         val shoulderWorkouts = arrayListOf(
             "Military Press", "Dumbbell Shoulder Press", "Arnold Press", "Push Press", "Seated Dumbbell Press",
             "Lateral Raises", "Front Raises", "Rear Delt Raises", "Upright Rows", "Shrugs",
@@ -202,7 +205,16 @@ class GenerateWorkout : Fragment() {
 
     // generate cardio workout
     fun generateCardioWorkout(duration: String, bool: Boolean){
-
+        val cardioWorkouts = arrayListOf(
+            "Running", "Cycling", "Swimming", "Jumping Rope", "High-Intensity Interval Training (HIIT)",
+            "Rowing", "Elliptical Trainer", "Stair Climbing", "Kickboxing", "Dancing",
+            "Aerobics", "Sprinting", "Boxing", "CrossFit", "Power Walking",
+            "Hiking", "Skating (Rollerblading or Ice Skating)", "Jumping Jacks", "Burpees", "Circuit Training",
+            "Tabata Workouts", "Sled Pushes", "Battle Ropes", "Mountain Climbers", "Sprints with Resistance Bands",
+            "Shadow Boxing", "Kick Sprints", "Swimming Laps", "Stationary Bike Intervals", "Cardio Kickboxing",
+            "Zumba", "Bodyweight Circuits", "Jumping Squats", "Mountain Biking", "Rock Climbing",
+            "Plyometric Exercises", "Racquet Sports (e.g., Tennis, Badminton)", "Calisthenics", "Running Stairs", "Trail Running"
+        )
 
         if (duration == "short") {
             if (bool) {
@@ -229,7 +241,17 @@ class GenerateWorkout : Fragment() {
 
     // generate abs workout
     fun generateAbWorkout(duration: String, bool: Boolean) {
-
+        // list containing ab workouts
+        val abWorkouts = arrayListOf(
+            "Crunches", "Leg Raises", "Russian Twists", "Planks", "Bicycle Crunches",
+            "Hanging Leg Raises", "Mountain Climbers", "Flutter Kicks", "Sit-Ups", "Side Planks",
+            "V-Ups", "Toe Touches", "Lying Leg Raises", "Oblique Crunches", "Scissor Kicks",
+            "Ab Wheel Rollouts", "Reverse Crunches", "Jackknife Sit-Ups", "Dead Bugs", "Standing Cable Crunches",
+            "Medicine Ball Slams", "L-Sit Holds", "Hanging Knee Raises", "Windshield Wipers", "Stability Ball Rollouts",
+            "Long Arm Crunches", "Plank Variations (e.g., Spiderman Planks)", "Cable Woodchoppers", "Bosu Ball Exercises", "Knee-to-Elbow Planks",
+            "Russian Twist with Medicine Ball", "Captain's Chair Leg Raises", "Seated Leg Tucks", "Cable Crunch Twists", "Hanging Windshield Wipers",
+            "Stir the Pot Planks", "Decline Sit-Ups", "Rope Crunches", "Dragon Flags", "Pulse Ups"
+        )
 
         if (duration == "short") {
             if (bool) {
@@ -252,5 +274,12 @@ class GenerateWorkout : Fragment() {
 
             }
         }
+    }
+
+    // generate random numbers. A parameter will determine how many random numbers are needed
+    // depending on the duration of the workout
+    private fun generateRandNums(arrayLen: Int, randNums: Int) {
+        for ()
+           val rand = Random().nextInt((randNums + 1) - 0) + 0
     }
 }
