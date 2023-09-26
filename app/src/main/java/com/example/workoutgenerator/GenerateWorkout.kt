@@ -278,7 +278,14 @@ class GenerateWorkout : Fragment() {
 
     // generate random numbers. A parameter will determine how many random numbers are needed
     // depending on the duration of the workout
-    private fun generateRandNums(arrayLen: Int, randNums: Int) {
-           val rand = Random().nextInt((randNums + 1) - 0) + 0
+    private fun generateRandNums(arrayLen: Int, randNums: Int): ArrayList<Int> {
+        val list = arrayListOf<Int>()
+
+        while (randNums >= 0) {
+            val rand = Random().nextInt((arrayLen + 1) - 0) + 0
+            list.add(rand)
+        }
+
+        return list
     }
 }
