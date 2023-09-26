@@ -50,12 +50,15 @@
             <Button
                 android:id="@+id/chestBtn"
                 android:text="Chest"
+                android:background="@color/white"
+                android:layout_marginBottom="8dp"
                 android:layout_width="100dp"
                 android:layout_height="50dp"/>
 
             <Button
                 android:id="@+id/backBtn"
                 android:text="Back"
+                android:background="@color/white"
                 android:layout_width="100dp"
                 android:layout_height="50dp"/>
         </LinearLayout>
@@ -74,12 +77,15 @@
             <Button
                 android:id="@+id/legsBtn"
                 android:text="Legs"
+                android:background="@color/white"
+                android:layout_marginBottom="8dp"
                 android:layout_width="100dp"
                 android:layout_height="50dp"/>
 
             <Button
-                android:id="@+id/amrsBtn"
+                android:id="@+id/armsBtn"
                 android:text="Arms"
+                android:background="@color/white"
                 android:layout_width="100dp"
                 android:layout_height="50dp"/>
         </LinearLayout>
@@ -99,12 +105,15 @@
             <Button
                 android:id="@+id/cardioBtn"
                 android:text="Cardio"
+                android:layout_marginBottom="8dp"
+                android:background="@color/white"
                 android:layout_width="100dp"
                 android:layout_height="50dp"/>
 
             <Button
                 android:id="@+id/absBtn"
-                android:text="Arms"
+                android:text="Abs"
+                android:background="@color/white"
                 android:layout_width="100dp"
                 android:layout_height="50dp"/>
         </LinearLayout>

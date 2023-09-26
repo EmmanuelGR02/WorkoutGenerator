@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import com.example.workoutgenerator.databinding.FragmentGenerateWorkoutBinding
 import java.util.Random
 
@@ -18,11 +19,29 @@ class GenerateWorkout : Fragment() {
         binding = FragmentGenerateWorkoutBinding.inflate(inflater, container, false)
 
         // take user back to workout generator fragment
-        val bacBtn = binding.backButton
-        bacBtn?.setOnClickListener {
+        val backButton = binding.backButton
+        backButton?.setOnClickListener {
             val fragment = WorkoutGeneratorFragment()
             (requireActivity() as MainActivity).navigateToFragment(fragment)
         }
+
+        // initialize the workout buttons
+        val chestBtn = binding.chestBtn
+        val backBtn = binding.backBtn
+        val legsBtn = binding.legsBtn
+        val armsBtn = binding.armsBtn
+        val cardioBtn = binding.cardioBtn
+        val absBtn = binding.absBtn
+
+        // get values for if buttons are currently selected
+        val isChestBtn = isButtonPressed(chestBtn)
+        val isBackBtn = isButtonPressed(backBtn)
+        val isLegsBtn = isButtonPressed(legsBtn)
+        val isArmsBtn = isButtonPressed(armsBtn)
+        val isCardioBtn = isButtonPressed(cardioBtn)
+        val isAbsBtn = isButtonPressed(absBtn)
+
+
 
         return binding.root
     }
@@ -287,5 +306,14 @@ class GenerateWorkout : Fragment() {
         }
 
         return list
+    }
+
+    // function that will check if the button passed is selected. return true or false
+    // we check if the button is selected or not by getting the current background color
+    private fun isButtonPressed(button: Button): Boolean {
+        val bgColor = button.background
+        val str = bgColor.toString()
+
+        return str == "dark_blue"
     }
 }
