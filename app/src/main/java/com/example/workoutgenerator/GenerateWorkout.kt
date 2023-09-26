@@ -25,6 +25,18 @@ class GenerateWorkout : Fragment() {
             (requireActivity() as MainActivity).navigateToFragment(fragment)
         }
 
+        // call main fun to generate the workout
+        val generateBtn = binding.generateBtn
+        generateBtn?.setOnClickListener {
+            generateWorkout()
+        }
+
+        return binding.root
+    }
+
+
+    // main function to generate the workout
+    private fun generateWorkout() {
         // initialize the workout buttons
         val chestBtn = binding.chestBtn
         val backBtn = binding.backBtn
@@ -33,17 +45,29 @@ class GenerateWorkout : Fragment() {
         val cardioBtn = binding.cardioBtn
         val absBtn = binding.absBtn
 
-        // get values for if buttons are currently selected
-        val isChestBtn = isButtonPressed(chestBtn)
-        val isBackBtn = isButtonPressed(backBtn)
-        val isLegsBtn = isButtonPressed(legsBtn)
-        val isArmsBtn = isButtonPressed(armsBtn)
-        val isCardioBtn = isButtonPressed(cardioBtn)
-        val isAbsBtn = isButtonPressed(absBtn)
+        // list of the buttons
+        val btnList = ArrayList<Button>()
+        btnList.add(chestBtn)
+        btnList.add(backBtn)
+        btnList.add(legsBtn)
+        btnList.add(armsBtn)
+        btnList.add(cardioBtn)
+        btnList.add(absBtn)
 
+        // list of the buttons that are currently selected
+        val selectedBtns = ArrayList<Button>()
 
+        // check which of the buttons are selected
+        for (button in btnList) {
+            val bgColor = button.background.toString()
+            if (bgColor == "dark_blue") {
+                selectedBtns.add(button)
+            }
+        }
 
-        return binding.root
+        // initialize the two selected buttons
+        val button1 = selectedBtns[0]
+        val button2 = selectedBtns[1]
     }
 
 
@@ -308,12 +332,4 @@ class GenerateWorkout : Fragment() {
         return list
     }
 
-    // function that will check if the button passed is selected. return true or false
-    // we check if the button is selected or not by getting the current background color
-    private fun isButtonPressed(button: Button): Boolean {
-        val bgColor = button.background
-        val str = bgColor.toString()
-
-        return str == "dark_blue"
-    }
 }
