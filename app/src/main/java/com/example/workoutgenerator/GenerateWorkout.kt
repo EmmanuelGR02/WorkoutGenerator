@@ -73,6 +73,7 @@ class GenerateWorkout : Fragment() {
         if (button1.text == "CHEST" || button2.text == "CHEST") {
 
         }
+
     }
 
 
@@ -333,8 +334,31 @@ class GenerateWorkout : Fragment() {
             val rand = Random().nextInt((arrayLen + 1) - 0) + 0
             list.add(rand)
         }
-
         return list
+    }
+
+    // function that will check which of the duration button was selected
+    // we check if the button is selected or not by getting the current background color
+    private fun durationBtnSelected(): String {
+        // initialize buttons
+        val shortBtn = binding.shortBtn
+        val mediumBtn = binding.mediumBtn
+        val longBtn = binding.longBtn
+
+        // list containing all the duration buttons
+        val btnList = ArrayList<Button>()
+        btnList.add(shortBtn)
+        btnList.add(mediumBtn)
+        btnList.add(longBtn)
+
+        var selectedBtn = ""
+        for (button in btnList) {
+            if (button.background.toString() == "dark_orange") {
+                selectedBtn = button.text.toString()
+            }
+        }
+
+        return selectedBtn
     }
 
 }
