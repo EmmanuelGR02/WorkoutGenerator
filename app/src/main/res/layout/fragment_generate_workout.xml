@@ -12,6 +12,15 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/centerPoint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Choose what you would like to workout"
@@ -44,7 +53,7 @@
             android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/centerPoint"
             app:layout_constraintEnd_toStartOf="@+id/legsArmsBtns">
 
             <Button
@@ -72,7 +81,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintBottom_toBottomOf="@+id/centerPoint">
 
             <Button
                 android:id="@+id/legsBtn"
@@ -99,7 +108,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/legsArmsBtns"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/centerPoint"
             android:layout_marginStart="0dp">
 
             <Button
@@ -119,23 +128,53 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/durationLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@id/legsArmsBtns"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintBottom_toTopOf="@id/centerPoint"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
             <Button
-                android:id="@+id/generateBtn"
-                android:layout_width="120dp"
-                android:layout_height="50dp"
-                android:text="Generate"
-                android:background="@color/dark_blue"
-                android:textStyle="bold"
-                android:textSize="18sp"/>
+                android:layout_width="110dp"
+                android:layout_height="40sp"
+                android:text="Short"
+                android:background="@color/light_gray"
+                android:textStyle="bold"/>
+
+            <Button
+                android:layout_width="110dp"
+                android:layout_height="40sp"
+                android:text="Medium"
+                android:background="@color/light_gray"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:textStyle="bold"/>
+
+            <Button
+                android:layout_width="110dp"
+                android:layout_height="40sp"
+                android:text="Long"
+                android:background="@color/light_gray"
+                android:textStyle="bold"/>
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/generateBtn"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:text="Generate"
+            android:background="@color/dark_blue"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/centerPoint"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

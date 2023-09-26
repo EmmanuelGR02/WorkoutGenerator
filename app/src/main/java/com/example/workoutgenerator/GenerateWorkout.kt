@@ -28,7 +28,7 @@ class GenerateWorkout : Fragment() {
         // call main fun to generate the workout
         val generateBtn = binding.generateBtn
         generateBtn?.setOnClickListener {
-            generateWorkout()
+            generate()
         }
 
         return binding.root
@@ -36,7 +36,7 @@ class GenerateWorkout : Fragment() {
 
 
     // main function to generate the workout
-    private fun generateWorkout() {
+    private fun generate() {
         // initialize the workout buttons
         val chestBtn = binding.chestBtn
         val backBtn = binding.backBtn
@@ -68,6 +68,11 @@ class GenerateWorkout : Fragment() {
         // initialize the two selected buttons
         val button1 = selectedBtns[0]
         val button2 = selectedBtns[1]
+
+        // logic to make the workouts
+        if (button1.text == "CHEST" || button2.text == "CHEST") {
+
+        }
     }
 
 
