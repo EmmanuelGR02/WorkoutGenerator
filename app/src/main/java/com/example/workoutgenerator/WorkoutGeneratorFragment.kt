@@ -30,6 +30,14 @@ class WorkoutGeneratorFragment : Fragment() {
             (requireActivity() as MainActivity).navigateToFragment(fragment)
         }
 
+        // if the current user doesn't have a workout going on,
+        // display a button that when clicked, it takes them to the generate workout fragment
+        val generateWorkoutBtn = binding.generateWorkoutBtn
+        generateWorkoutBtn?.setOnClickListener {
+            val fragment = GenerateWorkout()
+            (requireActivity() as MainActivity).navigateToFragment(fragment)
+        }
+
         return view
     }
 

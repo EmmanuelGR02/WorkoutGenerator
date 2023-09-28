@@ -47,7 +47,7 @@
                 android:id="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Username"
+                android:text=""
                 android:textSize="30sp"
                 android:layout_marginStart="55dp"
                 android:textColor="@color/dark_orange"
@@ -63,7 +63,7 @@
                     android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Name"
+                    android:text=""
                     android:layout_marginStart="50dp"
                     android:textColor="@color/light_blue"
                     android:textSize="15sp"/>
@@ -72,7 +72,7 @@
                     android:id="@+id/lastname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="lastname"
+                    android:text=""
                     android:textColor="@color/light_blue"
                     android:layout_marginStart="5dp"
                     android:textSize="15sp"/>

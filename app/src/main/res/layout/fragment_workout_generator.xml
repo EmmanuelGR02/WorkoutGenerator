@@ -18,16 +18,33 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonsLayout">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Choose a Workout"
-                android:textSize="30sp"
+                android:text="No active workouts"
+                android:textSize="20sp"
                 android:textColor="@color/white"
-                android:textStyle="bold"
-                app:layout_constraintTop_toTopOf="parent"/>
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/buttonsLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Button
+                android:id="@+id/generateWorkoutBtn"
+                android:layout_width="120dp"
+                android:layout_height="45dp"
+                android:text="Generate"/>
 
         </LinearLayout>
 
