@@ -42,57 +42,16 @@ class GenerateWorkout : Fragment() {
         val mediumBtn = binding.mediumBtn
         val longBtn = binding.longBtn
 
-        // get their current background colors
-        // list of the buttons
-        val btnList = ArrayList<Button>()
-        btnList.add(chestBtn)
-        btnList.add(backBtn)
-        btnList.add(legsBtn)
-        btnList.add(armsBtn)
-        btnList.add(cardioBtn)
-        btnList.add(absBtn)
+        val durationButtons = listOf(shortBtn, mediumBtn, longBtn)
 
-        val durationList = ArrayList<Button>()
-        durationList.add(shortBtn)
-        durationList.add(mediumBtn)
-        durationList.add(longBtn)
-
-        val workoutSelectedList = ArrayList<Button>()
-        val durationSelectedList = ArrayList<Button>()
-
-        // loop through the buttons and only allow two to have the blue background
-        for (button in btnList) {
-            Log.e("test", "changeBg - " +  workoutSelectedList.size)
-            if (workoutSelectedList.size < 1) {
-                button.setOnClickListener {
-                    button.background = ContextCompat.getColor(requireContext(), R.color.dark_blue).toDrawable()
-                    workoutSelectedList.add(button)
-                }
-            } else {
-                button.setOnClickListener {
-                    button.background = ContextCompat.getColor(requireContext(), R.color.white).toDrawable()
-                    workoutSelectedList.remove(button)
-                }
+        // Example usage for workout buttons
+        val workoutButtons = listOf(chestBtn, backBtn, legsBtn, armsBtn, cardioBtn, absBtn)
+        for (button in workoutButtons) {
+            button.setOnClickListener {
+                changeBackgroundColor(button, workoutButtons)
             }
         }
 
-        // loop through the duration buttons and only allow one to have the blue background
-        for (button in durationList) {
-            if (durationSelectedList.isEmpty()) {
-                button.setOnClickListener {
-                    button.background = ContextCompat.getColor(requireContext(), R.color.dark_orange).toDrawable()
-                    durationSelectedList.add(button)
-                }
-            } else {
-                button.setOnClickListener {
-                    button.background = ContextCompat.getColor(requireContext(), R.color.dark_orange).toDrawable()
-                    val buttonInList = durationSelectedList[0]
-                    buttonInList.background = ContextCompat.getColor(requireContext(), R.color.light_gray).toDrawable()
-                    durationSelectedList.remove(buttonInList)
-                    durationSelectedList.add(button)
-                }
-            }
-        }
 
         // call main fun to generate the workout
         val generateBtn = binding.generateBtn
@@ -118,6 +77,12 @@ class GenerateWorkout : Fragment() {
         val cardioBtn = binding.cardioBtn
         val absBtn = binding.absBtn
 
+        val shortBtn = binding.shortBtn
+        val mediumBtn = binding.mediumBtn
+        val longBtn = binding.longBtn
+
+        val durationButtons = listOf(shortBtn, mediumBtn, longBtn)
+
         // list of the buttons
         val btnList = ArrayList<Button>()
         btnList.add(chestBtn)
@@ -127,14 +92,15 @@ class GenerateWorkout : Fragment() {
         btnList.add(cardioBtn)
         btnList.add(absBtn)
 
+
         // list of the buttons that are currently selected
-        val selectedBtns = ArrayList<String>()
+        val selectedBtns = ArrayList<Button>()
 
         // check which of the buttons are selected
         for (button in btnList) {
-            val bgColor = button.background.toString()
-            if (bgColor == "dark_blue") {
-                selectedBtns.add(button.text.toString())
+            val bgColor = button.background
+            if (bgColor.constantState == ContextCompat.getColor(requireContext(), R.color.dark_blue).toDrawable().constantState) {
+                selectedBtns.add(button)
             }
         }
 
@@ -506,70 +472,28 @@ class GenerateWorkout : Fragment() {
     // function to change the background color of the buttons when pressed
     // only two buttons from the workout button can be selected
     // and only 1 from the duration buttons
-    private fun changeBackgroundColor() {
-        // initialize the workout buttons
-        val chestBtn = binding.chestBtn
-        val backBtn = binding.backBtn
-        val legsBtn = binding.legsBtn
-        val armsBtn = binding.armsBtn
-        val cardioBtn = binding.cardioBtn
-        val absBtn = binding.absBtn
+    private fun changeBackgroundColor(clickedButton: Button, workoutButtons: List<Button>) {
+        val blueColor = ContextCompat.getColor(requireContext(), R.color.dark_blue)
+        val whiteColor = ContextCompat.getColor(requireContext(), R.color.white)
+        val orangeColor = ContextCompat.getColor(requireContext(), R.color.dark_orange)
+        val grayColor = ContextCompat.getColor(requireContext(), R.color.light_gray)
 
-        // duration buttons
-        val shortBtn = binding.shortBtn
-        val mediumBtn = binding.mediumBtn
-        val longBtn = binding.longBtn
-
-        // get their current background colors
-        // list of the buttons
-        val btnList = ArrayList<Button>()
-        btnList.add(chestBtn)
-        btnList.add(backBtn)
-        btnList.add(legsBtn)
-        btnList.add(armsBtn)
-        btnList.add(cardioBtn)
-        btnList.add(absBtn)
-
-        val durationList = ArrayList<Button>()
-        durationList.add(shortBtn)
-        durationList.add(mediumBtn)
-        durationList.add(longBtn)
-
-        val workoutSelectedList = ArrayList<Button>()
-        val durationSelectedList = ArrayList<Button>()
-
-        // loop through the buttons and only allow two to have the blue background
-        for (button in btnList) {
-            Log.e("test", "changeBg - " +  workoutSelectedList.size)
-            if (workoutSelectedList.size < 1) {
-                button.setOnClickListener {
-                    button.background = ContextCompat.getColor(requireContext(), R.color.dark_blue).toDrawable()
-                    workoutSelectedList.add(button)
-                }
+        // Check if the clicked button is a workout button
+        if (workoutButtons.contains(clickedButton)) {
+            // Toggle the background color of the clicked workout button
+            clickedButton.background = if (clickedButton.background?.constantState == blueColor.toDrawable().constantState) {
+                whiteColor.toDrawable()
             } else {
-                button.setOnClickListener {
-                    button.background = ContextCompat.getColor(requireContext(), R.color.white).toDrawable()
-                    workoutSelectedList.remove(button)
-                }
+                blueColor.toDrawable()
             }
-        }
 
-        // loop through the duration buttons and only allow one to have the blue background
-        for (button in durationList) {
-            if (durationSelectedList.isEmpty()) {
-                button.setOnClickListener {
-                    button.background = ContextCompat.getColor(requireContext(), R.color.dark_orange).toDrawable()
-                    durationSelectedList.add(button)
-                }
-            } else {
-                button.setOnClickListener {
-                    button.background = ContextCompat.getColor(requireContext(), R.color.dark_orange).toDrawable()
-                    val buttonInList = durationSelectedList[0]
-                    buttonInList.background = ContextCompat.getColor(requireContext(), R.color.light_gray).toDrawable()
-                    durationSelectedList.remove(buttonInList)
-                    durationSelectedList.add(button)
+            // Reset the background color of other workout buttons
+            for (button in workoutButtons) {
+                if (button != clickedButton) {
+                    button.background = whiteColor.toDrawable()
                 }
             }
         }
     }
+
 }
