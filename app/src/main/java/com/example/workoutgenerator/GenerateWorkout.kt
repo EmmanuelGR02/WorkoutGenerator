@@ -15,6 +15,8 @@ import java.util.Random
 
 class GenerateWorkout : Fragment() {
     private lateinit var binding: FragmentGenerateWorkoutBinding
+    private val twoButtons = arrayListOf<String>()
+    private val twoButtonsNonString = arrayListOf<Button>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,9 +46,8 @@ class GenerateWorkout : Fragment() {
 
         val durationButtons = listOf(shortBtn, mediumBtn, longBtn)
 
-        // Example usage for workout buttons
+        // change background of workout colors when selected
         val workoutButtons = listOf(chestBtn, backBtn, legsBtn, armsBtn, cardioBtn, absBtn)
-
         for (button in workoutButtons) {
             button.setOnClickListener {
                 changeWorkoutBgColor(button, workoutButtons)
@@ -476,30 +477,30 @@ class GenerateWorkout : Fragment() {
         val blueColor = ContextCompat.getColor(requireContext(), R.color.dark_blue)
         val whiteColor = ContextCompat.getColor(requireContext(), R.color.white)
 
-
-        val twoButtons = arrayListOf<Button>()
-
-        for (button in workoutButtons) {
-            if (button.background == blueColor.toDrawable()) {
-                twoButtons.add(button)
-            }
+        if (twoButtons.size == 2) {
+            twoButtonsNonString[0].background = whiteColor.toDrawable()
+            twoButtonsNonString.remove(twoButtonsNonString[0])
+            val tempName = twoButtonsNonString[0].text.toString()
+            twoButtons.remove(tempName)
+            Log.e("GenerateWorkout", "changeWorkoutBgColor - Size is 2!! $tempName")
         }
 
-        if(twoButtons.size <= 1) {
-            if (clickedButton.background == whiteColor.toDrawable()) {
-                clickedButton.background = blueColor.toDrawable()
-                twoButtons.remove(twoButtons[0])
-                twoButtons[0] = twoButtons[1]
-                twoButtons[1] = clickedButton
-            } else if (clickedButton.background == blueColor.toDrawable()) {
-                if (twoButtons.size == 1) {
-                    clickedButton.background == whiteColor.toDrawable()
-                    twoButtons.remove(clickedButton)
-                }
-            }
+        val buttonName = clickedButton.text.toString()
+        if (!(twoButtons.contains(buttonName))) {
+            clickedButton.background = blueColor.toDrawable()
+            twoButtons.add(buttonName)
+            twoButtonsNonString.add(clickedButton)
+        } else if (twoButtons.contains(buttonName)) {
+            clickedButton.background = whiteColor.toDrawable()
+            twoButtons.remove(buttonName)
+            twoButtonsNonString.remove(clickedButton)
         }
+        val arrSize = twoButtons.size
+        Log.e("GenerateWorkout", "changeWorkoutBgColor - $twoButtons, $arrSize")
 
 //        if (workoutButtons.contains(clickedButton)) {
+//            val buttonName = clickedButton.text.toString()
+//            twoButtons.add(buttonName)
 //            clickedButton.background = if (clickedButton.background?.constantState == blueColor.toDrawable().constantState) {
 //                whiteColor.toDrawable()
 //            } else {
@@ -511,6 +512,8 @@ class GenerateWorkout : Fragment() {
 //                    button.background = whiteColor.toDrawable()
 //                }
 //            }
+//            val temp1 = twoButtons[0].toString()
+//            Log.e("GenerateWorkout", "changeWorkoutBgColor - $temp1")
 //        }
     }
 
