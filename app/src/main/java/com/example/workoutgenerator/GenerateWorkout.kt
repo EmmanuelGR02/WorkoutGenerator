@@ -46,9 +46,10 @@ class GenerateWorkout : Fragment() {
 
         // Example usage for workout buttons
         val workoutButtons = listOf(chestBtn, backBtn, legsBtn, armsBtn, cardioBtn, absBtn)
+
         for (button in workoutButtons) {
             button.setOnClickListener {
-                changeBackgroundColor(button, workoutButtons)
+                changeWorkoutBgColor(button, workoutButtons)
             }
         }
 
@@ -471,29 +472,46 @@ class GenerateWorkout : Fragment() {
 
     // function to change the background color of the buttons when pressed
     // only two buttons from the workout button can be selected
-    // and only 1 from the duration buttons
-    private fun changeBackgroundColor(clickedButton: Button, workoutButtons: List<Button>) {
+    private fun changeWorkoutBgColor(clickedButton: Button, workoutButtons: List<Button>) {
         val blueColor = ContextCompat.getColor(requireContext(), R.color.dark_blue)
         val whiteColor = ContextCompat.getColor(requireContext(), R.color.white)
-        val orangeColor = ContextCompat.getColor(requireContext(), R.color.dark_orange)
-        val grayColor = ContextCompat.getColor(requireContext(), R.color.light_gray)
 
-        // Check if the clicked button is a workout button
-        if (workoutButtons.contains(clickedButton)) {
-            // Toggle the background color of the clicked workout button
-            clickedButton.background = if (clickedButton.background?.constantState == blueColor.toDrawable().constantState) {
-                whiteColor.toDrawable()
-            } else {
-                blueColor.toDrawable()
+
+        val twoButtons = arrayListOf<Button>()
+
+        for (button in workoutButtons) {
+            if (button.background == blueColor.toDrawable()) {
+                twoButtons.add(button)
             }
+        }
 
-            // Reset the background color of other workout buttons
-            for (button in workoutButtons) {
-                if (button != clickedButton) {
-                    button.background = whiteColor.toDrawable()
+        if(twoButtons.size <= 1) {
+            if (clickedButton.background == whiteColor.toDrawable()) {
+                clickedButton.background = blueColor.toDrawable()
+                twoButtons.remove(twoButtons[0])
+                twoButtons[0] = twoButtons[1]
+                twoButtons[1] = clickedButton
+            } else if (clickedButton.background == blueColor.toDrawable()) {
+                if (twoButtons.size == 1) {
+                    clickedButton.background == whiteColor.toDrawable()
+                    twoButtons.remove(clickedButton)
                 }
             }
         }
+
+//        if (workoutButtons.contains(clickedButton)) {
+//            clickedButton.background = if (clickedButton.background?.constantState == blueColor.toDrawable().constantState) {
+//                whiteColor.toDrawable()
+//            } else {
+//                blueColor.toDrawable()
+//            }
+//
+//            for (button in workoutButtons) {
+//                if (button != clickedButton) {
+//                    button.background = whiteColor.toDrawable()
+//                }
+//            }
+//        }
     }
 
 }
