@@ -498,23 +498,13 @@ class GenerateWorkout : Fragment() {
         val arrSize = twoButtons.size
         Log.e("GenerateWorkout", "changeWorkoutBgColor - $twoButtons, $arrSize")
 
-//        if (workoutButtons.contains(clickedButton)) {
-//            val buttonName = clickedButton.text.toString()
-//            twoButtons.add(buttonName)
-//            clickedButton.background = if (clickedButton.background?.constantState == blueColor.toDrawable().constantState) {
-//                whiteColor.toDrawable()
-//            } else {
-//                blueColor.toDrawable()
-//            }
-//
-//            for (button in workoutButtons) {
-//                if (button != clickedButton) {
-//                    button.background = whiteColor.toDrawable()
-//                }
-//            }
-//            val temp1 = twoButtons[0].toString()
-//            Log.e("GenerateWorkout", "changeWorkoutBgColor - $temp1")
-//        }
+    }
+
+    private fun changeDurationBgColor(clickedButton: Button, durationButtons: List<Button>) {
+        val orangeColor = ContextCompat.getColor(requireContext(), R.color.dark_orange)
+        val grayColor = ContextCompat.getColor(requireContext(), R.color.dark_gray)
+
+
     }
 
 }
