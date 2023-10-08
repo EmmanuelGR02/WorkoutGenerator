@@ -500,6 +500,7 @@ class GenerateWorkout : Fragment() {
 
     }
 
+    // function to change the background color of the duration buttons (only one button can be selected)
     private fun changeDurationBgColor(clickedButton: Button, durationButtons: List<Button>) {
         val orangeColor = ContextCompat.getColor(requireContext(), R.color.dark_orange)
         val grayColor = ContextCompat.getColor(requireContext(), R.color.dark_gray)
