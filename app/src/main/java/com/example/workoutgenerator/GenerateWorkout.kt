@@ -18,6 +18,9 @@ class GenerateWorkout : Fragment() {
     private val twoButtons = arrayListOf<String>()
     private val twoButtonsNonString = arrayListOf<Button>()
 
+    private val durationMax = 1
+    private val blueDurationBtn: MutableList<Button> = mutableListOf()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,6 +54,12 @@ class GenerateWorkout : Fragment() {
         for (button in workoutButtons) {
             button.setOnClickListener {
                 changeWorkoutBgColor(button, workoutButtons)
+            }
+        }
+
+        for (button in durationButtons) {
+            button.setOnClickListener {
+                changeDurationBgColor(button)
             }
         }
 
@@ -501,11 +510,21 @@ class GenerateWorkout : Fragment() {
     }
 
     // function to change the background color of the duration buttons (only one button can be selected)
-    private fun changeDurationBgColor(clickedButton: Button, durationButtons: List<Button>) {
+    private fun changeDurationBgColor(clickedButton: Button) {
         val orangeColor = ContextCompat.getColor(requireContext(), R.color.dark_orange)
         val grayColor = ContextCompat.getColor(requireContext(), R.color.dark_gray)
 
-
+        if (clickedButton in blueDurationBtn) {
+            blueDurationBtn.remove(clickedButton)
+            clickedButton.background = grayColor.toDrawable()
+        } else {
+            if (blueDurationBtn.size >= durationMax) {
+                val firstBlueButton = blueDurationBtn.removeAt(0)
+                firstBlueButton.background = grayColor.toDrawable()
+            }
+            blueDurationBtn.add(clickedButton)
+            clickedButton.background = orangeColor.toDrawable()
+        }
     }
 
 }
