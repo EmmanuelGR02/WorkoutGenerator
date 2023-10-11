@@ -67,13 +67,13 @@ class GenerateWorkout : Fragment() {
         // call main fun to generate the workout
         val generateBtn = binding.generateBtn
         generateBtn?.setOnClickListener {
-            if (areSelected()) {
+            if (workoutButtons.isNotEmpty() && durationButtons.isNotEmpty()) {
                 generate()
+                Log.e("GenerateWorkout.kt", "OnCreateView - Generate function called")
             } else {
-                Log.e("GenerateWorkout.kt", "OnCreateView - Invalid button selection")
+                Log.e("GenerateWorkout.kt", "OnCreateView - Button list is null")
             }
         }
-
         return binding.root
     }
 
@@ -103,7 +103,6 @@ class GenerateWorkout : Fragment() {
         btnList.add(cardioBtn)
         btnList.add(absBtn)
 
-
         // list of the buttons that are currently selected
         val selectedBtns = ArrayList<Button>()
 
@@ -118,29 +117,20 @@ class GenerateWorkout : Fragment() {
         // initialize the two selected buttons
         val button1 = ""
         val button2 = ""
-
         var bool = false
+        var d = blueDurationBtn[0].text.toString()
 
-        // check if there were 2 or 1 button selected
-        if (selectedBtns.size > 0) {
-            val button1 = selectedBtns[0]
-            val button2 = selectedBtns[1]
-            bool = true
-        } else {
-            val button1 = selectedBtns[0]
-            bool = false
-        }
+
 
         // logic to make the workouts
-        if (button1 == "CHEST" || button2 == "CHEST") {
-            generateChestWorkout(durationBtnSelected(), bool)
+        if (blueWorkoutBtn.contains(chestBtn)) {
+            generateChestWorkout(d, bool)
         }
 
     }
 
-
     // generate chest workout
-    fun generateChestWorkout(duration: String, bool: Boolean) {
+    private fun generateChestWorkout(duration: String, bool: Boolean) {
         // array list containing different chest workouts
         val chestWorkouts = arrayListOf(
             "Bench Press", "Incline Bench Press", "Decline Bench Press", "Dumbbell Bench Press",
@@ -155,22 +145,24 @@ class GenerateWorkout : Fragment() {
             "Push-Up Variations (e.g., wide grip, close grip)", "Isometric Chest Squeezes", "Chest Pulsing",
             "Chest Stretching Exercises"
         )
+        val rand = Random().nextInt((30 + 1) - 0) + 0
+        val workout = chestWorkouts[rand]
 
-        if (duration == "short") {
+        if (duration == "SHORT") {
+            if (bool) {
+                Log.e("GenerateWorkout.kt", "$workout $duration")
+            } else if (!bool) {
+
+            }
+
+        } else if (duration == "MEDIUM") {
             if (bool) {
 
             } else if (!bool) {
 
             }
 
-        } else if (duration == "medium") {
-            if (bool) {
-
-            } else if (!bool) {
-
-            }
-
-        } else if (duration == "long") {
+        } else if (duration == "LONG") {
             if (bool) {
 
             } else if (!bool) {
@@ -178,7 +170,6 @@ class GenerateWorkout : Fragment() {
             }
         }
     }
-
 
     // generate back workout
     fun generateBackWorkout(duration: String, bool: Boolean) {
