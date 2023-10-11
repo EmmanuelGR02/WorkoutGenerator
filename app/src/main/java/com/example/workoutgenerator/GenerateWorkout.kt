@@ -15,8 +15,8 @@ import java.util.Random
 
 class GenerateWorkout : Fragment() {
     private lateinit var binding: FragmentGenerateWorkoutBinding
-    private val twoButtons = arrayListOf<String>()
-    private val twoButtonsNonString = arrayListOf<Button>()
+    private val workoutsSelectedMax = 2
+    private val blueWorkoutBtn: MutableList<Button> = mutableListOf()
 
     private val durationMax = 1
     private val blueDurationBtn: MutableList<Button> = mutableListOf()
@@ -53,16 +53,16 @@ class GenerateWorkout : Fragment() {
         val workoutButtons = listOf(chestBtn, backBtn, legsBtn, armsBtn, cardioBtn, absBtn)
         for (button in workoutButtons) {
             button.setOnClickListener {
-                changeWorkoutBgColor(button, workoutButtons)
+                changeWorkoutBgColor(button)
             }
         }
 
+        // change bg color of duration buttons as needed
         for (button in durationButtons) {
             button.setOnClickListener {
                 changeDurationBgColor(button)
             }
         }
-
 
         // call main fun to generate the workout
         val generateBtn = binding.generateBtn
@@ -482,31 +482,21 @@ class GenerateWorkout : Fragment() {
 
     // function to change the background color of the buttons when pressed
     // only two buttons from the workout button can be selected
-    private fun changeWorkoutBgColor(clickedButton: Button, workoutButtons: List<Button>) {
+    private fun changeWorkoutBgColor(clickedButton: Button) {
         val blueColor = ContextCompat.getColor(requireContext(), R.color.dark_blue)
         val whiteColor = ContextCompat.getColor(requireContext(), R.color.white)
 
-        if (twoButtons.size == 2) {
-            twoButtonsNonString[0].background = whiteColor.toDrawable()
-            twoButtonsNonString.remove(twoButtonsNonString[0])
-            val tempName = twoButtonsNonString[0].text.toString()
-            twoButtons.remove(tempName)
-            Log.e("GenerateWorkout", "changeWorkoutBgColor - Size is 2!! $tempName")
-        }
-
-        val buttonName = clickedButton.text.toString()
-        if (!(twoButtons.contains(buttonName))) {
-            clickedButton.background = blueColor.toDrawable()
-            twoButtons.add(buttonName)
-            twoButtonsNonString.add(clickedButton)
-        } else if (twoButtons.contains(buttonName)) {
+        if (clickedButton in blueWorkoutBtn) {
+            blueWorkoutBtn.remove(clickedButton)
             clickedButton.background = whiteColor.toDrawable()
-            twoButtons.remove(buttonName)
-            twoButtonsNonString.remove(clickedButton)
+        } else {
+            if (blueWorkoutBtn.size >= workoutsSelectedMax) {
+                val firstBlueBtn = blueWorkoutBtn.removeAt(0)
+                firstBlueBtn.background = whiteColor.toDrawable()
+            }
+            blueWorkoutBtn.add(clickedButton)
+            clickedButton.background = blueColor.toDrawable()
         }
-        val arrSize = twoButtons.size
-        Log.e("GenerateWorkout", "changeWorkoutBgColor - $twoButtons, $arrSize")
-
     }
 
     // function to change the background color of the duration buttons (only one button can be selected)
@@ -526,5 +516,4 @@ class GenerateWorkout : Fragment() {
             clickedButton.background = orangeColor.toDrawable()
         }
     }
-
 }
