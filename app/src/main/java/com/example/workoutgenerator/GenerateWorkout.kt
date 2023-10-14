@@ -8,9 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.compose.ui.text.toUpperCase
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toDrawable
 import com.example.workoutgenerator.databinding.FragmentGenerateWorkoutBinding
+import java.util.Locale
 import java.util.Random
 
 class GenerateWorkout : Fragment() {
@@ -94,6 +96,7 @@ class GenerateWorkout : Fragment() {
 
         val durationButtons = listOf(shortBtn, mediumBtn, longBtn)
 
+
         // list of the buttons
         val btnList = ArrayList<Button>()
         btnList.add(chestBtn)
@@ -114,13 +117,13 @@ class GenerateWorkout : Fragment() {
             }
         }
 
+        var d = blueDurationBtn[0].text.toString().uppercase(Locale.getDefault())
+        Log.e("GenerateWorkout.kt", "generate - $d")
+
         // initialize the two selected buttons
         val button1 = ""
         val button2 = ""
         var bool = false
-        var d = blueDurationBtn[0].text.toString()
-
-
 
         // logic to make the workouts
         if (blueWorkoutBtn.contains(chestBtn)) {
@@ -152,7 +155,7 @@ class GenerateWorkout : Fragment() {
             if (bool) {
                 Log.e("GenerateWorkout.kt", "$workout $duration")
             } else if (!bool) {
-
+                Log.e("GenerateWorkout.kt", "$workout $duration")
             }
 
         } else if (duration == "MEDIUM") {
