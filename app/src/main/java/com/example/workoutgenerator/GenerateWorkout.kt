@@ -94,7 +94,6 @@ class GenerateWorkout : Fragment() {
         val mediumBtn = binding.mediumBtn
         val longBtn = binding.longBtn
 
-        val durationButtons = listOf(shortBtn, mediumBtn, longBtn)
 
 
         // list of the buttons
