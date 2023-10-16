@@ -24,19 +24,15 @@ class GenerateWorkout : Fragment() {
     private val blueDurationBtn: MutableList<Button> = mutableListOf()
 
     // initialize buttons
-    private var chestBtn: Button = Button(requireContext())
-    private var backBtn: Button = Button(requireContext())
-    private var legsBtn: Button = Button(requireContext())
-    private var armsBtn: Button = Button(requireContext())
-    private var cardioBtn: Button = Button(requireContext())
-    private var absBtn: Button = Button(requireContext())
-    private var shortBtn: Button = Button(requireContext())
-    private var mediumBtn: Button = Button(requireContext())
-    private var longBtn: Button = Button(requireContext())
-
-
-
-
+    private lateinit var chestBtn: Button
+    private lateinit var backBtn: Button
+    private lateinit var legsBtn: Button
+    private lateinit var armsBtn: Button
+    private lateinit var cardioBtn: Button
+    private lateinit var absBtn: Button
+    private lateinit var shortBtn: Button
+    private lateinit var mediumBtn: Button
+    private lateinit var longBtn: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
