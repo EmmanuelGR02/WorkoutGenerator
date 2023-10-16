@@ -23,6 +23,21 @@ class GenerateWorkout : Fragment() {
     private val durationMax = 1
     private val blueDurationBtn: MutableList<Button> = mutableListOf()
 
+    // initialize buttons
+    private var chestBtn: Button = Button(requireContext())
+    private var backBtn: Button = Button(requireContext())
+    private var legsBtn: Button = Button(requireContext())
+    private var armsBtn: Button = Button(requireContext())
+    private var cardioBtn: Button = Button(requireContext())
+    private var absBtn: Button = Button(requireContext())
+    private var shortBtn: Button = Button(requireContext())
+    private var mediumBtn: Button = Button(requireContext())
+    private var longBtn: Button = Button(requireContext())
+
+
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,22 +52,21 @@ class GenerateWorkout : Fragment() {
         }
 
         // initialize the workout buttons
-        val chestBtn = binding.chestBtn
-        val backBtn = binding.backBtn
-        val legsBtn = binding.legsBtn
-        val armsBtn = binding.armsBtn
-        val cardioBtn = binding.cardioBtn
-        val absBtn = binding.absBtn
-
+        chestBtn = binding.chestBtn
+        backBtn = binding.backBtn
+        legsBtn = binding.legsBtn
+        armsBtn = binding.armsBtn
+        cardioBtn = binding.cardioBtn
+        absBtn = binding.absBtn
         // duration buttons
-        val shortBtn = binding.shortBtn
-        val mediumBtn = binding.mediumBtn
-        val longBtn = binding.longBtn
+        shortBtn = binding.shortBtn
+        mediumBtn = binding.mediumBtn
+        longBtn = binding.longBtn
 
         val durationButtons = listOf(shortBtn, mediumBtn, longBtn)
+        val workoutButtons = listOf(chestBtn, backBtn, legsBtn, armsBtn, cardioBtn, absBtn)
 
         // change background of workout colors when selected
-        val workoutButtons = listOf(chestBtn, backBtn, legsBtn, armsBtn, cardioBtn, absBtn)
         for (button in workoutButtons) {
             button.setOnClickListener {
                 changeWorkoutBgColor(button)
@@ -82,20 +96,6 @@ class GenerateWorkout : Fragment() {
 
     // main function to generate the workout
     private fun generate() {
-        // initialize the workout buttons
-        val chestBtn = binding.chestBtn
-        val backBtn = binding.backBtn
-        val legsBtn = binding.legsBtn
-        val armsBtn = binding.armsBtn
-        val cardioBtn = binding.cardioBtn
-        val absBtn = binding.absBtn
-
-        val shortBtn = binding.shortBtn
-        val mediumBtn = binding.mediumBtn
-        val longBtn = binding.longBtn
-
-
-
         // list of the buttons
         val btnList = ArrayList<Button>()
         btnList.add(chestBtn)
@@ -119,9 +119,6 @@ class GenerateWorkout : Fragment() {
         var d = blueDurationBtn[0].text.toString().uppercase(Locale.getDefault())
         Log.e("GenerateWorkout.kt", "generate - $d")
 
-        // initialize the two selected buttons
-        val button1 = ""
-        val button2 = ""
         var bool = false
 
         // logic to make the workouts
@@ -399,11 +396,6 @@ class GenerateWorkout : Fragment() {
     // function that will check which of the duration button was selected
     // we check if the button is selected or not by getting the current background color
     private fun durationBtnSelected(): String {
-        // initialize buttons
-        val shortBtn = binding.shortBtn
-        val mediumBtn = binding.mediumBtn
-        val longBtn = binding.longBtn
-
         // list containing all the duration buttons
         val btnList = ArrayList<Button>()
         btnList.add(shortBtn)
@@ -416,7 +408,6 @@ class GenerateWorkout : Fragment() {
                 selectedBtn = button.text.toString()
             }
         }
-
         return selectedBtn
     }
 
@@ -427,20 +418,7 @@ class GenerateWorkout : Fragment() {
     // and only one from the duration layout
     private fun areSelected(): Boolean {
         var bool = false
-        // initialize the workout buttons
-        val chestBtn = binding.chestBtn
-        val backBtn = binding.backBtn
-        val legsBtn = binding.legsBtn
-        val armsBtn = binding.armsBtn
-        val cardioBtn = binding.cardioBtn
-        val absBtn = binding.absBtn
 
-        // duration buttons
-        val shortBtn = binding.shortBtn
-        val mediumBtn = binding.mediumBtn
-        val longBtn = binding.longBtn
-
-        // get their current background colors
         // list of the buttons
         val btnList = ArrayList<Button>()
         btnList.add(chestBtn)
