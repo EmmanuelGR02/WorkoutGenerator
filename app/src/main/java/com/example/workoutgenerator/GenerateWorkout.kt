@@ -81,12 +81,7 @@ class GenerateWorkout : Fragment() {
         // call main fun to generate the workout
         val generateBtn = binding.generateBtn
         generateBtn?.setOnClickListener {
-            if (workoutBtnList!!.isNotEmpty() && durationBtnList!!.isNotEmpty()) {
-                generate()
-                Log.e("GenerateWorkout.kt", "OnCreateView - Generate function called")
-            } else {
-                Log.e("GenerateWorkout.kt", "OnCreateView - Button list is null")
-            }
+
         }
         return binding.root
     }
@@ -95,9 +90,7 @@ class GenerateWorkout : Fragment() {
     // main function to generate the workout
     private fun generate() {
         // handle user not selecting any of the workout button, duration buttons, or both
-        while (!areSelected()) {
-            Log.e("GenerateWorkout", "generate- selected buttons - false")
-        }
+
 
         // list of the buttons that are currently selected
         val selectedBtns = ArrayList<Button>()
@@ -399,14 +392,22 @@ class GenerateWorkout : Fragment() {
         return selectedBtn
     }
 
-    // function that checks if the user selected any buttons
-    // prevents the app from crashing if the user didn't select any
-    // it also changes the buttons background color when pressed
-    // only two buttons from the workout layout are allowed to change their bg
-    // and only one from the duration layout
-    private fun areSelected(): Boolean {
-
-        return durationMax != 1 && workoutsSelectedMax < 1
+    // Function to help handle correct button selection
+    // returns -2 if user did not select any of the workout buttons
+    // returns -1 if the user did not select any of the duration buttons
+    // returns 0 is the user did not select any of the duration and workout buttons
+    // returns 1 if user gave correct selections
+    private fun areSelected(): Int {
+        var n = if (workoutsSelectedMax < 1) {
+            -2
+        } else if (durationMax < 1) {
+            -1
+        } else if (durationMax < 1 && workoutsSelectedMax < 1) {
+            0
+        } else {
+            1
+        }
+        return n
     }
 
     // function to change the background color of the buttons when pressed
