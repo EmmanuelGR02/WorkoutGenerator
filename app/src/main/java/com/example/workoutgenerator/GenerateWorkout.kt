@@ -94,6 +94,11 @@ class GenerateWorkout : Fragment() {
 
     // main function to generate the workout
     private fun generate() {
+        // handle user not selecting any of the workout button, duration buttons, or both
+        while (!areSelected()) {
+            Log.e("GenerateWorkout", "generate- selected buttons - false")
+        }
+
         // list of the buttons that are currently selected
         val selectedBtns = ArrayList<Button>()
 
@@ -400,29 +405,8 @@ class GenerateWorkout : Fragment() {
     // only two buttons from the workout layout are allowed to change their bg
     // and only one from the duration layout
     private fun areSelected(): Boolean {
-        var bool = false
 
-        // list of the buttons that are currently selected
-        val selectedBtns = ArrayList<String>()
-
-        // check which of the buttons are selected
-        for (button in workoutBtnList!!) {
-            val bgColor = button.background.toString()
-            if (bgColor == "dark_blue") {
-                selectedBtns.add(button.text.toString())
-            }
-        }
-        for (button in durationBtnList!!) {
-            val bgColor = button.background.toString()
-            if (bgColor == "dark_blue") {
-                selectedBtns.add(button.text.toString())
-            }
-        }
-
-        // need to be tell the user what they need to six in order for their workout to be generated
-
-        bool = selectedBtns.size == 2
-        return bool
+        return durationMax != 1 && workoutsSelectedMax < 1
     }
 
     // function to change the background color of the buttons when pressed
