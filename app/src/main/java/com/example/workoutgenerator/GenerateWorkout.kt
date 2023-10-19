@@ -78,19 +78,22 @@ class GenerateWorkout : Fragment() {
             }
         }
 
+        var invalidSelection = binding.wrongSelection
+
         // call main fun to generate the workout
         val generateBtn = binding.generateBtn
         generateBtn?.setOnClickListener {
             val areSelected = areSelected()
             while (areSelected != 1) {
                 if (areSelected == -2) {
-
+                    invalidSelection.text = "You must select at least one workout!"
                 } else if (areSelected == -1) {
-
+                    invalidSelection.text = "You must select the duration!"
                 } else if (areSelected == 0) {
-
+                    invalidSelection.text = "You must select at least one workout, and the duration!"
                 }
             }
+            generate()
         }
         return binding.root
     }
