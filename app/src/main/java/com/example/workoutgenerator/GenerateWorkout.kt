@@ -81,7 +81,16 @@ class GenerateWorkout : Fragment() {
         // call main fun to generate the workout
         val generateBtn = binding.generateBtn
         generateBtn?.setOnClickListener {
+            val areSelected = areSelected()
+            while (areSelected != 1) {
+                if (areSelected == -2) {
 
+                } else if (areSelected == -1) {
+
+                } else if (areSelected == 0) {
+
+                }
+            }
         }
         return binding.root
     }
