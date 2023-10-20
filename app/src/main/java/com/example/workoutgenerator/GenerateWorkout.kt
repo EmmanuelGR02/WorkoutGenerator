@@ -84,16 +84,15 @@ class GenerateWorkout : Fragment() {
         val generateBtn = binding.generateBtn
         generateBtn?.setOnClickListener {
             val areSelected = areSelected()
-            while (areSelected != 1) {
-                if (areSelected == -2) {
-                    invalidSelection.text = "You must select at least one workout!"
-                } else if (areSelected == -1) {
-                    invalidSelection.text = "You must select the duration!"
-                } else if (areSelected == 0) {
-                    invalidSelection.text = "You must select at least one workout, and the duration!"
-                }
+            if (areSelected == -2) {
+                invalidSelection.text = "You must select at least one workout!"
+            } else if (areSelected == -1) {
+                invalidSelection.text = "You must select the duration!"
+            } else if (areSelected == 0) {
+                invalidSelection.text = "You must select at least one workout, and the duration!"
+            } else {
+                generate()
             }
-            generate()
         }
         return binding.root
     }
