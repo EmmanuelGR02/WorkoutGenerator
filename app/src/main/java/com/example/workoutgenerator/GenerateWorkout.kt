@@ -114,16 +114,21 @@ class GenerateWorkout : Fragment() {
             }
         }
 
-        var d = blueDurationBtn[0].text.toString().uppercase(Locale.getDefault())
-        Log.e("GenerateWorkout.kt", "generate - $d")
+        var d = ""
 
-        var bool = false
+        if (blueDurationBtn.isEmpty()) {
+            Log.e("GenerateWorkout.kt", "generate - blueDurationList empty")
+        } else {
+            d = blueDurationBtn[0].text.toString().uppercase(Locale.getDefault())
+            Log.e("GenerateWorkout.kt", "generate - $d")
 
-        // logic to make the workouts
-        if (blueWorkoutBtn.contains(chestBtn)) {
-            generateChestWorkout(d, bool)
+            var bool = false
+
+            // logic to make the workouts
+            if (blueWorkoutBtn.contains(chestBtn)) {
+                generateChestWorkout(d, bool)
+            }
         }
-
     }
 
     // generate chest workout
