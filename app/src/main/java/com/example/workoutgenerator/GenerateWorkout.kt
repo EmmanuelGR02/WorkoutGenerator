@@ -102,7 +102,6 @@ class GenerateWorkout : Fragment() {
     private fun generate() {
         // handle user not selecting any of the workout button, duration buttons, or both
 
-
         // list of the buttons that are currently selected
         val selectedBtns = ArrayList<Button>()
 
