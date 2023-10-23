@@ -121,17 +121,15 @@ class GenerateWorkout : Fragment() {
             d = blueDurationBtn[0].text.toString().uppercase(Locale.getDefault())
             Log.e("GenerateWorkout.kt", "generate - $d")
 
-            var bool = false
-
             // logic to make the workouts
             if (blueWorkoutBtn.contains(chestBtn)) {
-                generateChestWorkout(d, bool)
+                generateChestWorkout(d)
             }
         }
     }
 
     // generate chest workout
-    private fun generateChestWorkout(duration: String, bool: Boolean) {
+    private fun generateChestWorkout(duration: String) {
         // array list containing different chest workouts
         val chestWorkouts = arrayListOf(
             "Bench Press", "Incline Bench Press", "Decline Bench Press", "Dumbbell Bench Press",
@@ -149,27 +147,7 @@ class GenerateWorkout : Fragment() {
         val rand = Random().nextInt((30 + 1) - 0) + 0
         val workout = chestWorkouts[rand]
 
-        if (duration == "SHORT") {
-            if (bool) {
-                Log.e("GenerateWorkout.kt", "$workout $duration")
-            } else if (!bool) {
-                Log.e("GenerateWorkout.kt", "$workout $duration")
-            }
 
-        } else if (duration == "MEDIUM") {
-            if (bool) {
-
-            } else if (!bool) {
-
-            }
-
-        } else if (duration == "LONG") {
-            if (bool) {
-
-            } else if (!bool) {
-
-            }
-        }
     }
 
     // generate back workout
