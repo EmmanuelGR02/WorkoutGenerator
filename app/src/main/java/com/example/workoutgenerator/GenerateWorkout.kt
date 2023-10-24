@@ -97,35 +97,13 @@ class GenerateWorkout : Fragment() {
         return binding.root
     }
 
-
     // main function to generate the workout
     private fun generate() {
-        // handle user not selecting any of the workout button, duration buttons, or both
+        // initialize duration/wor button selected
+        var duration = blueDurationBtn[0].toString()
 
-        // list of the buttons that are currently selected
-        val selectedBtns = ArrayList<Button>()
+        // Generate workouts depending on the selected buttons
 
-        // check which of the buttons are selected
-        for (button in workoutBtnList!!) {
-            val bgColor = button.background
-            if (bgColor.constantState == ContextCompat.getColor(requireContext(), R.color.dark_blue).toDrawable().constantState) {
-                selectedBtns.add(button)
-            }
-        }
-
-        var d = ""
-
-        if (blueDurationBtn.isEmpty()) {
-            Log.e("GenerateWorkout.kt", "generate - blueDurationList empty")
-        } else {
-            d = blueDurationBtn[0].text.toString().uppercase(Locale.getDefault())
-            Log.e("GenerateWorkout.kt", "generate - $d")
-
-            // logic to make the workouts
-            if (blueWorkoutBtn.contains(chestBtn)) {
-                generateChestWorkout(d)
-            }
-        }
     }
 
     // generate chest workout
