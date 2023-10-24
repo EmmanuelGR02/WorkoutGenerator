@@ -73,7 +73,7 @@
                 android:layout_height="50dp"/>
 
             <Button
-                android:id="@+id/bicepBtn"
+                android:id="@+id/bicepsBtn"
                 android:text="Biceps"
                 android:background="@color/white"
                 android:layout_width="100dp"

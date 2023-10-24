@@ -17,7 +17,7 @@ import java.util.Random
 
 class GenerateWorkout : Fragment() {
     private lateinit var binding: FragmentGenerateWorkoutBinding
-    private val workoutsSelectedMax = 2
+    private val workoutsSelectedMax = 3
     private val blueWorkoutBtn: MutableList<Button> = mutableListOf()
     private var workoutBtnList: List<Button>? = null
 
@@ -32,6 +32,9 @@ class GenerateWorkout : Fragment() {
     private lateinit var armsBtn: Button
     private lateinit var cardioBtn: Button
     private lateinit var absBtn: Button
+    private lateinit var bicepsBtn: Button
+    private lateinit var tricepsBtn: Button
+    private lateinit var shoulderBtn: Button
     private lateinit var shortBtn: Button
     private lateinit var mediumBtn: Button
     private lateinit var longBtn: Button
@@ -56,12 +59,15 @@ class GenerateWorkout : Fragment() {
         armsBtn = binding.armsBtn
         cardioBtn = binding.cardioBtn
         absBtn = binding.absBtn
+        bicepsBtn = binding.bicepsBtn
+        tricepsBtn = binding.tricepsBtn
+        shoulderBtn = binding.shoulderBtn
         // duration buttons
         shortBtn = binding.shortBtn
         mediumBtn = binding.mediumBtn
         longBtn = binding.longBtn
 
-        workoutBtnList = listOf(chestBtn, backBtn, legsBtn, armsBtn, cardioBtn, absBtn)
+        workoutBtnList = listOf(chestBtn, backBtn, legsBtn, armsBtn, cardioBtn, absBtn, bicepsBtn, tricepsBtn, shortBtn)
         durationBtnList = listOf(shortBtn, mediumBtn, longBtn)
 
         // change background of workout colors when selected
@@ -271,17 +277,6 @@ class GenerateWorkout : Fragment() {
         return list
     }
 
-    // function that will check which of the duration button was selected
-    // we check if the button is selected or not by getting the current background color
-    private fun durationBtnSelected(): String {
-        var selectedBtn = ""
-        for (button in durationBtnList!!) {
-            if (button.background.toString() == "dark_orange") {
-                selectedBtn = button.text.toString()
-            }
-        }
-        return selectedBtn
-    }
 
     // Function to help handle correct button selection
     // returns -2 if user did not select any of the workout buttons
