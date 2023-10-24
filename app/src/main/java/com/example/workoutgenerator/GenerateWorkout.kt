@@ -99,10 +99,36 @@ class GenerateWorkout : Fragment() {
 
     // main function to generate the workout
     private fun generate() {
-        // initialize duration/wor button selected
-        var duration = blueDurationBtn[0].toString()
+        // initialize duration/workout button selected
+        var duration = blueDurationBtn[0].text.toString().uppercase(Locale.ROOT)
+        var workout1 = ""
+        var workout2 = ""
+
+        // assign the values depending on how many workout buttons were selected
+        if (workoutBtnList?.size == 1) {
+            workout1 = workoutBtnList?.get(0)?.text.toString().uppercase(Locale.ROOT)
+        } else if (workoutBtnList?.size == 2) {
+            workout2 = workoutBtnList?.get(1)?.text.toString().uppercase(Locale.ROOT)
+        }
 
         // Generate workouts depending on the selected buttons
+        if (workoutsSelectedMax == 1) {
+            if (workout1 == "CHEST") {
+                generateChestWorkout(duration)
+            } else if (workout1 == "BACK") {
+                generateBackWorkout(duration)
+            } else if (workout1 == "LEGS") {
+                generateLegWorkout(duration)
+            } else if (workout1 == "ARMS") {
+                generateArmWorkout(duration)
+            } else if (workout1 == "CARDIO") {
+                generateCardioWorkout(duration)
+            } else if (workout1 == "ABS") {
+                generateAbWorkout(duration)
+            } else {
+                Log.e("GenerateWorkout.kt", "generate() - Error in registering the name of the workout selected")
+            }
+        }
 
     }
 
@@ -129,7 +155,7 @@ class GenerateWorkout : Fragment() {
     }
 
     // generate back workout
-    fun generateBackWorkout(duration: String, bool: Boolean) {
+    private fun generateBackWorkout(duration: String) {
         // array list containing back Workouts
         val backWorkouts = arrayListOf(
             "Deadlifts", "Pull-Ups", "Bent-Over Rows", "Lat Pulldowns", "T-Bar Rows",
@@ -142,32 +168,10 @@ class GenerateWorkout : Fragment() {
             "Smith Machine Rows", "Seated Reverse Flyes", "Band Pull-Aparts"
         )
 
-
-        if (duration == "short") {
-            if (bool) {
-
-            } else if (!bool) {
-
-            }
-
-        } else if (duration == "medium") {
-            if (bool) {
-
-            } else if (!bool) {
-
-            }
-
-        } else if (duration == "long") {
-            if (bool) {
-
-            } else if (!bool) {
-
-            }
-        }
     }
 
     // generate legs workout
-    fun generateLegWorkout(duration: String, bool: Boolean) {
+    private fun generateLegWorkout(duration: String) {
         // arrayList containing different leg workouts
         val legWorkouts = arrayListOf(
             "Squats", "Deadlifts", "Leg Press", "Lunges", "Step-Ups",
@@ -180,31 +184,10 @@ class GenerateWorkout : Fragment() {
             "Leg Abduction Machine"
         )
 
-        if (duration == "short") {
-            if (bool) {
-
-            } else if (!bool) {
-
-            }
-
-        } else if (duration == "medium") {
-            if (bool) {
-
-            } else if (!bool) {
-
-            }
-
-        } else if (duration == "long") {
-            if (bool) {
-
-            } else if (!bool) {
-
-            }
-        }
     }
 
     // generate arms workout
-    fun generateArmWorkout(duration: String, bool: Boolean) {
+    private fun generateArmWorkout(duration: String) {
         // array lists containing different bicep, triceps, and shoulder workouts
         val bicepWorkouts = arrayListOf(
             "Barbell Curls", "Dumbbell Curls", "Hammer Curls", "Preacher Curls", "Concentration Curls",
@@ -236,31 +219,10 @@ class GenerateWorkout : Fragment() {
             "Machine Shrugs", "Smith Machine Shrugs", "Lateral Raise Machine", "Single-Arm Landmine Press", "Machine Lateral Raises"
         )
 
-        if (duration == "short") {
-            if (bool) {
-
-            } else if (!bool) {
-
-            }
-
-        } else if (duration == "medium") {
-            if (bool) {
-
-            } else if (!bool) {
-
-            }
-
-        } else if (duration == "long") {
-            if (bool) {
-
-            } else if (!bool) {
-
-            }
-        }
     }
 
     // generate cardio workout
-    fun generateCardioWorkout(duration: String, bool: Boolean){
+    private fun generateCardioWorkout(duration: String){
         val cardioWorkouts = arrayListOf(
             "Running", "Cycling", "Swimming", "Jumping Rope", "High-Intensity Interval Training (HIIT)",
             "Rowing", "Elliptical Trainer", "Stair Climbing", "Kickboxing", "Dancing",
@@ -272,31 +234,10 @@ class GenerateWorkout : Fragment() {
             "Plyometric Exercises", "Racquet Sports (e.g., Tennis, Badminton)", "Calisthenics", "Running Stairs", "Trail Running"
         )
 
-        if (duration == "short") {
-            if (bool) {
-
-            } else if (!bool) {
-
-            }
-
-        } else if (duration == "medium") {
-            if (bool) {
-
-            } else if (!bool) {
-
-            }
-
-        } else if (duration == "long") {
-            if (bool) {
-
-            } else if (!bool) {
-
-            }
-        }
     }
 
     // generate abs workout
-    fun generateAbWorkout(duration: String, bool: Boolean) {
+    private fun generateAbWorkout(duration: String) {
         // list containing ab workouts
         val abWorkouts = arrayListOf(
             "Crunches", "Leg Raises", "Russian Twists", "Planks", "Bicycle Crunches",
@@ -309,27 +250,6 @@ class GenerateWorkout : Fragment() {
             "Stir the Pot Planks", "Decline Sit-Ups", "Rope Crunches", "Dragon Flags", "Pulse Ups"
         )
 
-        if (duration == "short") {
-            if (bool) {
-
-            } else if (!bool) {
-
-            }
-
-        } else if (duration == "medium") {
-            if (bool) {
-
-            } else if (!bool) {
-
-            }
-
-        } else if (duration == "long") {
-            if (bool) {
-
-            } else if (!bool) {
-
-            }
-        }
     }
 
     // generate random numbers. A parameter will determine how many random numbers are needed
