@@ -158,7 +158,7 @@ class GenerateWorkout : Fragment() {
         )
         val rand = Random().nextInt((30 + 1) - 0) + 0
         val workout = chestWorkouts[rand]
-
+        bool = true
 
     }
 
