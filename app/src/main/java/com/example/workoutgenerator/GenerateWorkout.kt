@@ -160,6 +160,12 @@ class GenerateWorkout : Fragment() {
         val workout = chestWorkouts[rand]
         bool = true
 
+        if (bool) {
+
+        } else {
+
+        }
+
     }
 
     // generate back workout
