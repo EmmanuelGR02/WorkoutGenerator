@@ -108,7 +108,11 @@ class GenerateWorkout : Fragment() {
     // main function to generate the workout
     private fun generate() {
         // initialize duration/workout button selected
-        var duration = blueDurationBtn[0].text.toString().uppercase(Locale.ROOT)
+        var duration = if (blueDurationBtn.isNotEmpty()) {
+            blueDurationBtn[0].text.toString().uppercase(Locale.ROOT)
+        } else {
+            Log.e("GenerateWorkout.kt", "generate() - Error duration")
+        }
         var workout1 = ""
         var workout2 = ""
 
@@ -122,17 +126,17 @@ class GenerateWorkout : Fragment() {
         // Generate workouts depending on the selected buttons
         if (workoutsSelectedMax == 1) {
             if (workout1 == "CHEST") {
-                generateChestWorkout(duration)
+                generateChestWorkout(duration as String)
             } else if (workout1 == "BACK") {
-                generateBackWorkout(duration)
+                generateBackWorkout(duration as String)
             } else if (workout1 == "LEGS") {
-                generateLegWorkout(duration)
+                generateLegWorkout(duration as String)
             } else if (workout1 == "ARMS") {
-                generateArmWorkout(duration)
+                generateArmWorkout(duration as String)
             } else if (workout1 == "CARDIO") {
-                generateCardioWorkout(duration)
+                generateCardioWorkout(duration as String)
             } else if (workout1 == "ABS") {
-                generateAbWorkout(duration)
+                generateAbWorkout(duration as String)
             } else {
                 Log.e("GenerateWorkout.kt", "generate() - Error in registering the name of the workout selected")
             }
@@ -333,7 +337,7 @@ class GenerateWorkout : Fragment() {
     // returns 0 is the user did not select any of the duration and workout buttons
     // returns 1 if user gave correct selections
     private fun areSelected(): Int {
-        var n = if (workoutsSelectedMax < 1) {
+        return if (workoutsSelectedMax < 1) {
             -2
         } else if (durationMax < 1) {
             -1
@@ -342,7 +346,7 @@ class GenerateWorkout : Fragment() {
         } else {
             1
         }
-        return n
+
     }
 
     // function to change the background color of the buttons when pressed
