@@ -100,6 +100,7 @@ class GenerateWorkout : Fragment() {
                 invalidSelection.text = "You must select a duration"
             } else if (blueWorkoutBtn.size >= 1 && orangeDurationBtn.size >= 1) {
                 generate()
+                Log.e("GenerateWorkout.kt", "OnCreateView - generate() called Successfully - $workoutsSelectedMax")
             } else {
                 Log.e("GenerateWorkout.kt", "OnCreateView - generate() failed to be called")
             }
@@ -126,7 +127,7 @@ class GenerateWorkout : Fragment() {
         }
 
         // Generate workouts depending on the selected buttons
-        if (workoutsSelectedMax == 1) {
+        if (blueWorkoutBtn.size == 1) {
             if (workout1 == "CHEST") {
                 generateChestWorkout(duration as String)
             } else if (workout1 == "BACK") {
