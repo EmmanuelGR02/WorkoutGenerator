@@ -24,7 +24,7 @@ class GenerateWorkout : Fragment() {
     private var bool: Boolean = false
 
     private val durationMax = 1
-    private val blueDurationBtn: MutableList<Button> = mutableListOf()
+    private val orangeDurationBtn: MutableList<Button> = mutableListOf()
     private var durationBtnList: List<Button>? = null
 
     // initialize buttons
@@ -91,15 +91,17 @@ class GenerateWorkout : Fragment() {
         // call main fun to generate the workout
         val generateBtn = binding.generateBtn
         generateBtn?.setOnClickListener {
-            val areSelected = areSelected()
-            if (areSelected == -2) {
+            // handle errors when user makes wrong selection
+            if (blueWorkoutBtn.size < 1 && orangeDurationBtn.size < 1) {
+                invalidSelection.text = "Please select desired workout and duration"
+            } else if (blueWorkoutBtn.size < 1) {
                 invalidSelection.text = "You must select at least one workout!"
-            } else if (areSelected == -1) {
-                invalidSelection.text = "You must select the duration!"
-            } else if (areSelected == 0) {
-                invalidSelection.text = "You must select at least one workout, and the duration!"
-            } else {
+            } else if (orangeDurationBtn.size < 1){
+                invalidSelection.text = "You must select a duration"
+            } else if (blueWorkoutBtn.size >= 1 && orangeDurationBtn.size >= 1) {
                 generate()
+            } else {
+                Log.e("GenerateWorkout.kt", "OnCreateView - generate() failed to be called")
             }
         }
         return binding.root
@@ -108,8 +110,8 @@ class GenerateWorkout : Fragment() {
     // main function to generate the workout
     private fun generate() {
         // initialize duration/workout button selected
-        var duration = if (blueDurationBtn.isNotEmpty()) {
-            blueDurationBtn[0].text.toString().uppercase(Locale.ROOT)
+        var duration = if (orangeDurationBtn.isNotEmpty()) {
+            orangeDurationBtn[0].text.toString().uppercase(Locale.ROOT)
         } else {
             Log.e("GenerateWorkout.kt", "generate() - Error duration")
         }
@@ -164,11 +166,7 @@ class GenerateWorkout : Fragment() {
         val workout = chestWorkouts[rand]
         bool = true
 
-        if (bool) {
-
-        } else {
-
-        }
+        Log.e("GenerateWorkout.kt", "generateChestWorkout - $workout")
 
     }
 
@@ -373,15 +371,15 @@ class GenerateWorkout : Fragment() {
         val orangeColor = ContextCompat.getColor(requireContext(), R.color.dark_orange)
         val grayColor = ContextCompat.getColor(requireContext(), R.color.light_gray)
 
-        if (clickedButton in blueDurationBtn) {
-            blueDurationBtn.remove(clickedButton)
+        if (clickedButton in orangeDurationBtn) {
+            orangeDurationBtn.remove(clickedButton)
             clickedButton.background = grayColor.toDrawable()
         } else {
-            if (blueDurationBtn.size >= durationMax) {
-                val firstBlueButton = blueDurationBtn.removeAt(0)
+            if (orangeDurationBtn.size >= durationMax) {
+                val firstBlueButton = orangeDurationBtn.removeAt(0)
                 firstBlueButton.background = grayColor.toDrawable()
             }
-            blueDurationBtn.add(clickedButton)
+            orangeDurationBtn.add(clickedButton)
             clickedButton.background = orangeColor.toDrawable()
         }
     }
