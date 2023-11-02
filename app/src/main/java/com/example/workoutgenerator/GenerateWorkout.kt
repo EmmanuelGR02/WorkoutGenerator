@@ -127,7 +127,7 @@ class GenerateWorkout : Fragment() {
         }
 
         // Generate workouts depending on the selected buttons
-        if (blueWorkoutBtn.size == 1) {
+        if (blueWorkoutBtn.size >= 1) {
             if (workout1 == "CHEST") {
                 generateChestWorkout(duration as String)
             } else if (workout1 == "BACK") {
@@ -141,7 +141,7 @@ class GenerateWorkout : Fragment() {
             } else if (workout1 == "ABS") {
                 generateAbWorkout(duration as String)
             } else {
-                Log.e("GenerateWorkout.kt", "generate() - Error in registering the name of the workout selected")
+                Log.e("GenerateWorkout.kt", "generate() - Error in registering the name of the workout selected - $workout1 - $duration - ${blueWorkoutBtn.size}")
             }
         }
 
