@@ -116,15 +116,15 @@ class GenerateWorkout : Fragment() {
         } else {
             Log.e("GenerateWorkout.kt", "generate() - Error duration")
         }
-        var workout1 = ""
         var workout2 = ""
 
         // assign the values depending on how many workout buttons were selected
-        if (workoutBtnList?.size == 1) {
-            workout1 = workoutBtnList?.get(0)?.text.toString().uppercase(Locale.ROOT)
-        } else if (workoutBtnList?.size == 2) {
-            workout2 = workoutBtnList?.get(1)?.text.toString().uppercase(Locale.ROOT)
+        var workout1 = if (blueWorkoutBtn.isNotEmpty()) {
+            blueWorkoutBtn[0].text.toString().uppercase(Locale.ROOT)
+        } else {
+            Log.e("GenerateWorkout.kt", "generate() - Error getting chest workout name")
         }
+
 
         // Generate workouts depending on the selected buttons
         if (blueWorkoutBtn.size >= 1) {
