@@ -23,7 +23,6 @@ class GenerateWorkout : Fragment() {
 
     private var bool: Boolean = false
 
-
     private val durationMax = 1
     private val orangeDurationBtn: MutableList<Button> = mutableListOf()
     private var durationBtnList: List<Button>? = null
