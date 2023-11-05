@@ -125,7 +125,6 @@ class GenerateWorkout : Fragment() {
             Log.e("GenerateWorkout.kt", "generate() - Error getting chest workout name")
         }
 
-
         // Generate workouts depending on the selected buttons
         if (blueWorkoutBtn.size >= 1) {
             if (workout1 == "CHEST") {
@@ -144,6 +143,8 @@ class GenerateWorkout : Fragment() {
                 Log.e("GenerateWorkout.kt", "generate() - Error in registering the name of the workout selected - $workout1 - $duration - ${blueWorkoutBtn.size}")
             }
         }
+
+        // make algorithm to be able to generate any workout based on the specific workouts and duration without hard coding all the possibilities
 
     }
 
@@ -200,7 +201,6 @@ class GenerateWorkout : Fragment() {
             "Cable Pull-Throughs", "Walking Lunges", "Single-Leg Press", "Leg Raises",
             "Leg Abduction Machine"
         )
-
     }
 
     // generate arms workout
