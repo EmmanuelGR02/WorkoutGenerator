@@ -322,32 +322,6 @@ class GenerateWorkout : Fragment() {
         return list
     }
 
-    // returns an array list of the workouts depending on the workout passed and the random ints array from "generateRandInts()"
-    private fun getWorkouts(list: ArrayList<Int>):ArrayList<String>  {
-        val list = ArrayList<String>()
-
-        return list
-    }
-
-
-    // Function to help handle correct button selection
-    // returns -2 if user did not select any of the workout buttons
-    // returns -1 if the user did not select any of the duration buttons
-    // returns 0 is the user did not select any of the duration and workout buttons
-    // returns 1 if user gave correct selections
-    private fun areSelected(): Int {
-        return if (workoutsSelectedMax < 1) {
-            -2
-        } else if (durationMax < 1) {
-            -1
-        } else if (durationMax < 1 && workoutsSelectedMax < 1) {
-            0
-        } else {
-            1
-        }
-
-    }
-
     // function to change the background color of the buttons when pressed
     // only two buttons from the workout button can be selected
     private fun changeWorkoutBgColor(clickedButton: Button) {
