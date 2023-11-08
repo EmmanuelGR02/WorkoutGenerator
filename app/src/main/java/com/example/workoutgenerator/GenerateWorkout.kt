@@ -146,6 +146,7 @@ class GenerateWorkout : Fragment() {
 
         // make algorithm to be able to generate any workout based on the specific workouts and duration without hard coding all the possibilities
 
+
     }
 
     // generate chest workout
