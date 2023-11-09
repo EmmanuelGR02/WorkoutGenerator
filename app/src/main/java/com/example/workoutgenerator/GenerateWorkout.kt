@@ -171,8 +171,8 @@ class GenerateWorkout : Fragment() {
 
 
         if (duration == "LONG" && blueWorkoutBtn.size == 1) {
-            getWorkouts(chestWorkouts, generateRandInts(chestWorkouts.size, 6))
-            Log.e("GenerateWorkout.kt", "generateChestWorkout - $workout")
+            var workouts = getWorkouts(chestWorkouts, generateRandInts(chestWorkouts.size, 6))
+            Log.e("GenerateWorkout.kt", "generateChestWorkout - $workouts")
         }
 
     }
