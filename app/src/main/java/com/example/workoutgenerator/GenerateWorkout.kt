@@ -169,7 +169,11 @@ class GenerateWorkout : Fragment() {
         val workout = chestWorkouts[rand]
         bool = true
 
-        Log.e("GenerateWorkout.kt", "generateChestWorkout - $workout")
+
+        if (duration == "LONG" && blueWorkoutBtn.size == 1) {
+            getWorkouts(chestWorkouts, generateRandInts(chestWorkouts.size, 6))
+            Log.e("GenerateWorkout.kt", "generateChestWorkout - $workout")
+        }
 
     }
 
@@ -321,6 +325,16 @@ class GenerateWorkout : Fragment() {
             list.add(rand)
         }
         return list
+    }
+
+    private fun getWorkouts(workoutList: ArrayList<String>, randNums: ArrayList<Int>): ArrayList<String> {
+        val workouts = arrayListOf<String>()
+
+        for (num in randNums) {
+            workoutList.add(workoutList[num])
+        }
+
+        return workouts
     }
 
     // function to change the background color of the buttons when pressed
