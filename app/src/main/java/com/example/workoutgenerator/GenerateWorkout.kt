@@ -172,7 +172,7 @@ class GenerateWorkout : Fragment() {
 
         if (duration == "LONG" && blueWorkoutBtn.size == 1) {
             var workouts = getWorkouts(chestWorkouts, generateRandInts(chestWorkouts.size, 6))
-            Log.e("GenerateWorkout.kt", "generateChestWorkout - $workouts")
+            Log.e("GenerateWorkout.kt", "generateChestWorkout - $workouts - ${blueWorkoutBtn.size}")
         }
 
     }
@@ -207,6 +207,8 @@ class GenerateWorkout : Fragment() {
             "Leg Abduction Machine"
         )
     }
+
+
 
     // generate arms workout
     private fun generateArmWorkout(duration: String) {
