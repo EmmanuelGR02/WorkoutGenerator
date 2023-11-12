@@ -100,7 +100,6 @@ class GenerateWorkout : Fragment() {
                 invalidSelection.text = "You must select a duration"
             } else if (blueWorkoutBtn.size >= 1 && orangeDurationBtn.size >= 1) {
                 generate()
-                Log.e("GenerateWorkout.kt", "OnCreateView - generate() called Successfully - $workoutsSelectedMax")
             } else {
                 Log.e("GenerateWorkout.kt", "OnCreateView - generate() failed to be called")
             }
@@ -172,7 +171,7 @@ class GenerateWorkout : Fragment() {
 
         if (duration == "LONG" && blueWorkoutBtn.size == 1) {
             var workouts = getWorkouts(chestWorkouts, generateRandInts(chestWorkouts.size, 6))
-            Log.e("GenerateWorkout.kt", "generateChestWorkout - $workouts - ${blueWorkoutBtn.size}")
+            Log.e("GenerateWorkout.kt", "generateChestWorkout - $workouts ${blueWorkoutBtn.size}")
         }
 
     }
@@ -322,18 +321,19 @@ class GenerateWorkout : Fragment() {
     private fun generateRandInts(arrayLen: Int, randNums: Int): ArrayList<Int> {
         val list = arrayListOf<Int>()
 
-        while (randNums >= 0) {
-            val rand = Random().nextInt((arrayLen + 1) - 0) + 0
+        while (list.size < randNums) {
+            val rand = Random().nextInt(arrayLen)
             list.add(rand)
         }
         return list
     }
 
+
     private fun getWorkouts(workoutList: ArrayList<String>, randNums: ArrayList<Int>): ArrayList<String> {
         val workouts = arrayListOf<String>()
 
         for (num in randNums) {
-            workoutList.add(workoutList[num])
+            workoutList[num]?.let { workouts.add(it) }
         }
 
         return workouts
