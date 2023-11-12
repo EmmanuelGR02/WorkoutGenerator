@@ -110,43 +110,36 @@ class GenerateWorkout : Fragment() {
     // main function to generate the workout
     private fun generate() {
         // initialize duration/workout button selected
-        var duration = if (orangeDurationBtn.isNotEmpty()) {
-            orangeDurationBtn[0].text.toString().uppercase(Locale.ROOT)
-        } else {
-            Log.e("GenerateWorkout.kt", "generate() - Error duration")
-        }
-        var workout2 = ""
+        val duration = orangeDurationBtn.firstOrNull()?.text.toString().uppercase(Locale.ROOT)
+        val selectedWorkouts = blueWorkoutBtn.map { it.text.toString().uppercase(Locale.ROOT) }
 
-        // assign the values depending on how many workout buttons were selected
-        var workout1 = if (blueWorkoutBtn.isNotEmpty()) {
-            blueWorkoutBtn[0].text.toString().uppercase(Locale.ROOT)
-        } else {
-            Log.e("GenerateWorkout.kt", "generate() - Error getting chest workout name")
+        if (duration == null || selectedWorkouts.isEmpty()) {
+            Log.e("GenerateWorkout.kt", "generate() - Error: Invalid duration or no workout selected")
+            return
         }
 
-        // Generate workouts depending on the selected buttons
-        if (blueWorkoutBtn.size >= 1) {
-            if (workout1 == "CHEST") {
-                generateChestWorkout(duration as String)
-            } else if (workout1 == "BACK") {
-                generateBackWorkout(duration as String)
-            } else if (workout1 == "LEGS") {
-                generateLegWorkout(duration as String)
-            } else if (workout1 == "ARMS") {
-                generateArmWorkout(duration as String)
-            } else if (workout1 == "CARDIO") {
-                generateCardioWorkout(duration as String)
-            } else if (workout1 == "ABS") {
-                generateAbWorkout(duration as String)
-            } else {
-                Log.e("GenerateWorkout.kt", "generate() - Error in registering the name of the workout selected - $workout1 - $duration - ${blueWorkoutBtn.size}")
-            }
+        // Create a map to associate each workout type with its generation function
+        val workoutGenerators = mapOf(
+            "CHEST" to ::generateChestWorkout,
+            "BACK" to ::generateBackWorkout,
+            "LEGS" to ::generateLegWorkout,
+            "ARMS" to ::generateArmWorkout,
+            "CARDIO" to ::generateCardioWorkout,
+            "BICEPS" to ::generateBicepsWorkout,
+            "TRICEPS" to ::generateTricepsWorkout,
+            "SHOULDERS" to ::generateShoulderWorkout,
+            "ABS" to ::generateAbWorkout
+        )
+
+        // Generate up to three workouts based on the selected buttons
+        val maxSelectedWorkouts = minOf(selectedWorkouts.size, 3)
+        for (i in 0 until maxSelectedWorkouts) {
+            val workoutType = selectedWorkouts[i]
+            workoutGenerators[workoutType]?.invoke(duration)
+                ?: Log.e("GenerateWorkout.kt", "generate() - Error: Invalid workout type - $workoutType")
         }
-
-        // make algorithm to be able to generate any workout based on the specific workouts and duration without hard coding all the possibilities
-
-
     }
+
 
     // generate chest workout
     private fun generateChestWorkout(duration: String) {
@@ -165,7 +158,6 @@ class GenerateWorkout : Fragment() {
             "Chest Stretching Exercises"
         )
         val rand = Random().nextInt((30 + 1) - 0) + 0
-        val workout = chestWorkouts[rand]
         bool = true
 
 
@@ -313,7 +305,6 @@ class GenerateWorkout : Fragment() {
             "Russian Twist with Medicine Ball", "Captain's Chair Leg Raises", "Seated Leg Tucks", "Cable Crunch Twists", "Hanging Windshield Wipers",
             "Stir the Pot Planks", "Decline Sit-Ups", "Rope Crunches", "Dragon Flags", "Pulse Ups"
         )
-
     }
 
     // generate random numbers. A parameter will determine how many random numbers are needed
