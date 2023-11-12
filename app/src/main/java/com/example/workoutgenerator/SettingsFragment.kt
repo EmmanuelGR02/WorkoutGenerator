@@ -24,6 +24,13 @@ class SettingsFragment : Fragment() {
             (requireActivity() as MainActivity).navigateToFragment(fragment)
         }
 
+        // back button logic
+        val backBtn = binding.backButton
+        backBtn?.setOnClickListener {
+            val fragment = ProfileFragment()
+            (requireActivity() as MainActivity).navigateToFragment(fragment)
+        }
+
         return binding.root
     }
 
