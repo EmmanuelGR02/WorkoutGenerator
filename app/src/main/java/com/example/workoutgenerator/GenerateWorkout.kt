@@ -99,6 +99,7 @@ class GenerateWorkout : Fragment() {
             } else if (orangeDurationBtn.size < 1){
                 invalidSelection.text = "You must select a duration"
             } else if (blueWorkoutBtn.size >= 1 && orangeDurationBtn.size >= 1) {
+                invalidSelection.text = ""
                 generate()
             } else {
                 Log.e("GenerateWorkout.kt", "OnCreateView - generate() failed to be called")
@@ -130,6 +131,8 @@ class GenerateWorkout : Fragment() {
             "SHOULDERS" to ::generateShoulderWorkout,
             "ABS" to ::generateAbWorkout
         )
+
+        Log.e("GenerateWorkout.kt", "generate - $selectedWorkouts")
 
         // Generate up to three workouts based on the selected buttons
         val maxSelectedWorkouts = minOf(selectedWorkouts.size, 3)
@@ -182,6 +185,7 @@ class GenerateWorkout : Fragment() {
             "Smith Machine Rows", "Seated Reverse Flyes", "Band Pull-Aparts"
         )
 
+        Log.e("GenerateWorkout.kt", "generateBackWorkout - BACK")
     }
 
     // generate legs workout
@@ -197,6 +201,8 @@ class GenerateWorkout : Fragment() {
             "Cable Pull-Throughs", "Walking Lunges", "Single-Leg Press", "Leg Raises",
             "Leg Abduction Machine"
         )
+
+        Log.e("GenerateWorkout.kt", "generateLegWorkout - LEGS")
     }
 
 
@@ -234,6 +240,8 @@ class GenerateWorkout : Fragment() {
             "Machine Shrugs", "Smith Machine Shrugs", "Lateral Raise Machine", "Single-Arm Landmine Press", "Machine Lateral Raises"
         )
 
+        Log.e("GenerateWorkout.kt", "generateArmsWorkout - ARMS")
+
     }
 
     // generate biceps workout
@@ -248,6 +256,8 @@ class GenerateWorkout : Fragment() {
             "Standing Barbell Curls", "Cheat Curls", "Machine Preacher Curls", "Pulley Curls", "Scott Curl Machine",
             "Dumbbell Hammer Curls", "Bicep Curl Machine", "Cable Preacher Curls", "Resistance Band Hammer Curls", "Isometric Hammer Curls"
         )
+
+        Log.e("GenerateWorkout.kt", "generateBicepsWorkout - BICEPS")
     }
 
     // generate triceps workout
@@ -261,6 +271,8 @@ class GenerateWorkout : Fragment() {
             "V-Bar Pushdowns", "Plate Tricep Extensions", "Lying Tricep Press", "Cable Overhead Tricep Extensions", "Reverse Grip Tricep Push-Ups",
             "Close-Grip Smith Machine Bench Press", "Tricep Machine", "Cable Rope Overhead Tricep Extensions", "Cable Lying Tricep Extensions", "Tricep Isolation Machine"
         )
+
+        Log.e("GenerateWorkout.kt", "generateTricepsWorkout - TRICEPS")
     }
 
     // generate shoulder workout
@@ -275,6 +287,8 @@ class GenerateWorkout : Fragment() {
             "Dumbbell Clean and Press", "Single-Arm Dumbbell Press", "Reverse Pec Deck Flyes", "Kettlebell Swings", "Cable Face Pulls",
             "Machine Shrugs", "Smith Machine Shrugs", "Lateral Raise Machine", "Single-Arm Landmine Press", "Machine Lateral Raises"
         )
+
+        Log.e("GenerateWorkout.kt", "generateShoulderWorkout - SHOULDERS")
     }
 
     // generate cardio workout
@@ -289,6 +303,8 @@ class GenerateWorkout : Fragment() {
             "Zumba", "Bodyweight Circuits", "Jumping Squats", "Mountain Biking", "Rock Climbing",
             "Plyometric Exercises", "Racquet Sports (e.g., Tennis, Badminton)", "Calisthenics", "Running Stairs", "Trail Running"
         )
+
+        Log.e("GenerateWorkout.kt", "generateCardioWorkout - CARDIO")
 
     }
 
@@ -305,6 +321,8 @@ class GenerateWorkout : Fragment() {
             "Russian Twist with Medicine Ball", "Captain's Chair Leg Raises", "Seated Leg Tucks", "Cable Crunch Twists", "Hanging Windshield Wipers",
             "Stir the Pot Planks", "Decline Sit-Ups", "Rope Crunches", "Dragon Flags", "Pulse Ups"
         )
+
+        Log.e("GenerateWorkout.kt", "generateAbWorkout - ABS")
     }
 
     // generate random numbers. A parameter will determine how many random numbers are needed
