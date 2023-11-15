@@ -21,7 +21,7 @@ class GenerateWorkout : Fragment() {
     private val blueWorkoutBtn: MutableList<Button> = mutableListOf()
     private var workoutBtnList: List<Button>? = null
 
-    private var bool: Boolean = false
+    private var currWorkoutNum: Int = 0
 
     private val durationMax = 1
     private val orangeDurationBtn: MutableList<Button> = mutableListOf()
@@ -132,8 +132,6 @@ class GenerateWorkout : Fragment() {
             "ABS" to ::generateAbWorkout
         )
 
-        Log.e("GenerateWorkout.kt", "generate - $selectedWorkouts")
-
         // Generate up to three workouts based on the selected buttons
         val maxSelectedWorkouts = minOf(selectedWorkouts.size, 3)
         for (i in 0 until maxSelectedWorkouts) {
@@ -160,15 +158,11 @@ class GenerateWorkout : Fragment() {
             "Push-Up Variations (e.g., wide grip, close grip)", "Isometric Chest Squeezes", "Chest Pulsing",
             "Chest Stretching Exercises"
         )
-        val rand = Random().nextInt((30 + 1) - 0) + 0
-        bool = true
-
 
         if (duration == "LONG" && blueWorkoutBtn.size == 1) {
             var workouts = getWorkouts(chestWorkouts, generateRandInts(chestWorkouts.size, 6))
             Log.e("GenerateWorkout.kt", "generateChestWorkout - $workouts ${blueWorkoutBtn.size}")
         }
-
     }
 
     // generate back workout
@@ -366,6 +360,7 @@ class GenerateWorkout : Fragment() {
             clickedButton.background = blueColor.toDrawable()
         }
     }
+
 
     // function to change the background color of the duration buttons (only one button can be selected)
     private fun changeDurationBgColor(clickedButton: Button) {
