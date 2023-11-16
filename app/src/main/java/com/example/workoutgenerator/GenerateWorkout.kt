@@ -159,6 +159,17 @@ class GenerateWorkout : Fragment() {
             "Chest Stretching Exercises"
         )
 
+        var numOfWorkouts = 0
+        val workoutsSelected = blueWorkoutBtn.size
+
+        if (workoutsSelected == 1 && duration == "LONG") {
+            numOfWorkouts = 8
+        } else if (workoutsSelected == 2 && duration == "LONG") {
+            numOfWorkouts = 4
+        } else if (workoutsSelected == 3 && duration == "LONG"){
+            numOfWorkouts = 3
+        }
+
         if (duration == "LONG" && blueWorkoutBtn.size == 1) {
             var workouts = getWorkouts(chestWorkouts, generateRandInts(chestWorkouts.size, 6))
             Log.e("GenerateWorkout.kt", "generateChestWorkout - $workouts ${blueWorkoutBtn.size}")
