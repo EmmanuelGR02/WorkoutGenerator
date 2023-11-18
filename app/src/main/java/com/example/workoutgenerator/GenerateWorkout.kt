@@ -176,6 +176,8 @@ class GenerateWorkout : Fragment() {
             numOfWorkouts = 3
         } else if (workoutsSelected == 3 && duration == "MEDIUM") {
             numOfWorkouts = 2
+
+
         }
 
         if (duration == "LONG" && blueWorkoutBtn.size == 1) {
