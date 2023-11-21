@@ -182,6 +182,7 @@ class GenerateWorkout : Fragment() {
             var workouts = getWorkouts(chestWorkouts, generateRandInts(chestWorkouts.size, 6))
             Log.e("GenerateWorkout.kt", "generateChestWorkout - $workouts")
         }
+
     }
 
     // generate back workout
