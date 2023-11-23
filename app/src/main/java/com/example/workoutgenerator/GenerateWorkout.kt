@@ -175,7 +175,7 @@ class GenerateWorkout : Fragment() {
         } else if (workoutsSelected == 2 && duration == "MEDIUM") {
             numOfWorkouts = 3
         } else if (workoutsSelected == 3 && duration == "MEDIUM") {
-            numOfWorkouts = 2
+            numOfWorkouts = 2//u7u
         }
 
         if (duration == "LONG" && blueWorkoutBtn.size == 1) {
