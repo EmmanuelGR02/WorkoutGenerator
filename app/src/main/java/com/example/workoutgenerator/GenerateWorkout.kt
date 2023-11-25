@@ -177,7 +177,7 @@ class GenerateWorkout : Fragment() {
         } else if (workoutsSelected == 3 && duration == "MEDIUM") {
             numOfWorkouts = 2
         }
-/// ynjymjyyy
+
         if (duration == "LONG" && blueWorkoutBtn.size == 1) {
             var workouts = getWorkouts(chestWorkouts, generateRandInts(chestWorkouts.size, 6))
             Log.e("GenerateWorkout.kt", "generateChestWorkout - $workouts")
