@@ -184,7 +184,7 @@ class GenerateWorkout : Fragment() {
             numOfWorkouts = 3
         } else if (numOfWorkouts == 3 && duration == "SHORT") {
             numOfWorkouts = 2
-        } //uo
+        }
 
         if (duration == "LONG" && blueWorkoutBtn.size == 1) {
             var workouts = getWorkouts(chestWorkouts, generateRandInts(chestWorkouts.size, 6))
