@@ -1,10 +1,5 @@
 package com.example.workoutgenerator
 
-import android.util.Log
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -44,7 +39,9 @@ class User(private val username : String? = null) {
 
                 val today = Calendar.getInstance()
                 val birthCalendar = Calendar.getInstance()
-                birthCalendar.time = birthDate
+                if (birthDate != null) {
+                    birthCalendar.time = birthDate
+                }
 
                 val isTodayBirthday =
                     today.get(Calendar.MONTH) == birthCalendar.get(Calendar.MONTH) &&
@@ -65,7 +62,9 @@ class User(private val username : String? = null) {
 
                 val today = Calendar.getInstance()
                 val birthCalendar = Calendar.getInstance()
-                birthCalendar.time = birthDate
+                if (birthDate != null) {
+                    birthCalendar.time = birthDate
+                }
 
                 var age = today.get(Calendar.YEAR) - birthCalendar.get(Calendar.YEAR)
                 if (today.get(Calendar.MONTH) < birthCalendar.get(Calendar.MONTH) ||
@@ -127,7 +126,7 @@ class User(private val username : String? = null) {
     // Get the last workout done by this user
     fun getPrevWorkout(callback: (lastWorkout: String?) -> Unit) {
         database.getUserInfo(username.toString(), "prev workout") { snapshot ->
-           val workout = snapshot?.value?.toString() ?: "N/A"
+            val workout = snapshot?.value?.toString() ?: "N/A"
             callback(workout)
         }
     }

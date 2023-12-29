@@ -30,6 +30,7 @@ class WelcomePageFragment : Fragment() {
         User(currentUser).welcomeText { text ->
             welcomeMsg.text = text
         }
+
         getStartedBtn.setOnClickListener {
             val fragment = ProfileFragment()
             val transaction = fragmentManager?.beginTransaction()

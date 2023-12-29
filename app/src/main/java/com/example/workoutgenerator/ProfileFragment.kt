@@ -108,6 +108,7 @@ class ProfileFragment : Fragment() {
         // set values
         user.getBenchPR { tempPR ->
             benchPR.text = "B-pr: $tempPR lbs"
+
         }
         user.getSquatPR { tempPR ->
             squatPR.text = "S-pr: $tempPR lbs"
