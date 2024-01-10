@@ -69,7 +69,7 @@ class GenerateWorkout : Fragment() {
         mediumBtn = binding.mediumBtn
         longBtn = binding.longBtn
 
-        workoutBtnList = listOf(chestBtn, backBtn, legsBtn, armsBtn, cardioBtn, absBtn, bicepsBtn, tricepsBtn, shortBtn)
+        workoutBtnList = listOf(chestBtn, backBtn, legsBtn, armsBtn, cardioBtn, absBtn, bicepsBtn, tricepsBtn, shoulderBtn)
         durationBtnList = listOf(shortBtn, mediumBtn, longBtn)
 
         // change background of workout colors when selected
@@ -143,7 +143,7 @@ class GenerateWorkout : Fragment() {
 
 
     // generate chest workout
-    private fun generateChestWorkout(duration: String) {
+    private fun generateChestWorkout(duration: String) : MutableList<String> {
         // array list containing different chest workouts
         val chestWorkouts = arrayListOf(
             "Bench Press", "Incline Bench Press", "Decline Bench Press", "Dumbbell Bench Press",
@@ -180,17 +180,21 @@ class GenerateWorkout : Fragment() {
 
         if (workoutsSelected == 1 && duration == "SHORT") {
             numOfWorkouts = 4
-        } else if (numOfWorkouts == 2 && duration == "SHORT") {
+        } else if (workoutsSelected == 2 && duration == "SHORT") {
             numOfWorkouts = 3
-        } else if (numOfWorkouts == 3 && duration == "SHORT") {
+        } else if (workoutsSelected == 3 && duration == "SHORT") {
             numOfWorkouts = 2
         }
 
-        if (duration == "LONG" && blueWorkoutBtn.size == 1) {
-            var workouts = getWorkouts(chestWorkouts, generateRandInts(chestWorkouts.size, 6))
-            Log.e("GenerateWorkout.kt", "generateChestWorkout - $workouts")
-        }
+        val nums = generateRandInts(chestWorkouts.size, numOfWorkouts)
 
+        val workoutsGenerated = mutableListOf<String>()
+
+        for (i in nums) {
+            workoutsGenerated.add(chestWorkouts[i])
+        }
+        Log.e("GenerateWorkout", "Chest Workout - $workoutsGenerated")
+        return workoutsGenerated
     }
 
     // generate back workout

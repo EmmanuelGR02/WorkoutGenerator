@@ -1,6 +1,7 @@
 
 package com.example.workoutgenerator
 
+import android.net.Uri
 import android.util.Log
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -8,6 +9,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import java.util.Locale
+import java.util.UUID
 
 class Database private constructor() {
     private val database: DatabaseReference = FirebaseDatabase.getInstance().reference
@@ -25,18 +27,21 @@ class Database private constructor() {
     }
 
     // saves the info for the latest workout
-    fun saveLatestWorkoutInfo(username: String, workout: String, duration: String, song: String, date: String, caption: String, likes: Int) {
+    fun saveLatestWorkoutInfo(username: String, workout: String, duration: String, song: String, date: String, caption: String, likes: Int, imageUrl: String?) {
         val workoutInfoMap = mapOf(
             "workout" to workout,
             "duration" to duration,
             "song" to song,
             "date" to date,
             "caption" to caption,
-            "likes" to likes
+            "likes" to likes,
+            "imageUrl" to imageUrl
         )
 
         database.child("users").child(username).child("latest workout").setValue(workoutInfoMap)
     }
+
+
 
     fun saveUserInfo(username: String, userInfo: SignUpActivity, onSuccess: () -> Unit, onFailure: () -> Unit) {
         // Check if the username already exists in the database
