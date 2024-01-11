@@ -21,8 +21,6 @@ class GenerateWorkout : Fragment() {
     private val blueWorkoutBtn: MutableList<Button> = mutableListOf()
     private var workoutBtnList: List<Button>? = null
 
-    private var currWorkoutNum: Int = 0
-
     private val durationMax = 1
     private val orangeDurationBtn: MutableList<Button> = mutableListOf()
     private var durationBtnList: List<Button>? = null
@@ -142,23 +140,8 @@ class GenerateWorkout : Fragment() {
     }
 
 
-    // generate chest workout
-    private fun generateChestWorkout(duration: String) : MutableList<String> {
-        // array list containing different chest workouts
-        val chestWorkouts = arrayListOf(
-            "Bench Press", "Incline Bench Press", "Decline Bench Press", "Dumbbell Bench Press",
-            "Incline Dumbbell Bench Press", "Decline Dumbbell Bench Press", "Chest Flyes", "Dumbbell Flyes",
-            "Incline Dumbbell Flyes", "Cable Flyes", "Pec Deck Flyes", "Push-Ups", "Wide-Grip Push-Ups",
-            "Diamond Push-Ups", "Decline Push-Ups", "Weighted Push-Ups", "Chest Dips", "Weighted Chest Dips",
-            "Machine Chest Press", "Smith Machine Bench Press", "Landmine Press", "Barbell Pullovers",
-            "Dumbbell Pullovers", "Cable Crossovers", "Incline Cable Crossovers", "Dumbbell Squeeze Press",
-            "Seated Chest Press Machine", "Chest Press Machine", "Incline Chest Press Machine",
-            "Decline Chest Press Machine", "Hammer Strength Chest Press", "Machine Flyes", "Incline Machine Flyes",
-            "Decline Machine Flyes", "Smith Machine Incline Bench Press", "Smith Machine Decline Bench Press",
-            "Push-Up Variations (e.g., wide grip, close grip)", "Isometric Chest Squeezes", "Chest Pulsing",
-            "Chest Stretching Exercises"
-        )
-
+    // generates the amount of workouts based on the duration parameter
+    private fun getNumOfWorkouts(duration : String) : Int {
         var numOfWorkouts = 0
         val workoutsSelected = blueWorkoutBtn.size
 
@@ -186,6 +169,29 @@ class GenerateWorkout : Fragment() {
             numOfWorkouts = 2
         }
 
+        return numOfWorkouts
+    }
+
+
+    // generate chest workout
+    private fun generateChestWorkout(duration: String) : MutableList<String> {
+        // array list containing different chest workouts
+        val chestWorkouts = arrayListOf(
+            "Bench Press", "Incline Bench Press", "Decline Bench Press", "Dumbbell Bench Press",
+            "Incline Dumbbell Bench Press", "Decline Dumbbell Bench Press", "Chest Flyes", "Dumbbell Flyes",
+            "Incline Dumbbell Flyes", "Cable Flyes", "Pec Deck Flyes", "Push-Ups", "Wide-Grip Push-Ups",
+            "Diamond Push-Ups", "Decline Push-Ups", "Weighted Push-Ups", "Chest Dips", "Weighted Chest Dips",
+            "Machine Chest Press", "Smith Machine Bench Press", "Landmine Press", "Barbell Pullovers",
+            "Dumbbell Pullovers", "Cable Crossovers", "Incline Cable Crossovers", "Dumbbell Squeeze Press",
+            "Seated Chest Press Machine", "Chest Press Machine", "Incline Chest Press Machine",
+            "Decline Chest Press Machine", "Hammer Strength Chest Press", "Machine Flyes", "Incline Machine Flyes",
+            "Decline Machine Flyes", "Smith Machine Incline Bench Press", "Smith Machine Decline Bench Press",
+            "Push-Up Variations (e.g., wide grip, close grip)", "Isometric Chest Squeezes", "Chest Pulsing",
+            "Chest Stretching Exercises"
+        )
+
+        val numOfWorkouts = getNumOfWorkouts(duration)
+
         val nums = generateRandInts(chestWorkouts.size, numOfWorkouts)
 
         val workoutsGenerated = mutableListOf<String>()
@@ -198,7 +204,7 @@ class GenerateWorkout : Fragment() {
     }
 
     // generate back workout
-    private fun generateBackWorkout(duration: String) {
+    private fun generateBackWorkout(duration: String) : MutableList<String> {
         // array list containing back Workouts
         val backWorkouts = arrayListOf(
             "Deadlifts", "Pull-Ups", "Bent-Over Rows", "Lat Pulldowns", "T-Bar Rows",
@@ -211,11 +217,22 @@ class GenerateWorkout : Fragment() {
             "Smith Machine Rows", "Seated Reverse Flyes", "Band Pull-Aparts"
         )
 
-        Log.e("GenerateWorkout.kt", "generateBackWorkout - BACK")
+        val numOfWorkouts = getNumOfWorkouts(duration)
+
+        val nums = generateRandInts(backWorkouts.size, numOfWorkouts)
+
+        val workoutsGenerated = mutableListOf<String>()
+
+        for (i in nums) {
+            workoutsGenerated.add(backWorkouts[i])
+        }
+        Log.e("GenerateWorkout", "Back Workout - $workoutsGenerated")
+
+        return workoutsGenerated
     }
 
     // generate legs workout
-    private fun generateLegWorkout(duration: String) {
+    private fun generateLegWorkout(duration: String) : MutableList<String> {
         // arrayList containing different leg workouts
         val legWorkouts = arrayListOf(
             "Squats", "Deadlifts", "Leg Press", "Lunges", "Step-Ups",
@@ -228,13 +245,22 @@ class GenerateWorkout : Fragment() {
             "Leg Abduction Machine"
         )
 
-        Log.e("GenerateWorkout.kt", "generateLegWorkout - LEGS")
+        val numOfWorkouts = getNumOfWorkouts(duration)
+
+        val nums = generateRandInts(legWorkouts.size, numOfWorkouts)
+
+        val workoutsGenerated = mutableListOf<String>()
+
+        for (i in nums) {
+            workoutsGenerated.add(legWorkouts[i])
+        }
+        Log.e("GenerateWorkout", "Leg Workout - $workoutsGenerated")
+        return workoutsGenerated
     }
 
 
-
     // generate arms workout
-    private fun generateArmWorkout(duration: String) {
+    private fun generateArmWorkout(duration: String) : MutableList<String> {
         // array lists containing different bicep, triceps, and shoulder workouts
         val bicepWorkouts = arrayListOf(
             "Barbell Curls", "Dumbbell Curls", "Hammer Curls", "Preacher Curls", "Concentration Curls",
@@ -246,7 +272,7 @@ class GenerateWorkout : Fragment() {
             "Standing Barbell Curls", "Cheat Curls", "Machine Preacher Curls", "Pulley Curls", "Scott Curl Machine",
             "Dumbbell Hammer Curls", "Bicep Curl Machine", "Cable Preacher Curls", "Resistance Band Hammer Curls", "Isometric Hammer Curls"
         )
-        val tricepsWorkouts = arrayListOf(
+        val tricepWorkouts = arrayListOf(
             "Tricep Dips", "Tricep Pushdowns", "Skull Crushers", "Close-Grip Bench Press", "Overhead Tricep Extensions",
             "Diamond Push-Ups", "Rope Pushdowns", "Tricep Kickbacks", "Bench Dips", "French Press",
             "Single-Arm Tricep Pushdowns", "Reverse Grip Tricep Pushdowns", "Tricep Bench Dips", "Kneeling Tricep Extensions", "Lying Tricep Extensions",
@@ -266,12 +292,34 @@ class GenerateWorkout : Fragment() {
             "Machine Shrugs", "Smith Machine Shrugs", "Lateral Raise Machine", "Single-Arm Landmine Press", "Machine Lateral Raises"
         )
 
-        Log.e("GenerateWorkout.kt", "generateArmsWorkout - ARMS")
+        // biceps
+        val numOfWorkouts = getNumOfWorkouts(duration)
+        val nums = generateRandInts(bicepWorkouts.size, numOfWorkouts)
+        val workoutsGenerated = mutableListOf<String>()
+        for (i in nums) {
+            workoutsGenerated.add(bicepWorkouts[i])
+        }
 
+        // triceps
+        val numOfWorkouts2 = getNumOfWorkouts(duration)
+        val nums2 = generateRandInts(tricepWorkouts.size, numOfWorkouts2)
+        for (i in nums2) {
+            workoutsGenerated.add(tricepWorkouts[i])
+        }
+
+        // shoulders
+        val numOfWorkouts3 = getNumOfWorkouts(duration)
+        val nums3 = generateRandInts(shoulderWorkouts.size, numOfWorkouts3)
+        for (i in nums3) {
+            workoutsGenerated.add(shoulderWorkouts[i])
+        }
+
+        Log.e("GenerateWorkout", "Arms Workout - $workoutsGenerated")
+        return workoutsGenerated
     }
 
     // generate biceps workout
-    private fun generateBicepsWorkout(duration: String) {
+    private fun generateBicepsWorkout(duration: String) : MutableList<String> {
         val bicepWorkouts = arrayListOf(
             "Barbell Curls", "Dumbbell Curls", "Hammer Curls", "Preacher Curls", "Concentration Curls",
             "Spider Curls", "Cable Curls", "EZ Bar Curls", "Reverse Curls", "21s",
@@ -283,12 +331,23 @@ class GenerateWorkout : Fragment() {
             "Dumbbell Hammer Curls", "Bicep Curl Machine", "Cable Preacher Curls", "Resistance Band Hammer Curls", "Isometric Hammer Curls"
         )
 
-        Log.e("GenerateWorkout.kt", "generateBicepsWorkout - BICEPS")
+
+        val numOfWorkouts = getNumOfWorkouts(duration)
+
+        val nums = generateRandInts(bicepWorkouts.size, numOfWorkouts)
+
+        val workoutsGenerated = mutableListOf<String>()
+
+        for (i in nums) {
+            workoutsGenerated.add(bicepWorkouts[i])
+        }
+        Log.e("GenerateWorkout", "Bicep Workout - $workoutsGenerated")
+        return workoutsGenerated
     }
 
     // generate triceps workout
-    private fun generateTricepsWorkout(duration: String) {
-        val tricepsWorkouts = arrayListOf(
+    private fun generateTricepsWorkout(duration: String) : MutableList<String> {
+        val tricepWorkouts = arrayListOf(
             "Tricep Dips", "Tricep Pushdowns", "Skull Crushers", "Close-Grip Bench Press", "Overhead Tricep Extensions",
             "Diamond Push-Ups", "Rope Pushdowns", "Tricep Kickbacks", "Bench Dips", "French Press",
             "Single-Arm Tricep Pushdowns", "Reverse Grip Tricep Pushdowns", "Tricep Bench Dips", "Kneeling Tricep Extensions", "Lying Tricep Extensions",
@@ -298,11 +357,21 @@ class GenerateWorkout : Fragment() {
             "Close-Grip Smith Machine Bench Press", "Tricep Machine", "Cable Rope Overhead Tricep Extensions", "Cable Lying Tricep Extensions", "Tricep Isolation Machine"
         )
 
-        Log.e("GenerateWorkout.kt", "generateTricepsWorkout - TRICEPS")
+        val numOfWorkouts = getNumOfWorkouts(duration)
+
+        val nums = generateRandInts(tricepWorkouts.size, numOfWorkouts)
+
+        val workoutsGenerated = mutableListOf<String>()
+
+        for (i in nums) {
+            workoutsGenerated.add(tricepWorkouts[i])
+        }
+        Log.e("GenerateWorkout", "Triceps Workout - $workoutsGenerated")
+        return workoutsGenerated
     }
 
     // generate shoulder workout
-    private fun generateShoulderWorkout(duration: String) {
+    private fun generateShoulderWorkout(duration: String) : MutableList<String> {
         val shoulderWorkouts = arrayListOf(
             "Military Press", "Dumbbell Shoulder Press", "Arnold Press", "Push Press", "Seated Dumbbell Press",
             "Lateral Raises", "Front Raises", "Rear Delt Raises", "Upright Rows", "Shrugs",
@@ -314,11 +383,21 @@ class GenerateWorkout : Fragment() {
             "Machine Shrugs", "Smith Machine Shrugs", "Lateral Raise Machine", "Single-Arm Landmine Press", "Machine Lateral Raises"
         )
 
-        Log.e("GenerateWorkout.kt", "generateShoulderWorkout - SHOULDERS")
+        val numOfWorkouts = getNumOfWorkouts(duration)
+
+        val nums = generateRandInts(shoulderWorkouts.size, numOfWorkouts)
+
+        val workoutsGenerated = mutableListOf<String>()
+
+        for (i in nums) {
+            workoutsGenerated.add(shoulderWorkouts[i])
+        }
+        Log.e("GenerateWorkout", "Shoulder Workout - $workoutsGenerated")
+        return workoutsGenerated
     }
 
     // generate cardio workout
-    private fun generateCardioWorkout(duration: String){
+    private fun generateCardioWorkout(duration: String) : MutableList<String> {
         val cardioWorkouts = arrayListOf(
             "Running", "Cycling", "Swimming", "Jumping Rope", "High-Intensity Interval Training (HIIT)",
             "Rowing", "Elliptical Trainer", "Stair Climbing", "Kickboxing", "Dancing",
@@ -330,12 +409,22 @@ class GenerateWorkout : Fragment() {
             "Plyometric Exercises", "Racquet Sports (e.g., Tennis, Badminton)", "Calisthenics", "Running Stairs", "Trail Running"
         )
 
-        Log.e("GenerateWorkout.kt", "generateCardioWorkout - CARDIO")
+        val numOfWorkouts = getNumOfWorkouts(duration)
+
+        val nums = generateRandInts(cardioWorkouts.size, numOfWorkouts)
+
+        val workoutsGenerated = mutableListOf<String>()
+
+        for (i in nums) {
+            workoutsGenerated.add(cardioWorkouts[i])
+        }
+        Log.e("GenerateWorkout", "Cardio Workout - $workoutsGenerated")
+        return workoutsGenerated
 
     }
 
     // generate abs workout
-    private fun generateAbWorkout(duration: String) {
+    private fun generateAbWorkout(duration: String) : MutableList<String> {
         // list containing ab workouts
         val abWorkouts = arrayListOf(
             "Crunches", "Leg Raises", "Russian Twists", "Planks", "Bicycle Crunches",
@@ -348,7 +437,17 @@ class GenerateWorkout : Fragment() {
             "Stir the Pot Planks", "Decline Sit-Ups", "Rope Crunches", "Dragon Flags", "Pulse Ups"
         )
 
-        Log.e("GenerateWorkout.kt", "generateAbWorkout - ABS")
+        val numOfWorkouts = getNumOfWorkouts(duration)
+
+        val nums = generateRandInts(abWorkouts.size, numOfWorkouts)
+
+        val workoutsGenerated = mutableListOf<String>()
+
+        for (i in nums) {
+            workoutsGenerated.add(abWorkouts[i])
+        }
+        Log.e("GenerateWorkout", "Abs Workout - $workoutsGenerated")
+        return workoutsGenerated
     }
 
     // generate random numbers. A parameter will determine how many random numbers are needed
