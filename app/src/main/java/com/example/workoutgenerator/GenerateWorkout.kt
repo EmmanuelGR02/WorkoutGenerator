@@ -172,6 +172,16 @@ class GenerateWorkout : Fragment() {
         return numOfWorkouts
     }
 
+    // function to avoid getting similar workouts
+    private fun noRepeatedWorkouts(workouts : MutableList<String>) : MutableList<String> {
+        val numOfWorkouts = workouts.size
+        var newList = mutableListOf<String>()
+
+
+
+        return newList
+    }
+
 
     // generate chest workout
     private fun generateChestWorkout(duration: String) : MutableList<String> {
@@ -209,7 +219,7 @@ class GenerateWorkout : Fragment() {
         val backWorkouts = arrayListOf(
             "Deadlifts", "Pull-Ups", "Bent-Over Rows", "Lat Pulldowns", "T-Bar Rows",
             "Seated Cable Rows", "Face Pulls", "Single-Arm Dumbbell Rows", "Chin-Ups",
-            "Deadlift Variations (Sumo, Romanian, etc.)", "Hyperextensions", "Barbell Shrugs",
+            "Deadlift", "Hyperextensions", "Barbell Shrugs",
             "Cable Face Pulls", "Wide-Grip Pull-Ups", "Inverted Rows", "Lateral Pull-Downs",
             "Meadows Rows", "Pull-Up Variations (Weighted, Assisted, etc.)", "Machine Rows",
             "Renegade Rows", "Kettlebell Swings", "Farmer's Walks", "Good Mornings",
@@ -399,14 +409,14 @@ class GenerateWorkout : Fragment() {
     // generate cardio workout
     private fun generateCardioWorkout(duration: String) : MutableList<String> {
         val cardioWorkouts = arrayListOf(
-            "Running", "Cycling", "Swimming", "Jumping Rope", "High-Intensity Interval Training (HIIT)",
+            "Running", "Cycling", "Swimming", "Jumping Rope", "High-Intensity Interval Training",
             "Rowing", "Elliptical Trainer", "Stair Climbing", "Kickboxing", "Dancing",
             "Aerobics", "Sprinting", "Boxing", "CrossFit", "Power Walking",
             "Hiking", "Skating (Rollerblading or Ice Skating)", "Jumping Jacks", "Burpees", "Circuit Training",
             "Tabata Workouts", "Sled Pushes", "Battle Ropes", "Mountain Climbers", "Sprints with Resistance Bands",
             "Shadow Boxing", "Kick Sprints", "Swimming Laps", "Stationary Bike Intervals", "Cardio Kickboxing",
             "Zumba", "Bodyweight Circuits", "Jumping Squats", "Mountain Biking", "Rock Climbing",
-            "Plyometric Exercises", "Racquet Sports (e.g., Tennis, Badminton)", "Calisthenics", "Running Stairs", "Trail Running"
+            "Plyometric Exercises", "Calisthenics", "Running Stairs", "Trail Running"
         )
 
         val numOfWorkouts = getNumOfWorkouts(duration)
