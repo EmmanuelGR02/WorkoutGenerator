@@ -191,12 +191,40 @@ class GenerateWorkout : Fragment() {
             "Machine Flyes", "Incline Machine Flyes", "Decline Machine Flyes", "Close-Grip Push-Ups",
             "Isometric Chest Squeezes", "Cable Crossovers", "Incline Cable Crossovers")
 
+
         val numOfWorkouts = getNumOfWorkouts(duration)
-        val nums = generateRandInts(compoundChestWorkouts.size, numOfWorkouts)
+        val randNums = generateRandInts(compoundChestWorkouts.size, numOfWorkouts)
+
+        // separate number of workouts for compound and isolation
+        var compoundRand = ArrayList<Int>()
+        var isolationRand = ArrayList<Int>()
+
+        // list containing the final workouts
         val workoutsGenerated = mutableListOf<String>()
-        for (i in nums) {
-            workoutsGenerated.add(compoundChestWorkouts[i])
+
+        if (numOfWorkouts <= 1) {
+            workoutsGenerated.add(compoundChestWorkouts[randNums.indexOf(0)])
+        // handle when there is 3 workouts to generate
+        } else if (numOfWorkouts == 3) {
+            compoundRand = generateRandInts(compoundChestWorkouts.size, 2)
+            isolationRand = generateRandInts(isolationChestWorkouts.size, 1)
+            for (i in compoundRand) {
+                workoutsGenerated.add(compoundChestWorkouts[i])
+            }
+            workoutsGenerated.add(isolationChestWorkouts[isolationRand.indexOf(0)])
+        } else {
+            var temp = numOfWorkouts / 2
+            compoundRand = generateRandInts(compoundChestWorkouts.size, temp)
+            isolationRand = generateRandInts(isolationChestWorkouts.size, temp)
+
+            for (i in compoundRand) {
+                workoutsGenerated.add(compoundChestWorkouts[i])
+            }
+            for (i in isolationRand) {
+                workoutsGenerated.add(isolationChestWorkouts[i])
+            }
         }
+
         Log.e("GenerateWorkout", "Chest Workout - $workoutsGenerated")
         return workoutsGenerated
     }
@@ -229,7 +257,7 @@ class GenerateWorkout : Fragment() {
 
         return workoutsGenerated
     }
-//
+
     // generate legs workout
     private fun generateLegWorkout(duration: String) : MutableList<String> {
         // arrayList containing different compound leg workouts
