@@ -229,7 +229,7 @@ class GenerateWorkout : Fragment() {
 
         return workoutsGenerated
     }
-
+//
     // generate legs workout
     private fun generateLegWorkout(duration: String) : MutableList<String> {
         // arrayList containing different compound leg workouts
