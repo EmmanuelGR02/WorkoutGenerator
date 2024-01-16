@@ -146,15 +146,15 @@ class GenerateWorkout : Fragment() {
         val workoutsSelected = blueWorkoutBtn.size
 
         if (workoutsSelected == 1 && duration == "LONG") {
-            numOfWorkouts = 8
+            numOfWorkouts = 7
         } else if (workoutsSelected == 2 && duration == "LONG") {
-            numOfWorkouts = 4
-        } else if (workoutsSelected == 3 && duration == "LONG"){
             numOfWorkouts = 3
+        } else if (workoutsSelected == 3 && duration == "LONG"){
+            numOfWorkouts = 2
         }
 
         if (workoutsSelected == 1 && duration == "MEDIUM") {
-            numOfWorkouts = 6
+            numOfWorkouts = 5
         } else if (workoutsSelected == 2 && duration == "MEDIUM") {
             numOfWorkouts = 3
         } else if (workoutsSelected == 3 && duration == "MEDIUM") {
@@ -170,6 +170,63 @@ class GenerateWorkout : Fragment() {
         }
         return numOfWorkouts
     }
+
+    // generateAlgo function
+    // generateAlgo function
+    private fun generateAlgo(compoundList : ArrayList<String>, isolationList : ArrayList<String> = arrayListOf(), duration: String) : MutableList<String> {
+        val numOfWorkouts = getNumOfWorkouts(duration)
+        val randNums = generateRandInts(compoundList.size, numOfWorkouts)
+
+        // separate number of workouts for compound and isolation
+        var compoundRand = ArrayList<Int>()
+        var isolationRand = ArrayList<Int>()
+
+        // list containing the final workouts
+        val workoutsGenerated = mutableListOf<String>()
+
+        if (numOfWorkouts <= 1) {
+            if (randNums.isNotEmpty() && randNums[0] < compoundList.size) {
+                workoutsGenerated.add(compoundList[randNums[0]])
+            } else {
+                Log.e("GenerateWorkout", "Invalid index for compoundList")
+            }
+        } else if (numOfWorkouts == 3) {
+            compoundRand = generateRandInts(compoundList.size, 2)
+            isolationRand = generateRandInts(isolationList.size, 1)
+            for (i in compoundRand) {
+                if (i < compoundList.size) {
+                    workoutsGenerated.add(compoundList[i])
+                } else {
+                    Log.e("GenerateWorkout", "Index $i out of bounds for compoundList of size ${compoundList.size}")
+                }
+            }
+            if (isolationRand.isNotEmpty() && isolationRand[0] < isolationList.size) {
+                workoutsGenerated.add(isolationList[isolationRand[0]])
+            } else {
+                Log.e("GenerateWorkout", "Invalid index for isolationList")
+            }
+        } else {
+            compoundRand = generateRandInts(compoundList.size, numOfWorkouts - 1)
+            isolationRand = generateRandInts(isolationList.size, 1)
+
+            for (i in compoundRand) {
+                if (i < compoundList.size) {
+                    workoutsGenerated.add(compoundList[i])
+                } else {
+                    Log.e("GenerateWorkout", "Index $i out of bounds for compoundList of size ${compoundList.size}")
+                }
+            }
+
+            if (isolationRand.isNotEmpty() && isolationRand[0] < isolationList.size) {
+                workoutsGenerated.add(isolationList[isolationRand[0]])
+            } else {
+                Log.e("GenerateWorkout", "Invalid index for isolationList")
+            }
+        }
+        return workoutsGenerated
+    }
+
+
 
 
     // generate chest workout
@@ -192,38 +249,7 @@ class GenerateWorkout : Fragment() {
             "Isometric Chest Squeezes", "Cable Crossovers", "Incline Cable Crossovers")
 
 
-        val numOfWorkouts = getNumOfWorkouts(duration)
-        val randNums = generateRandInts(compoundChestWorkouts.size, numOfWorkouts)
-
-        // separate number of workouts for compound and isolation
-        var compoundRand = ArrayList<Int>()
-        var isolationRand = ArrayList<Int>()
-
-        // list containing the final workouts
-        val workoutsGenerated = mutableListOf<String>()
-
-        if (numOfWorkouts <= 1) {
-            workoutsGenerated.add(compoundChestWorkouts[randNums.indexOf(0)])
-        // handle when there is 3 workouts to generate
-        } else if (numOfWorkouts == 3) {
-            compoundRand = generateRandInts(compoundChestWorkouts.size, 2)
-            isolationRand = generateRandInts(isolationChestWorkouts.size, 1)
-            for (i in compoundRand) {
-                workoutsGenerated.add(compoundChestWorkouts[i])
-            }
-            workoutsGenerated.add(isolationChestWorkouts[isolationRand.indexOf(0)])
-        } else {
-            var temp = numOfWorkouts / 2
-            compoundRand = generateRandInts(compoundChestWorkouts.size, temp)
-            isolationRand = generateRandInts(isolationChestWorkouts.size, temp)
-
-            for (i in compoundRand) {
-                workoutsGenerated.add(compoundChestWorkouts[i])
-            }
-            for (i in isolationRand) {
-                workoutsGenerated.add(isolationChestWorkouts[i])
-            }
-        }
+        val workoutsGenerated = generateAlgo(compoundChestWorkouts, isolationChestWorkouts, duration)
 
         Log.e("GenerateWorkout", "Chest Workout - $workoutsGenerated")
         return workoutsGenerated
@@ -247,12 +273,8 @@ class GenerateWorkout : Fragment() {
         )
 
 
-        val numOfWorkouts = getNumOfWorkouts(duration)
-        val nums = generateRandInts(compoundBackWorkouts.size, numOfWorkouts)
-        val workoutsGenerated = mutableListOf<String>()
-        for (i in nums) {
-            workoutsGenerated.add(compoundBackWorkouts[i])
-        }
+        val workoutsGenerated = generateAlgo(compoundBackWorkouts, isolationBackWorkouts, duration)
+
         Log.e("GenerateWorkout", "Back Workout - $workoutsGenerated")
 
         return workoutsGenerated
@@ -270,18 +292,14 @@ class GenerateWorkout : Fragment() {
         )
 
         // isolation leg workouts
-        val isolationLegExercises = arrayListOf(
+        val isolationLegWorkouts = arrayListOf(
             "Calf Raises", "Leg Extensions", "Glute Bridges", "Hamstring Curls",
             "Sissy Squats", "Donkey Calf Raises", "Seated Leg Curls", "Cable Pull-Throughs",
             "Leg Raises", "Leg Abduction Machine", "Dumbell RDL", "Barbell RDL"
         )
 
-        val numOfWorkouts = getNumOfWorkouts(duration)
-        val nums = generateRandInts(compoundLegWorkouts.size, numOfWorkouts)
-        val workoutsGenerated = mutableListOf<String>()
-        for (i in nums) {
-            workoutsGenerated.add(compoundLegWorkouts[i])
-        }
+        val workoutsGenerated = generateAlgo(compoundLegWorkouts, isolationLegWorkouts, duration)
+
         Log.e("GenerateWorkout", "Leg Workout - $workoutsGenerated")
         return workoutsGenerated
     }
