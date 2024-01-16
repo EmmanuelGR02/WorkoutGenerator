@@ -14,14 +14,18 @@ import java.util.Locale
 import java.util.Random
 
 class GenerateWorkout : Fragment() {
-    private lateinit var binding: FragmentGenerateWorkoutBinding
-    private val workoutsSelectedMax = 3
-    private val blueWorkoutBtn: MutableList<Button> = mutableListOf()
-    private var workoutBtnList: List<Button>? = null
 
-    private val durationMax = 1
-    private val orangeDurationBtn: MutableList<Button> = mutableListOf()
-    private var durationBtnList: List<Button>? = null
+    public lateinit var duration : String
+    public lateinit var selectedWorkouts: List<String>
+
+    private lateinit var binding: FragmentGenerateWorkoutBinding
+    public val workoutsSelectedMax = 3
+    public var blueWorkoutBtn: MutableList<Button> = mutableListOf()
+    public var workoutBtnList: List<Button>? = null
+
+    public val durationMax = 1
+    public val orangeDurationBtn: MutableList<Button> = mutableListOf()
+    public var durationBtnList: List<Button>? = null
 
     // initialize buttons
     private lateinit var chestBtn: Button
@@ -96,7 +100,7 @@ class GenerateWorkout : Fragment() {
                 invalidSelection.text = "You must select a duration"
             } else if (blueWorkoutBtn.size >= 1 && orangeDurationBtn.size >= 1) {
                 invalidSelection.text = ""
-                val fragment = ConfirmWorkoutFragment()
+                val fragment = confirmWorkoutFragment()
                 val transaction = fragmentManager?.beginTransaction()
                 transaction?.replace(R.id.nav_container, fragment)?.commit()
             } else {
@@ -109,8 +113,8 @@ class GenerateWorkout : Fragment() {
     // main function to generate the workout
     fun generate() {
         // initialize duration/workout button selected
-        val duration = orangeDurationBtn.firstOrNull()?.text.toString().uppercase(Locale.ROOT)
-        val selectedWorkouts = blueWorkoutBtn.map { it.text.toString().uppercase(Locale.ROOT) }
+        duration = orangeDurationBtn.firstOrNull()?.text.toString().uppercase(Locale.ROOT)
+        selectedWorkouts = blueWorkoutBtn.map { it.text.toString().uppercase(Locale.ROOT) }
 
         if (duration == null || selectedWorkouts.isEmpty()) {
             Log.e("GenerateWorkout.kt", "generate() - Error: Invalid duration or no workout selected")

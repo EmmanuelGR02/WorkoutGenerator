@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.workoutgenerator.databinding.FragmentConfirmWorkoutBinding
 
-class ConfirmWorkoutFragment : Fragment() {
+class confirmWorkoutFragment : Fragment() {
     private lateinit var binding: FragmentConfirmWorkoutBinding
 
     override fun onCreateView(

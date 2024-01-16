@@ -148,7 +148,7 @@
     </fragment>
     <fragment
         android:id="@+id/confirmWorkoutFragment"
-        android:name="com.example.workoutgenerator.ConfirmWorkoutFragment"
+        android:name="com.example.workoutgenerator.confirmWorkoutFragment"
         android:label="fragment_confirm_workout"
         tools:layout="@layout/fragment_confirm_workout" >
         <action
