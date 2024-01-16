@@ -1,6 +1,5 @@
 package com.example.workoutgenerator
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.compose.ui.text.toUpperCase
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toDrawable
 import com.example.workoutgenerator.databinding.FragmentGenerateWorkoutBinding
@@ -98,7 +96,9 @@ class GenerateWorkout : Fragment() {
                 invalidSelection.text = "You must select a duration"
             } else if (blueWorkoutBtn.size >= 1 && orangeDurationBtn.size >= 1) {
                 invalidSelection.text = ""
-                generate()
+                val fragment = ConfirmWorkoutFragment()
+                val transaction = fragmentManager?.beginTransaction()
+                transaction?.replace(R.id.nav_container, fragment)?.commit()
             } else {
                 Log.e("GenerateWorkout.kt", "OnCreateView - generate() failed to be called")
             }
@@ -107,7 +107,7 @@ class GenerateWorkout : Fragment() {
     }
 
     // main function to generate the workout
-    private fun generate() {
+    fun generate() {
         // initialize duration/workout button selected
         val duration = orangeDurationBtn.firstOrNull()?.text.toString().uppercase(Locale.ROOT)
         val selectedWorkouts = blueWorkoutBtn.map { it.text.toString().uppercase(Locale.ROOT) }

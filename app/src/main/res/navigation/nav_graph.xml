@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/signInFragment">
+    app:startDestination="@id/addFriendsFragment">
 
     <fragment
         android:id="@+id/signInFragment"
@@ -142,5 +142,17 @@
         <action
             android:id="@+id/action_generateWorkout_to_workoutGeneratorFragment"
             app:destination="@id/workoutGeneratorFragment" />
+        <action
+            android:id="@+id/action_generateWorkout_to_confirmWorkoutFragment"
+            app:destination="@id/confirmWorkoutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/confirmWorkoutFragment"
+        android:name="com.example.workoutgenerator.ConfirmWorkoutFragment"
+        android:label="fragment_confirm_workout"
+        tools:layout="@layout/fragment_confirm_workout" >
+        <action
+            android:id="@+id/action_confirmWorkoutFragment_to_generateWorkout"
+            app:destination="@id/generateWorkout" />
     </fragment>
 </navigation>
