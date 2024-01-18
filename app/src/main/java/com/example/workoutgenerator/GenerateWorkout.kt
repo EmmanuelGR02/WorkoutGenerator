@@ -17,7 +17,7 @@ class GenerateWorkout : Fragment() {
 
     private lateinit var duration : String
     private lateinit var selectedWorkouts: List<String>
-    private lateinit var tempGeneratedWorkout : List<String>
+    private var workoutsGenerated = mutableListOf<String>()
 
     private lateinit var binding: FragmentGenerateWorkoutBinding
     private val workoutsSelectedMax = 3
@@ -187,8 +187,6 @@ class GenerateWorkout : Fragment() {
         var compoundRand = ArrayList<Int>()
         var isolationRand = ArrayList<Int>()
 
-        // list containing the final workouts
-        val workoutsGenerated = mutableListOf<String>()
 
         if (numOfWorkouts <= 1) {
             if (randNums.isNotEmpty() && randNums[0] < compoundList.size) {
