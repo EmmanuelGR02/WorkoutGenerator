@@ -15,17 +15,18 @@ import java.util.Random
 
 class GenerateWorkout : Fragment() {
 
-    public lateinit var duration : String
-    public lateinit var selectedWorkouts: List<String>
+    private lateinit var duration : String
+    private lateinit var selectedWorkouts: List<String>
+    private lateinit var tempGeneratedWorkout : List<String>
 
     private lateinit var binding: FragmentGenerateWorkoutBinding
-    public val workoutsSelectedMax = 3
-    public var blueWorkoutBtn: MutableList<Button> = mutableListOf()
-    public var workoutBtnList: List<Button>? = null
+    private val workoutsSelectedMax = 3
+    private var blueWorkoutBtn: MutableList<Button> = mutableListOf()
+    private var workoutBtnList: List<Button>? = null
 
-    public val durationMax = 1
-    public val orangeDurationBtn: MutableList<Button> = mutableListOf()
-    public var durationBtnList: List<Button>? = null
+    private var durationMax = 1
+    private var orangeDurationBtn: MutableList<Button> = mutableListOf()
+    private var durationBtnList: List<Button>? = null
 
     // initialize buttons
     private lateinit var chestBtn: Button
@@ -100,9 +101,10 @@ class GenerateWorkout : Fragment() {
                 invalidSelection.text = "You must select a duration"
             } else if (blueWorkoutBtn.size >= 1 && orangeDurationBtn.size >= 1) {
                 invalidSelection.text = ""
-                val fragment = confirmWorkoutFragment()
-                val transaction = fragmentManager?.beginTransaction()
-                transaction?.replace(R.id.nav_container, fragment)?.commit()
+                generate()
+//                val fragment = confirmWorkoutFragment()
+//                val transaction = fragmentManager?.beginTransaction()
+//                transaction?.replace(R.id.nav_container, fragment)?.commit()
             } else {
                 Log.e("GenerateWorkout.kt", "OnCreateView - generate() failed to be called")
             }
@@ -256,6 +258,7 @@ class GenerateWorkout : Fragment() {
         val workoutsGenerated = generateAlgo(compoundChestWorkouts, isolationChestWorkouts, duration)
 
         Log.e("GenerateWorkout", "Chest Workout - $workoutsGenerated")
+        Database.getInstance().setTempGeneratedWorkout(currentUser, workoutsGenerated)
         return workoutsGenerated
     }
 
@@ -280,7 +283,7 @@ class GenerateWorkout : Fragment() {
         val workoutsGenerated = generateAlgo(compoundBackWorkouts, isolationBackWorkouts, duration)
 
         Log.e("GenerateWorkout", "Back Workout - $workoutsGenerated")
-
+        Database.getInstance().setTempGeneratedWorkout(currentUser, workoutsGenerated)
         return workoutsGenerated
     }
 
@@ -305,6 +308,7 @@ class GenerateWorkout : Fragment() {
         val workoutsGenerated = generateAlgo(compoundLegWorkouts, isolationLegWorkouts, duration)
 
         Log.e("GenerateWorkout", "Leg Workout - $workoutsGenerated")
+        Database.getInstance().setTempGeneratedWorkout(currentUser, workoutsGenerated)
         return workoutsGenerated
     }
 
@@ -365,6 +369,7 @@ class GenerateWorkout : Fragment() {
         }
 
         Log.e("GenerateWorkout", "Arms Workout - $workoutsGenerated")
+        Database.getInstance().setTempGeneratedWorkout(currentUser, workoutsGenerated)
         return workoutsGenerated
     }
 
@@ -389,6 +394,7 @@ class GenerateWorkout : Fragment() {
             workoutsGenerated.add(bicepWorkouts[i])
         }
         Log.e("GenerateWorkout", "Bicep Workout - $workoutsGenerated")
+        Database.getInstance().setTempGeneratedWorkout(currentUser, workoutsGenerated)
         return workoutsGenerated
     }
 
@@ -411,6 +417,7 @@ class GenerateWorkout : Fragment() {
             workoutsGenerated.add(tricepWorkouts[i])
         }
         Log.e("GenerateWorkout", "Triceps Workout - $workoutsGenerated")
+        Database.getInstance().setTempGeneratedWorkout(currentUser, workoutsGenerated)
         return workoutsGenerated
     }
 
@@ -434,6 +441,7 @@ class GenerateWorkout : Fragment() {
             workoutsGenerated.add(shoulderWorkouts[i])
         }
         Log.e("GenerateWorkout", "Shoulder Workout - $workoutsGenerated")
+        Database.getInstance().setTempGeneratedWorkout(currentUser, workoutsGenerated)
         return workoutsGenerated
     }
 
@@ -453,6 +461,7 @@ class GenerateWorkout : Fragment() {
             workoutsGenerated.add(cardioWorkouts[i])
         }
         Log.e("GenerateWorkout", "Cardio Workout - $workoutsGenerated")
+        Database.getInstance().setTempGeneratedWorkout(currentUser, workoutsGenerated)
         return workoutsGenerated
 
     }
@@ -478,6 +487,7 @@ class GenerateWorkout : Fragment() {
             workoutsGenerated.add(abWorkouts[i])
         }
         Log.e("GenerateWorkout", "Abs Workout - $workoutsGenerated")
+        Database.getInstance().setTempGeneratedWorkout(currentUser, workoutsGenerated)
         return workoutsGenerated
     }
 

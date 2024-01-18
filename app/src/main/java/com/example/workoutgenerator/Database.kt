@@ -445,4 +445,13 @@ class Database private constructor() {
         }
     }
 
+    // set workout generated
+    fun setTempGeneratedWorkout(username : String, workoutList : List<String>) {
+        val workoutInfoMap = mapOf(
+            "workout" to workoutList,
+        )
+
+        database.child("users").child(username).child("temp workout").setValue(workoutInfoMap)
+    }
+
 }
