@@ -35,7 +35,7 @@ class ConfirmWorkoutFragment : Fragment() {
         // back button logic
         val backBtn = binding.backButton
         backBtn?.setOnClickListener {
-            val fragment = WorkoutGeneratorFragment()
+            val fragment = GenerateWorkout()
             (requireActivity() as MainActivity).navigateToFragment(fragment)
         }
 

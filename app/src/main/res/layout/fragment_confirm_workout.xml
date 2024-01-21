@@ -13,8 +13,8 @@
 
         <Button
             android:id="@+id/backButton"
-            android:layout_width="80dp"
-            android:layout_height="30dp"
+            android:layout_width="83dp"
+            android:layout_height="33dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
             android:text="BACK"
@@ -32,7 +32,7 @@
             android:text="Confirm or edit your workout"
             android:textColor="@color/light_blue"
             android:textStyle="bold"
-            android:textSize="25sp"
+            android:textSize="28sp"
             android:layout_marginTop="45dp"
             android:layout_marginBottom="250dp"
             app:layout_constraintBottom_toBottomOf="@id/scrollView"
@@ -67,6 +67,19 @@
                 android:layout_marginTop="16dp"/>
 
         </ScrollView>
+
+
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="45dp"
+            android:text="Start!"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:background="@drawable/signup_backbtn_background"
+            app:layout_constraintTop_toBottomOf="@id/scrollView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
