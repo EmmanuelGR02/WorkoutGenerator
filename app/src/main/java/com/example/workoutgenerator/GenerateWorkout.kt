@@ -102,9 +102,9 @@ class GenerateWorkout : Fragment() {
             } else if (blueWorkoutBtn.size >= 1 && orangeDurationBtn.size >= 1) {
                 invalidSelection.text = ""
                 generate()
-//                val fragment = confirmWorkoutFragment()
-//                val transaction = fragmentManager?.beginTransaction()
-//                transaction?.replace(R.id.nav_container, fragment)?.commit()
+                val fragment = ConfirmWorkoutFragment()
+                val transaction = fragmentManager?.beginTransaction()
+                transaction?.replace(R.id.nav_container, fragment)?.commit()
             } else {
                 Log.e("GenerateWorkout.kt", "OnCreateView - generate() failed to be called")
             }

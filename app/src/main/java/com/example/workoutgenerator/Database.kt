@@ -372,6 +372,35 @@ class Database private constructor() {
         }
     }
 
+    // set workout generated
+    fun setTempGeneratedWorkout(username : String, workoutList : List<String>) {
+        val workoutInfoMap = mapOf(
+            "workout" to workoutList,
+        )
+
+        database.child("users").child(username).child("temp workout").setValue(workoutInfoMap)
+    }
+
+    // get temporary generated workout
+    fun getTempGenerateWorkout(username : String, callback : (tempWorkout : List<String>) -> Unit) {
+        val requestRef = database.child("users").child((username)).child("temp workout").child("workout")
+
+        requestRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val requestList = ArrayList<String>()
+
+                for (childSnapshot in snapshot.children) {
+                    val workout = childSnapshot.value.toString()
+                    requestList.add(workout)
+                }
+                callback(requestList)
+            }
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("Database-getTempGeneratedWorkout", "Error returning temporary generated workout")
+            }
+        })
+    }
+
 
     //returns the list of users that have sent a friend request to the current user
     fun getRequests(username: String, callback: (usernames: ArrayList<String>) -> Unit) {
@@ -389,7 +418,7 @@ class Database private constructor() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.e("Database-getRequest", "Error returning friend requests")
+                Log.e("Database-getRequests", "Error returning friend requests")
             }
         })
     }
@@ -443,15 +472,6 @@ class Database private constructor() {
                 otherUsersFriendsRef.setValue(friends)
             }
         }
-    }
-
-    // set workout generated
-    fun setTempGeneratedWorkout(username : String, workoutList : List<String>) {
-        val workoutInfoMap = mapOf(
-            "workout" to workoutList,
-        )
-
-        database.child("users").child(username).child("temp workout").setValue(workoutInfoMap)
     }
 
 }

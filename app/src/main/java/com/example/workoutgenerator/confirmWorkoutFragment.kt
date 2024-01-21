@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.workoutgenerator.databinding.FragmentConfirmWorkoutBinding
 
-class confirmWorkoutFragment : Fragment() {
+class ConfirmWorkoutFragment : Fragment() {
     private lateinit var binding: FragmentConfirmWorkoutBinding
 
     override fun onCreateView(
@@ -25,6 +25,16 @@ class confirmWorkoutFragment : Fragment() {
         val generateWorkoutInstance = GenerateWorkout()
 
         // Call the generate function from GenerateWorkout
-        generateWorkoutInstance.generate()
+        temp()
+
+    }
+
+
+    fun temp() {
+        val msg = binding.firstWorkout
+
+        Database.getInstance().getTempGenerateWorkout(currentUser) { list ->
+            msg.text = list.toString()
+        }
     }
 }
