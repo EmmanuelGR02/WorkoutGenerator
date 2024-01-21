@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- item_workout.xml -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="45dp"
     android:orientation="horizontal"
-    android:padding="16dp"
+    android:padding="4dp"
     android:background="@color/black">
 
     <TextView
@@ -14,11 +13,14 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Workout Name"
-        android:textSize="20sp"/>
+        android:textColor="@color/white"
+        android:paddingStart="10dp"
+        android:textSize="15sp"/>
 
     <Button
         android:id="@+id/regenerateButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Re-generate"/>
+        android:layout_width="105dp"
+        android:layout_height="35dp"
+        android:text="Re-generate"
+        android:textSize="12dp" />
 </LinearLayout>

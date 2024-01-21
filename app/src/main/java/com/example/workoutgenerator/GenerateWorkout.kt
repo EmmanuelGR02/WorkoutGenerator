@@ -178,7 +178,6 @@ class GenerateWorkout : Fragment() {
     }
 
     // generateAlgo function
-    // generateAlgo function
     private fun generateAlgo(compoundList : ArrayList<String>, isolationList : ArrayList<String> = arrayListOf(), duration: String) : MutableList<String> {
         val numOfWorkouts = getNumOfWorkouts(duration)
         val randNums = generateRandInts(compoundList.size, numOfWorkouts)
@@ -491,13 +490,16 @@ class GenerateWorkout : Fragment() {
 
     // generate random numbers. A parameter will determine how many random numbers are needed
     // depending on the duration of the workout
-    private fun generateRandInts(arrayLen: Int, randNums: Int): ArrayList<Int> {
+    private fun generateRandInts(range: Int, randNums: Int): ArrayList<Int> {
         val list = arrayListOf<Int>()
+        val random = Random()
 
         while (list.size < randNums) {
-            val rand = Random().nextInt(arrayLen)
+            val rand = random.nextInt(range)
             list.add(rand)
         }
+
+        Log.e("test", list.toString())
         return list
     }
 

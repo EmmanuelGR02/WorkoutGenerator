@@ -8,6 +8,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.snapshots
+import com.google.firebase.database.values
 import java.util.Locale
 import java.util.UUID
 
@@ -374,12 +376,14 @@ class Database private constructor() {
 
     // set workout generated
     fun setTempGeneratedWorkout(username : String, workoutList : List<String>) {
+        val requestRef = database.child("users").child(username).child("temp workout")
         val workoutInfoMap = mapOf(
             "workout" to workoutList,
         )
-
-        database.child("users").child(username).child("temp workout").setValue(workoutInfoMap)
+        requestRef.setValue(workoutInfoMap)
     }
+
+
 
     // get temporary generated workout
     fun getTempGenerateWorkout(username : String, callback : (tempWorkout : List<String>) -> Unit) {

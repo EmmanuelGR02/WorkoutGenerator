@@ -11,51 +11,63 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:text="BACK"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/welcomebtn_background"
+            android:drawableStart="@drawable/back_icon"/>
+
         <!-- Fragment title -->
         <TextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="35sp"
             android:text="Confirm or edit your workout"
-            android:textColor="@color/white"
+            android:textColor="@color/light_blue"
             android:textStyle="bold"
             android:textSize="25sp"
+            android:layout_marginTop="45dp"
             android:layout_marginBottom="250dp"
-            app:layout_constraintBottom_toBottomOf="@id/midpoint"
+            app:layout_constraintBottom_toBottomOf="@id/scrollView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-        <TextView
-            android:id="@+id/midpoint"
-            android:layout_width="1dp"
-            android:layout_height="1dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-
-        <!-- contraint layouts containing workouts and edit buttons -->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/midpoint2"
-                android:layout_width="1dp"
-                android:layout_height="1dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="NotSibling" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- holds the generated workout items -->
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="NotSibling">
+
+            <LinearLayout
+                android:id="@+id/workoutContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="16dp"/>
+
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
