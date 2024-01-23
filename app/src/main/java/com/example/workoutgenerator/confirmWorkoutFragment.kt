@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.workoutgenerator.databinding.FragmentConfirmWorkoutBinding
@@ -57,6 +58,15 @@ class ConfirmWorkoutFragment : Fragment() {
 
             val workoutView = workoutLayout.findViewById<TextView>(R.id.workoutNameTextView)
             workoutView.text = workout
+
+            val regenBtn = workoutLayout.findViewById<Button>(R.id.regenerateButton)
+
+            regenBtn?.setOnClickListener {
+                val generatedWorkout = GenerateWorkout().findWorkoutGroup(workoutView.text.toString())
+                // Update the UI with the generated workout
+                workoutView.text = generatedWorkout
+            }
+
             container.addView(workoutLayout)
         }
 

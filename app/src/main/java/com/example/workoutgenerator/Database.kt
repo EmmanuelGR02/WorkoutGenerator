@@ -43,8 +43,6 @@ class Database private constructor() {
         database.child("users").child(username).child("latest workout").setValue(workoutInfoMap)
     }
 
-
-
     fun saveUserInfo(username: String, userInfo: SignUpActivity, onSuccess: () -> Unit, onFailure: () -> Unit) {
         // Check if the username already exists in the database
         database.child("users").child(username).child("user info").addListenerForSingleValueEvent(object : ValueEventListener {
@@ -283,15 +281,13 @@ class Database private constructor() {
                     // Update likes count
                     likesRef.setValue(newLikes)
                 }
-
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // Handle onCancelled if needed
+                Log.e("Database", "decrementLike() - failed to decrement like")
             }
         })
     }
-
 
     // check for the current user is in the "liked pic username"
     // and it increase or decreases a like depending on if the friend is already in there or not
@@ -355,7 +351,7 @@ class Database private constructor() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // Handle onCancelled if needed
+                Log.e("Database", "sendFriendRequest() - Fail to send friend request")
             }
         })
     }
@@ -382,8 +378,6 @@ class Database private constructor() {
         )
         requestRef.setValue(workoutInfoMap)
     }
-
-
 
     // get temporary generated workout
     fun getTempGenerateWorkout(username : String, callback : (tempWorkout : List<String>) -> Unit) {
