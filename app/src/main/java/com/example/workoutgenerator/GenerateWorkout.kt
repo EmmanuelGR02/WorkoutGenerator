@@ -472,6 +472,7 @@ class GenerateWorkout : Fragment() {
     private fun regenWorkout(workout: String) : String {
         var newWorkout = ""
 
+        // generate a new random number to get a new random workout from the correct list
         if (workout == "compoundChestWorkouts") {
             val num = generateRandInts(compoundChestWorkouts.size, 1)
             newWorkout = compoundChestWorkouts[num[0]]
