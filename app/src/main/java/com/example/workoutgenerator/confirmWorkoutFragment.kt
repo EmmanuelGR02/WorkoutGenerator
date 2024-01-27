@@ -40,6 +40,14 @@ class ConfirmWorkoutFragment : Fragment() {
             (requireActivity() as MainActivity).navigateToFragment(fragment)
         }
 
+        // start workout button
+        val startBtn = binding.start
+        startBtn?.setOnClickListener {
+            val generatedWorkout = "UI not ready yet fr"
+            val fragment = WorkoutGeneratorFragment.newInstance(generatedWorkout)
+            (requireActivity() as MainActivity).navigateToFragment(fragment)
+        }
+
         return binding.root
     }
 

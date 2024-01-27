@@ -10,6 +10,19 @@ import com.example.workoutgenerator.databinding.FragmentWorkoutGeneratorBinding
 
 class WorkoutGeneratorFragment : Fragment() {
     private lateinit var binding: FragmentWorkoutGeneratorBinding
+
+    companion object {
+        private const val ARG_GENERATED_WORKOUT = "generated_workout"
+
+        fun newInstance(generatedWorkout: String): WorkoutGeneratorFragment {
+            val fragment = WorkoutGeneratorFragment()
+            val args = Bundle()
+            args.putString(ARG_GENERATED_WORKOUT, generatedWorkout)
+            fragment.arguments = args
+            return fragment
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,6 +49,13 @@ class WorkoutGeneratorFragment : Fragment() {
         generateWorkoutBtn?.setOnClickListener {
             val fragment = GenerateWorkout()
             (requireActivity() as MainActivity).navigateToFragment(fragment)
+        }
+
+        // Check for generated workout data in arguments
+        val generatedWorkout = arguments?.getString(ARG_GENERATED_WORKOUT)
+        if (!generatedWorkout.isNullOrEmpty()) {
+            binding.msg.text = generatedWorkout
+            binding.generateWorkoutBtn.visibility = View.INVISIBLE
         }
 
         return view

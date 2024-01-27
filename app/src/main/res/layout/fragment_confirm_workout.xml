@@ -70,6 +70,7 @@
 
 
         <Button
+            android:id="@+id/start"
             android:layout_width="120dp"
             android:layout_height="45dp"
             android:text="Start!"

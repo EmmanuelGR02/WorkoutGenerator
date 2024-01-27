@@ -263,8 +263,27 @@ class GenerateWorkout : Fragment() {
 
     // generate arms workout
     private fun generateArmWorkout(duration: String) : MutableList<String> {
+        // subtract number of workouts so it doesn't overflow the UI because there is 3 workout groups in this function instead of 1
+        var numOfWorkouts = 0
+        if (duration == "LONG") {
+            numOfWorkouts = 3
+        } else if (duration == "MEDIUM") {
+            numOfWorkouts = 2
+        } else if (duration == "SHORT") {
+            numOfWorkouts = 1
+            // add a random arm muscle group so the user gets 4 workouts
+            val random = (1..3).random()
+            if (random == 1) {
+                workoutsGenerated.add(bicepWorkouts[1])
+            } else if (random == 2) {
+                workoutsGenerated.add(tricepWorkouts[1])
+            } else if (random == 3) {
+                workoutsGenerated.add(shoulderWorkouts[1])
+            }
+
+        }
+
         // biceps
-        val numOfWorkouts = getNumOfWorkouts(duration)
         val nums = generateRandInts(bicepWorkouts.size, numOfWorkouts)
         val workoutsGenerated = mutableListOf<String>()
         for (i in nums) {
@@ -273,14 +292,14 @@ class GenerateWorkout : Fragment() {
 
         // triceps
         val numOfWorkouts2 = getNumOfWorkouts(duration)
-        val nums2 = generateRandInts(tricepWorkouts.size, numOfWorkouts2)
+        val nums2 = generateRandInts(tricepWorkouts.size, numOfWorkouts)
         for (i in nums2) {
             workoutsGenerated.add(tricepWorkouts[i])
         }
 
         // shoulders
         val numOfWorkouts3 = getNumOfWorkouts(duration)
-        val nums3 = generateRandInts(shoulderWorkouts.size, numOfWorkouts3)
+        val nums3 = generateRandInts(shoulderWorkouts.size, numOfWorkouts)
         for (i in nums3) {
             workoutsGenerated.add(shoulderWorkouts[i])
         }
@@ -494,6 +513,11 @@ class GenerateWorkout : Fragment() {
         }
 
         if (workout == "compoundLegWorkouts") {
+            val num = generateRandInts(compoundLegWorkouts.size, 1)
+            newWorkout = compoundLegWorkouts[num[0]]
+        }
+
+        if (workout == "isolationLegWorkouts") {
             val num = generateRandInts(compoundLegWorkouts.size, 1)
             newWorkout = compoundLegWorkouts[num[0]]
         }
