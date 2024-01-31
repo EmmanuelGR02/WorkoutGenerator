@@ -10,6 +10,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.snapshots
 import com.google.firebase.database.values
+import java.security.MessageDigest
 import java.util.Locale
 import java.util.UUID
 
@@ -44,13 +45,17 @@ class Database private constructor() {
     }
 
     fun saveUserInfo(username: String, userInfo: SignUpActivity, onSuccess: () -> Unit, onFailure: () -> Unit) {
+        // Hash the password before saving it
+        val hashedPassword = userInfo.password?.let { hashPassword(it) }
+        val userInfoWithHashedPassword = userInfo.copy(password = hashedPassword)
+
         // Check if the username already exists in the database
         database.child("users").child(username).child("user info").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     onFailure()
                 } else {
-                    database.child("users").child(username).child("user info").setValue(userInfo)
+                    database.child("users").child(username).child("user info").setValue(userInfoWithHashedPassword)
                         .addOnSuccessListener {
                             onSuccess()
                         }
@@ -86,21 +91,36 @@ class Database private constructor() {
     }
 
     // Check if given password matches with the username
-    fun isPasswordValid(password : String,username: String, callback : (Boolean) -> Unit) {
+    fun isPasswordValid(password : String, username: String, callback : (Boolean) -> Unit) {
         database.child("users").child(username).child("user info").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val arr = ArrayList<String>()
-                val pswd = snapshot.child("password").value.toString()
-                arr.add(pswd)
+                val pswdFromDB = snapshot.child("password").getValue(String::class.java)
+                if (pswdFromDB != null) {
+                    // Hash the provided password for comparison
+                    val hashedPassword = hashPassword(password)
 
-                val isPasswordValid = arr.contains(password)
-                callback(isPasswordValid)
+                    // Compare the hashed password with the one stored in the database
+                    val isPasswordValid = hashedPassword == pswdFromDB
+                    callback(isPasswordValid)
+                } else {
+                    // Password not found in the database
+                    callback(false)
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {
                 callback(false)
             }
         })
+    }
+
+
+    // Hashes the given password using SHA-256 algorithm
+    private fun hashPassword(password: String): String {
+        val bytes = password.toByteArray()
+        val md = MessageDigest.getInstance("SHA-256")
+        val digest = md.digest(bytes)
+        return digest.fold("") { str, it -> str + "%02x".format(it) }
     }
 
     // check of the user stats child is empty
@@ -187,9 +207,7 @@ class Database private constructor() {
                 }
                 callback(userList)
             }
-
             override fun onCancelled(error: DatabaseError) {
-
             }
         })
     }
@@ -398,7 +416,6 @@ class Database private constructor() {
             }
         })
     }
-
 
     //returns the list of users that have sent a friend request to the current user
     fun getRequests(username: String, callback: (usernames: ArrayList<String>) -> Unit) {
