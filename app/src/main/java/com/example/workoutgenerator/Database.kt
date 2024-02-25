@@ -116,11 +116,11 @@ class Database private constructor() {
 
 
     // Hashes the given password using SHA-256 algorithm
-    private fun hashPassword(password: String): String {
-        val bytes = password.toByteArray()
-        val md = MessageDigest.getInstance("SHA-256")
-        val digest = md.digest(bytes)
-        return digest.fold("") { str, it -> str + "%02x".format(it) }
+    private fun hashPassword(password: String): String { // Defines a private function named hashPassword which takes a String parameter named password and returns a String.
+        val bytes = password.toByteArray() // Converts the password String into a byte array.
+        val md = MessageDigest.getInstance("SHA-256") // Creates a MessageDigest object for SHA-256 hashing algorithm.
+        val digest = md.digest(bytes) // Computes the hash of the byte array using the SHA-256 algorithm.
+        return digest.fold("") { str, it -> str + "%02x".format(it) } // Converts the hash bytes into a hexadecimal string representation.
     }
 
     // check of the user stats child is empty
