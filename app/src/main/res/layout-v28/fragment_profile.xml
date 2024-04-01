@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProfileFragment"
-    android:background="@drawable/homepage_background">
+    android:background="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -95,122 +95,19 @@
             android:id="@+id/weatherContainer"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/homepage_weather_background"
+            android:background="@color/black"
             android:elevation="15dp"
             android:outlineSpotShadowColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/separatorLine">
-
-            <TextView
-                android:id="@+id/weather_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:text="Weather"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                app:layout_constraintTop_toTopOf="@id/weatherContainer"></TextView>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!-- Layout containing current workout data -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/currWorkout_info"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/homepage_currworkout_background"
-        android:elevation="15dp"
-        android:outlineSpotShadowColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/weatherContainer"
-        app:layout_constraintBottom_toTopOf="@id/buttonLayout">
-
-        <TextView
-            android:id="@+id/currWorkout_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:text="Current Workout"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            app:layout_constraintTop_toTopOf="@id/currWorkout_info" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/positionDots"
-            android:layout_width="100dp"
-            android:layout_height="10dp"
-            app:layout_constraintTop_toBottomOf="@id/currWorkout_info"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-
-
+            app:layout_constraintTop_toBottomOf="@id/separatorLine"
+            >
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- Linear layout containing the main buttons to navigate through the fragments -->
-        <LinearLayout
-            android:id="@+id/buttonLayout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:padding="2dp"
-            android:layout_marginBottom="1dp"
-            android:orientation="horizontal"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <Button
-                android:id="@+id/friendsBtn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:layout_marginStart="4dp"
-                android:layout_weight="1"
-                android:background="@drawable/friends_button_background"
-                android:text="" />
-
-            <Button
-                android:id="@+id/profileBtn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:layout_weight="1"
-                android:background="@drawable/profile_button_background"
-                android:text="" />
-
-            <Button
-                android:id="@+id/workoutBtn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:layout_weight="1"
-                android:background="@drawable/workout_button_background"
-                android:text="" />
-
-        </LinearLayout>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </FrameLayout>
 
@@ -479,7 +376,41 @@
 <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
+<!--        &lt;!&ndash; Linear layout containing the 3 main buttons to navigate through the main fragments &ndash;&gt;-->
+<!--        <LinearLayout-->
+<!--            android:id="@+id/buttonLayout"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            app:layout_constraintLeft_toLeftOf="parent"-->
+<!--            app:layout_constraintRight_toRightOf="parent"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent">-->
 
+<!--            <Button-->
+<!--                android:id="@+id/friendsBtn"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:background="@drawable/friends_button_background"-->
+<!--                android:text="" />-->
+
+<!--            <Button-->
+<!--                android:id="@+id/profileBtn"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:background="@drawable/profile_button_background"-->
+<!--                android:text="" />-->
+
+<!--            <Button-->
+<!--                android:id="@+id/workoutBtn"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:background="@drawable/workout_button_background"-->
+<!--                android:text="" />-->
+
+<!--        </LinearLayout>-->
 
 <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 

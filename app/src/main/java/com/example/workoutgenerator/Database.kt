@@ -114,7 +114,6 @@ class Database private constructor() {
         })
     }
 
-
     // Hashes the given password using SHA-256 algorithm
     private fun hashPassword(password: String): String { // Defines a private function named hashPassword which takes a String parameter named password and returns a String.
         val bytes = password.toByteArray() // Converts the password String into a byte array.

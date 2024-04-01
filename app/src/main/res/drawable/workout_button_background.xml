@@ -5,8 +5,12 @@
         <shape android:shape="rectangle">
             <corners android:radius="30dp" />
             <solid android:color="@color/dark_orange"/>
+            <stroke
+                android:width="2dp"
+                android:color="@color/black"></stroke>
         </shape>
     </item>
+
 
     <!-- Add Friend Icon -->
     <item
