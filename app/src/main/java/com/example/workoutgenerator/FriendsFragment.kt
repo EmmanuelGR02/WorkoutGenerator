@@ -33,8 +33,6 @@ class FriendsFragment : Fragment() {
         val workoutBtn = binding.workoutBtn
         val addFriendBtn = binding.addFriendBtn
 
-        //Database.getInstance().saveLatestWorkoutInfo("AlanC", "Chest", "20", "Aware", "10/02/2023", "Quick lil ches sesh", 0)
-
         addFriendBtn.setOnClickListener {
             val fragment = AddFriendsFragment()
             (requireActivity() as MainActivity).navigateToFragment(fragment)
