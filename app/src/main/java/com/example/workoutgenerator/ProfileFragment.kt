@@ -9,9 +9,11 @@ import android.view.ViewGroup
 import com.example.workoutgenerator.databinding.FragmentProfileBinding
 import kotlin.math.roundToInt
 
+
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private val weatherAPI = WeatherAPI()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -20,116 +22,143 @@ class ProfileFragment : Fragment() {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        // displaySetCurrStats()
+        // Set up ViewPager with TabLayout
+        //val viewPager = binding.viewPager
+        //val tabLayout = binding.tabLayout
 
-        // user instance
-        val user = User(currentUser)
+        val adapter = ViewPagerAdapter(requireActivity().supportFragmentManager)
+        adapter.addFragment(WeatherFragment(), "Weather")
 
-        // Buttons to navigate through the main fragments
-        val friendsBtn = binding.friendsBtn
-        friendsBtn?.setOnClickListener {
-            val fragment = FriendsFragment()
-            (requireActivity() as MainActivity).navigateToFragment(fragment)
-        }
-        binding.workoutBtn?.setOnClickListener {
-            val fragment = WorkoutGeneratorFragment()
-            (requireActivity() as MainActivity).navigateToFragment(fragment)
-        }
-
-        // Set the values of the name, lastname and username text views
-        val nameView = binding.name
-        val lastnameView = binding.lastname
-        val usernameView = binding.username
-        val currWeatherView = binding.currentWeather
-        val currHumidityView = binding.currentHumidity
-        val currFeelsLikeView = binding.currentFeelsLike
-        val currLowView = binding.currentLow
-        val currHighView = binding.currentHigh
-        val currWeatherTypeView = binding.weatherType
-        val currUVindexView = binding.currentUVindex
-        val currVisibilityView = binding.currentVisibility
-
-
-        // fetch current weather
-        weatherAPI.getCurrentWeather { temp ->
-            temp?.let {
-                currWeatherView.text = "$temp\u2109"
-            }
-        }
-
-        // fetch current feels like temp
-        weatherAPI.getCurrentFeelsLikeTemperature { temp ->
-            temp?.let {
-                Log.e("ProfileFragment.kt", "Feels like temp -> $temp")
-                currFeelsLikeView.text = "Feels Like: $temp\u2109"
-            }
-        }
-
-        // fetch current humidity
-        weatherAPI.getCurrentHumidity { humidity ->
-            humidity?.let {
-                currHumidityView.text = "Humidity: ${humidity.roundToInt()}%"
-            }
-        }
-
-        // fetch current low
-        weatherAPI.getCurrentLowTemperature { low ->
-            low?.let {
-                currLowView.text = "L: $low\u2109"
-            }
-        }
-
-        // fetch current high
-        weatherAPI.getCurrentHighTemperature { high ->
-            high?.let {
-                currHighView.text = "H: $high\u2109"
-            }
-        }
-
-        // fetch current weather type
-        weatherAPI.getCurrentWeatherType { type ->
-            type?.let {
-                var realType = ""
-                if (type == "Clouds") {
-                    realType = "Cloudy"
-                }
-                currWeatherTypeView.text = "$realType"
-            }
-        }
-
-        // fetch current UVIndex
-        weatherAPI.getCurrentUVIndex{ index ->
-            index?.let {
-                Log.e("ProfileFragment.kt", "UV Index -> $index")
-                currUVindexView.text = "UV Index: $index"
-            }
-        }
-
-        // fetch current visibility
-        weatherAPI.getCurrentVisibility { visibility ->
-            visibility?.let {
-                currVisibilityView.text = "Visibility: $visibility mi"
-            }
-        }
-
-
-        user.getName { tempName ->
-            nameView.text = tempName.toString()
-        }
-        user.getLastname { tempLastname ->
-            lastnameView.text = tempLastname.toString()
-        }
-        usernameView.text = currentUser
-
-        // sent user to setting fragment
-        val settingsBtn = binding.settingBtn
-        settingsBtn?.setOnClickListener {
-            val fragment = SettingsFragment()
-            (requireActivity() as MainActivity).navigateToFragment(fragment)
-        }
+        //viewPager.adapter = adapter
+        //tabLayout.setupWithViewPager(viewPager)
 
         return view
     }
+}
+
+
+
+//class ProfileFragment : Fragment() {
+//    private lateinit var binding: FragmentProfileBinding
+//    private val weatherAPI = WeatherAPI()
+//    override fun onCreateView(
+//        inflater: LayoutInflater, container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View? {
+//        // Inflate the layout for this fragment
+//        binding = FragmentProfileBinding.inflate(inflater, container, false)
+//        val view = binding.root
+//
+//        // displaySetCurrStats()
+//
+//        // user instance
+//        val user = User(currentUser)
+//
+//        // Buttons to navigate through the main fragments
+//        val friendsBtn = binding.friendsBtn
+//        friendsBtn?.setOnClickListener {
+//            val fragment = FriendsFragment()
+//            (requireActivity() as MainActivity).navigateToFragment(fragment)
+//        }
+//        binding.workoutBtn?.setOnClickListener {
+//            val fragment = WorkoutGeneratorFragment()
+//            (requireActivity() as MainActivity).navigateToFragment(fragment)
+//        }
+//
+//        // Set the values of the name, lastname and username text views
+//        val nameView = binding.name
+//        val lastnameView = binding.lastname
+//        val usernameView = binding.username
+//        val currWeatherView = binding.currentWeather
+//        val currHumidityView = binding.currentHumidity
+//        val currFeelsLikeView = binding.currentFeelsLike
+//        val currLowView = binding.currentLow
+//        val currHighView = binding.currentHigh
+//        val currWeatherTypeView = binding.weatherType
+//        val currUVindexView = binding.currentUVindex
+//        val currVisibilityView = binding.currentVisibility
+//
+//
+//        // fetch current weather
+//        weatherAPI.getCurrentWeather { temp ->
+//            temp?.let {
+//                currWeatherView.text = "$temp\u2109"
+//            }
+//        }
+//
+//        // fetch current feels like temp
+//        weatherAPI.getCurrentFeelsLikeTemperature { temp ->
+//            temp?.let {
+//                Log.e("ProfileFragment.kt", "Feels like temp -> $temp")
+//                currFeelsLikeView.text = "Feels Like: $temp\u2109"
+//            }
+//        }
+//
+//        // fetch current humidity
+//        weatherAPI.getCurrentHumidity { humidity ->
+//            humidity?.let {
+//                currHumidityView.text = "Humidity: ${humidity.roundToInt()}%"
+//            }
+//        }
+//
+//        // fetch current low
+//        weatherAPI.getCurrentLowTemperature { low ->
+//            low?.let {
+//                currLowView.text = "L: $low\u2109"
+//            }
+//        }
+//
+//        // fetch current high
+//        weatherAPI.getCurrentHighTemperature { high ->
+//            high?.let {
+//                currHighView.text = "H: $high\u2109"
+//            }
+//        }
+//
+//        // fetch current weather type
+//        weatherAPI.getCurrentWeatherType { type ->
+//            type?.let {
+//                var realType = ""
+//                if (type == "Clouds") {
+//                    realType = "Cloudy"
+//                }
+//                currWeatherTypeView.text = "$realType"
+//            }
+//        }
+//
+//        // fetch current UVIndex
+//        weatherAPI.getCurrentUVIndex{ index ->
+//            index?.let {
+//                Log.e("ProfileFragment.kt", "UV Index -> $index")
+//                currUVindexView.text = "UV Index: $index"
+//            }
+//        }
+//
+//        // fetch current visibility
+//        weatherAPI.getCurrentVisibility { visibility ->
+//            visibility?.let {
+//                currVisibilityView.text = "Visibility: $visibility mi"
+//            }
+//        }
+//
+//
+//        user.getName { tempName ->
+//            nameView.text = tempName.toString()
+//        }
+//        user.getLastname { tempLastname ->
+//            lastnameView.text = tempLastname.toString()
+//        }
+//        usernameView.text = currentUser
+//
+//        // sent user to setting fragment
+//        val settingsBtn = binding.settingBtn
+//        settingsBtn?.setOnClickListener {
+//            val fragment = SettingsFragment()
+//            (requireActivity() as MainActivity).navigateToFragment(fragment)
+//        }
+//
+//        return view
+//    }
 
     // if the user does not have any stats saved, it will display a layout to take in their stats and save them
     // if the user already has stats saved, it will display a layout with all of their stats
@@ -208,4 +237,4 @@ class ProfileFragment : Fragment() {
 //        }
 //    }
 
-}
+//}
