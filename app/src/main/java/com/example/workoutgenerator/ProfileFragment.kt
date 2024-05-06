@@ -10,12 +10,18 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.workoutgenerator.databinding.FragmentProfileBinding
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private val weatherAPI = WeatherAPI()
+    private val spotifyAPI = SpotifyAPI()
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -56,6 +62,21 @@ class ProfileFragment : Fragment() {
         settingsBtn?.setOnClickListener {
             val fragment = SettingsFragment()
             (requireActivity() as MainActivity).navigateToFragment(fragment)
+        }
+
+        // Call buildSearchAPI from a coroutine
+        GlobalScope.launch(Dispatchers.Main) {
+            spotifyAPI.buildSearchAPI()
+
+            // Search for a user profile
+            val user2 = spotifyAPI.userSearch("username")
+
+            // Print the user name if it's not null
+            user2?.let {
+                println("User name: ${it.displayName}")
+            }
+
+            val names = spotifyAPI.getCurrSong()
         }
 
         return view

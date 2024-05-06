@@ -99,4 +99,6 @@ dependencies {
     implementation 'androidx.fragment:fragment:1.6.2'
 
     implementation "androidx.viewpager2:viewpager2:1.0.0"
+
+    implementation 'com.adamratzman:spotify-api-kotlin-core:3.8.6'
 }

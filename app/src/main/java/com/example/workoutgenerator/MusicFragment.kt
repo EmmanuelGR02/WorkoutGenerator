@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 
 class MusicFragment : Fragment() {
+
+    private var isPlaying: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -14,6 +17,21 @@ class MusicFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.musictab_layout, container, false)
 
-    return  view
+        // Get a reference to the play button ImageView
+        val playButton = view.findViewById<ImageView>(R.id.play_button)
+
+        // Set OnClickListener on the play button ImageView
+        playButton.setOnClickListener {
+            // Toggle the play/pause state
+            isPlaying = !isPlaying
+            // Change the button image based on the play/pause state
+            if (isPlaying) {
+                playButton.setImageResource(R.drawable.songpausebutton_icon)
+            } else {
+                playButton.setImageResource(R.drawable.playbutton_icon)
+            }
+        }
+
+        return view
     }
 }
