@@ -1,38 +1,46 @@
-// WeatherFragment.kt
 package com.example.workoutgenerator
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.example.workoutgenerator.databinding.FragmentProfileBinding
 import kotlin.math.roundToInt
 
 class WeatherFragment : Fragment() {
-    private lateinit var binding: FragmentProfileBinding
     private val weatherAPI = WeatherAPI()
+
+    private lateinit var currWeatherView: TextView
+    private lateinit var currHumidityView: TextView
+    private lateinit var currFeelsLikeView: TextView
+    private lateinit var currLowView: TextView
+    private lateinit var currHighView: TextView
+    private lateinit var currWeatherTypeView: TextView
+    private lateinit var currUVindexView: TextView
+    private lateinit var currVisibilityView: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        binding = FragmentProfileBinding.inflate(inflater, container, false)
-        val view = binding.root
+        val view = inflater.inflate(R.layout.weathertab_layout, container, false)
 
-        // displaySetCurrStats()
+        // Find views
+        currWeatherView = view.findViewById(R.id.current_weather)
+        currHumidityView = view.findViewById(R.id.current_humidity)
+        currFeelsLikeView = view.findViewById(R.id.current_feelsLike)
+        currLowView = view.findViewById(R.id.current_low)
+        currHighView = view.findViewById(R.id.current_high)
+        currWeatherTypeView = view.findViewById(R.id.weather_type)
+        currUVindexView = view.findViewById(R.id.current_UVindex)
+        currVisibilityView = view.findViewById(R.id.current_visibility)
 
-        // Set the values of the name, lastname and username text views
-        val currWeatherView = binding.currentWeather
-        val currHumidityView = binding.currentHumidity
-        val currFeelsLikeView = binding.currentFeelsLike
-        val currLowView = binding.currentLow
-        val currHighView = binding.currentHigh
-        val currWeatherTypeView = binding.weatherType
-        val currUVindexView = binding.currentUVindex
-        val currVisibilityView = binding.currentVisibility
+        return view
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         // fetch current weather
         weatherAPI.getCurrentWeather { temp ->
@@ -93,7 +101,5 @@ class WeatherFragment : Fragment() {
                 currVisibilityView.text = "Visibility: ${visibility?.roundToInt()} mi"
             }
         }
-
-        return view
     }
 }

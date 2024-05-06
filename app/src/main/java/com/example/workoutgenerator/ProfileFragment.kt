@@ -6,6 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager.widget.ViewPager
 import com.example.workoutgenerator.databinding.FragmentProfileBinding
 import kotlin.math.roundToInt
 
@@ -13,7 +16,6 @@ import kotlin.math.roundToInt
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private val weatherAPI = WeatherAPI()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -22,143 +24,73 @@ class ProfileFragment : Fragment() {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        // Set up ViewPager with TabLayout
-        //val viewPager = binding.viewPager
-        //val tabLayout = binding.tabLayout
+        // Set the values of the name, lastname and username text views
+        val nameView = binding.name
+        val lastnameView = binding.lastname
+        val usernameView = binding.username
 
-        val adapter = ViewPagerAdapter(requireActivity().supportFragmentManager)
-        adapter.addFragment(WeatherFragment(), "Weather")
+        // user instance
+        val user = User(currentUser)
 
-        //viewPager.adapter = adapter
-        //tabLayout.setupWithViewPager(viewPager)
+        // Buttons to navigate through the main fragments
+        val friendsBtn = binding.friendsBtn
+        friendsBtn?.setOnClickListener {
+            val fragment = FriendsFragment()
+            (requireActivity() as MainActivity).navigateToFragment(fragment)
+        }
+        binding.workoutBtn?.setOnClickListener {
+            val fragment = WorkoutGeneratorFragment()
+            (requireActivity() as MainActivity).navigateToFragment(fragment)
+        }
+
+        user.getName { tempName ->
+            nameView.text = tempName.toString()
+        }
+        user.getLastname { tempLastname ->
+            lastnameView.text = tempLastname.toString()
+        }
+        usernameView.text = currentUser
+
+        // sent user to setting fragment
+        val settingsBtn = binding.settingBtn
+        settingsBtn?.setOnClickListener {
+            val fragment = SettingsFragment()
+            (requireActivity() as MainActivity).navigateToFragment(fragment)
+        }
 
         return view
     }
-}
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        // Initialize ViewPager
+        val viewPager: ViewPager = view.findViewById(R.id.view_pager)
+        viewPager.adapter = ViewPagerAdapter(childFragmentManager)
+    }
 
-//class ProfileFragment : Fragment() {
-//    private lateinit var binding: FragmentProfileBinding
-//    private val weatherAPI = WeatherAPI()
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        // Inflate the layout for this fragment
-//        binding = FragmentProfileBinding.inflate(inflater, container, false)
-//        val view = binding.root
-//
-//        // displaySetCurrStats()
-//
-//        // user instance
-//        val user = User(currentUser)
-//
-//        // Buttons to navigate through the main fragments
-//        val friendsBtn = binding.friendsBtn
-//        friendsBtn?.setOnClickListener {
-//            val fragment = FriendsFragment()
-//            (requireActivity() as MainActivity).navigateToFragment(fragment)
-//        }
-//        binding.workoutBtn?.setOnClickListener {
-//            val fragment = WorkoutGeneratorFragment()
-//            (requireActivity() as MainActivity).navigateToFragment(fragment)
-//        }
-//
-//        // Set the values of the name, lastname and username text views
-//        val nameView = binding.name
-//        val lastnameView = binding.lastname
-//        val usernameView = binding.username
-//        val currWeatherView = binding.currentWeather
-//        val currHumidityView = binding.currentHumidity
-//        val currFeelsLikeView = binding.currentFeelsLike
-//        val currLowView = binding.currentLow
-//        val currHighView = binding.currentHigh
-//        val currWeatherTypeView = binding.weatherType
-//        val currUVindexView = binding.currentUVindex
-//        val currVisibilityView = binding.currentVisibility
-//
-//
-//        // fetch current weather
-//        weatherAPI.getCurrentWeather { temp ->
-//            temp?.let {
-//                currWeatherView.text = "$temp\u2109"
-//            }
-//        }
-//
-//        // fetch current feels like temp
-//        weatherAPI.getCurrentFeelsLikeTemperature { temp ->
-//            temp?.let {
-//                Log.e("ProfileFragment.kt", "Feels like temp -> $temp")
-//                currFeelsLikeView.text = "Feels Like: $temp\u2109"
-//            }
-//        }
-//
-//        // fetch current humidity
-//        weatherAPI.getCurrentHumidity { humidity ->
-//            humidity?.let {
-//                currHumidityView.text = "Humidity: ${humidity.roundToInt()}%"
-//            }
-//        }
-//
-//        // fetch current low
-//        weatherAPI.getCurrentLowTemperature { low ->
-//            low?.let {
-//                currLowView.text = "L: $low\u2109"
-//            }
-//        }
-//
-//        // fetch current high
-//        weatherAPI.getCurrentHighTemperature { high ->
-//            high?.let {
-//                currHighView.text = "H: $high\u2109"
-//            }
-//        }
-//
-//        // fetch current weather type
-//        weatherAPI.getCurrentWeatherType { type ->
-//            type?.let {
-//                var realType = ""
-//                if (type == "Clouds") {
-//                    realType = "Cloudy"
-//                }
-//                currWeatherTypeView.text = "$realType"
-//            }
-//        }
-//
-//        // fetch current UVIndex
-//        weatherAPI.getCurrentUVIndex{ index ->
-//            index?.let {
-//                Log.e("ProfileFragment.kt", "UV Index -> $index")
-//                currUVindexView.text = "UV Index: $index"
-//            }
-//        }
-//
-//        // fetch current visibility
-//        weatherAPI.getCurrentVisibility { visibility ->
-//            visibility?.let {
-//                currVisibilityView.text = "Visibility: $visibility mi"
-//            }
-//        }
-//
-//
-//        user.getName { tempName ->
-//            nameView.text = tempName.toString()
-//        }
-//        user.getLastname { tempLastname ->
-//            lastnameView.text = tempLastname.toString()
-//        }
-//        usernameView.text = currentUser
-//
-//        // sent user to setting fragment
-//        val settingsBtn = binding.settingBtn
-//        settingsBtn?.setOnClickListener {
-//            val fragment = SettingsFragment()
-//            (requireActivity() as MainActivity).navigateToFragment(fragment)
-//        }
-//
-//        return view
-//    }
+    private inner class ViewPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+
+        override fun getItem(position: Int): Fragment {
+            return when (position) {
+                0 -> WeatherFragment()
+                1 -> MusicFragment()
+                else -> throw IllegalArgumentException("Invalid position: $position")
+            }
+        }
+
+        override fun getCount(): Int {
+            return 2
+        }
+
+        override fun getPageTitle(position: Int): CharSequence? {
+            return when (position) {
+                0 -> "Weather"
+                1 -> "Music"
+                else -> throw IllegalArgumentException("Invalid position: $position")
+            }
+        }
+    }
 
     // if the user does not have any stats saved, it will display a layout to take in their stats and save them
     // if the user already has stats saved, it will display a layout with all of their stats
@@ -237,4 +169,4 @@ class ProfileFragment : Fragment() {
 //        }
 //    }
 
-//}
+}
