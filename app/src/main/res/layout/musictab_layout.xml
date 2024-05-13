@@ -35,7 +35,7 @@ tools:context=".ProfileFragment">
             android:id="@+id/song_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Apocalypse"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="23sp"
             android:layout_marginTop="8dp"
@@ -96,6 +96,8 @@ tools:context=".ProfileFragment">
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="parent"/>
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

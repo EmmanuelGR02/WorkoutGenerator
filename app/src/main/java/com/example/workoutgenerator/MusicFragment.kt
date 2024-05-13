@@ -5,7 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.chaquo.python.Python
+import com.chaquo.python.android.AndroidPlatform
 
 class MusicFragment : Fragment() {
 
@@ -19,6 +22,7 @@ class MusicFragment : Fragment() {
 
         // Get a reference to the play button ImageView
         val playButton = view.findViewById<ImageView>(R.id.play_button)
+        val text = view.findViewById<TextView>(R.id.song_name)
 
         // Set OnClickListener on the play button ImageView
         playButton.setOnClickListener {
@@ -31,6 +35,21 @@ class MusicFragment : Fragment() {
                 playButton.setImageResource(R.drawable.playbutton_icon)
             }
         }
+
+        // Initialize Python
+        if (!Python.isStarted()) {
+            Python.start(AndroidPlatform(requireContext()))
+        }
+
+        // Get Python instance
+        val py = Python.getInstance()
+
+        // Get the Python module
+        val pyObj = py.getModule("SpotifyAPI")
+
+        // Call the Python function and set the result to the TextView
+        val result = pyObj.callAttr("returnhi").toString()
+        text.text = result
 
         return view
     }

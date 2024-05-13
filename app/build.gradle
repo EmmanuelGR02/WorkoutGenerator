@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id("com.chaquo.python")
     // Add the Google services Gradle plugin
     id("com.google.gms.google-services")
 }
@@ -9,7 +10,20 @@ android {
     namespace 'com.example.workoutgenerator'
     compileSdk 34
 
+    sourceSets {
+        main {
+            python.srcDir "src/main/python"
+        }
+    }
+
     defaultConfig {
+        python {
+            buildPython "C:/Users/eguti/AppData/Local/Microsoft/WindowsApps/python.exe"
+        }
+        ndk {
+            // On Apple silicon, you can omit x86_64.
+            abiFilters 'arm64-v8a', 'x86_64'
+        }
         applicationId "com.example.workoutgenerator"
         minSdk 24
         targetSdk 34

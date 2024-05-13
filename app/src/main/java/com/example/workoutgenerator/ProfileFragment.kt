@@ -64,20 +64,6 @@ class ProfileFragment : Fragment() {
             (requireActivity() as MainActivity).navigateToFragment(fragment)
         }
 
-        // Call buildSearchAPI from a coroutine
-        GlobalScope.launch(Dispatchers.Main) {
-            spotifyAPI.buildSearchAPI()
-
-            // Search for a user profile
-            val user2 = spotifyAPI.userSearch("username")
-
-            // Print the user name if it's not null
-            user2?.let {
-                println("User name: ${it.displayName}")
-            }
-
-            val names = spotifyAPI.getCurrSong()
-        }
 
         return view
     }
